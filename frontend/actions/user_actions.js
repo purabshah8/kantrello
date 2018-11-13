@@ -1,0 +1,71 @@
+import * as UserApiUtil from '../util/user_api_util';
+
+export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
+
+export const receiveCurrentUser = user => {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    user,
+  };
+};
+
+export const logoutCurrentUser = id => {
+  return {
+    type: LOGOUT_CURRENT_USER,
+    id,
+  };
+};
+
+export const receiveUserErrors = errors => {
+  return {
+    type: RECEIVE_USER_ERRORS,
+    errors,
+  };
+};
+
+export const receiveSessionErrors = errors => {
+  return {
+    type: RECEIVE_SESSION_ERRORS,
+    errors,
+  };
+};
+
+
+export const createUser = user => dispatch => {
+  return UserApiUtil.createUser(user).then(
+    user => dispatch(receiveCurrentUser(user)),
+    errors => dispatch(receiveUserErrors(errors))
+  );
+};
+
+export const updateUser = user => dispatch => {
+  return UserApiUtil.updateUser(user).then(
+    user => dispatch(receiveCurrentUser(user)),
+    errors => dispatch(receiveUserErrors(errors))
+  );
+};
+
+
+export const deleteUser = id => dispatch => {
+  return UserApiUtil.deleteUser(id).then(
+    () => dispatch(logoutCurrentUser(id)),
+    errors => dispatch(receiveUserErrors(errors))
+  );
+};
+
+export const login = user => dispatch => {
+  return UserApiUtil.logIn(user).then(
+    user => dispatch(receiveCurrentUser(user)),
+    errors => dispatch(receiveSessionErrors(errors))
+  );
+};
+
+export const logout = id => dispatch => {
+  return UserApiUtil.logOut(id).then(
+    () => dispatch(logoutCurrentUser(id)),
+    errors => dispatch(receiveSessionErrors(errors))
+  );
+};
