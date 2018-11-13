@@ -17,6 +17,7 @@
 
 class User < ApplicationRecord
   validates :email, :username, :name, :initials, :password_digest, :session_token, presence: true
+  validates :email, :username, :session, uniqueness: true
   validates :password, length: {minimum: 6}, allow_nil: true
   validates :initials, length: {minimum: 1, maximum: 4}
 
@@ -25,7 +26,7 @@ class User < ApplicationRecord
   after_initialize :ensure_user_info
 
 
-  def self.get_by_credentials(credentials)
+  def self.find_by_credentials(credentials)
     if credentials[:username]
       user = User.find_by(username: credentials[:username])
     else
