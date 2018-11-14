@@ -11,6 +11,9 @@ export default class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.processForm(merge({}, this.state));
+    if (this.props.loggedIn) {
+      this.props.history.push(`/users/${this.props.userId}`);
+    }
   }
 
   update(field) {
@@ -35,7 +38,7 @@ export default class SessionForm extends React.Component {
   addField() {
     if (this.props.formType === 'Sign Up') {
       return(
-        <label>
+        <label>Name
           <input type="text" onChange={this.update('name')} value={this.state.name} />
         </label>
       );
@@ -53,6 +56,7 @@ export default class SessionForm extends React.Component {
         <div>{this.renderErrors()}</div>
         <h2>{headerText}</h2>
         <p>or {navLink}</p>
+        {this.addField()}
         <label>Email<p>{emailText}</p>
           <input type="text" onChange={this.update('email')} value={this.state.email} default="name@example.com"/>
         </label>
