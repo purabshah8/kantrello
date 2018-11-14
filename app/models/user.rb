@@ -55,18 +55,20 @@ class User < ApplicationRecord
   def ensure_user_info
     self.session_token ||= generate_session_token
 
-    username = self.name.downcase.split.join
+    username = self.name.downcase.split.join # generate as lowercase full name, no spaces
+    
+    # if user with given username already exists, add incremental nums to end of username, e.g. "johnsmith2"
     if User.exists?(username: username)
       num = 2
       username += num.to_s
       while User.exists?(username: username)
         username = username[0...-1] + num.to_s
+        num += 1
       end
     end
 
     self.username ||= username
-    self.initials ||= self.name.split.map{ |w| w[0]}.join[0...4]
-
+    self.initials ||= self.name.split.map(){ |w| w[0] }.join[0...4] # use name to create initials, limit 4 chars
   end
 
   def generate_session_token
