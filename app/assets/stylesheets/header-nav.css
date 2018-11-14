@@ -1,0 +1,25 @@
+.header-nav {
+  height: 48px;
+  background: #026aa7;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-button-header {
+  font-family: "Damion";
+  color: white;
+  /* font-size: 48px; */
+  text-decoration: none;
+  /* text-align: center; */
+  vertical-align: middle;
+  display: flex;
+
+}
+
+.home-button-header p {
+  font-size: 2em;
+}
+
+.logo-header {
+  height: 24px;
+}

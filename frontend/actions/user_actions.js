@@ -36,14 +36,14 @@ export const receiveSessionErrors = errors => {
 
 export const createUser = user => dispatch => {
   return UserApiUtil.createUser(user).then(
-    user => dispatch(receiveCurrentUser(user)),
+    newUser => dispatch(receiveCurrentUser(newUser)),
     errors => dispatch(receiveUserErrors(errors))
   );
 };
 
 export const updateUser = user => dispatch => {
   return UserApiUtil.updateUser(user).then(
-    user => dispatch(receiveCurrentUser(user)),
+    updatedUser => dispatch(receiveCurrentUser(updatedUser)),
     errors => dispatch(receiveUserErrors(errors))
   );
 };
@@ -58,7 +58,7 @@ export const deleteUser = id => dispatch => {
 
 export const login = user => dispatch => {
   return UserApiUtil.logIn(user).then(
-    user => dispatch(receiveCurrentUser(user)),
+    loggedInUser => dispatch(receiveCurrentUser(loggedInUser)),
     errors => dispatch(receiveSessionErrors(errors))
   );
 };

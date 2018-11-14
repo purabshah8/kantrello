@@ -1,0 +1,63 @@
+.splash-nav {
+  position: fixed;
+  height: 80px;
+  background: #0079bf;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+  width: 100%;
+}
+
+.home-button {
+  font-family: "Damion";
+  color: white;
+  /* font-size: 48px; */
+  text-decoration: none;
+  /* text-align: center; */
+  vertical-align: middle;
+  display: flex;
+
+}
+
+.home-button p {
+  font-size: 3em;
+}
+
+.logo {
+  height: 40px;
+}
+
+.session-actions {
+
+}
+
+.login-button {
+  height: 40px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  background: rgba(0,0,0,0.15);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  border-radius: 5px;
+  padding: .7em 1.3em;
+  font-weight: 350;
+  line-height: 1.1em;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+.signup-button {
+  height: 40px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #61BD4F 0, #5AAC44 100%);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  border-radius: 5px;
+  padding: .7em 1.3em;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin-left: auto;
+  margin-right: auto;
+}

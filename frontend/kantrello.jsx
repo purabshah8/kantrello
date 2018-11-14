@@ -7,7 +7,17 @@ import * as UserActions from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () =>{
   const root = document.getElementById('root');
-  const store = configureStore();
+  let preloadedState = {};
+  if (window.currentUser) {
+    preloadedState = {
+      entities: {
+        users: {[window.currentUser.id] : window.currentUser},
+      },
+      session: {currentUserId: window.currentUser.id},
+    };
+
+  }
+  const store = configureStore(preloadedState);
   ReactDOM.render(<Root store={store}/>, root);
 
   // Test

@@ -26,7 +26,7 @@ export const deleteUser = id => {
 export const logIn = user => {
   return $.ajax({
     method: "POST",
-    url: 'api/session',
+    url: '/api/session',
     data: { user },
   });
 };
@@ -34,6 +34,6 @@ export const logIn = user => {
 export const logOut = () => {
   return $.ajax({
     method: "DELETE",
-    url: "api/session"
+    url: '/api/session',
   });
 };

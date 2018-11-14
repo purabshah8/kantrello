@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :update, :destroy]
     resource :session, only: [:create, :destroy]
   end
+
+  get '*path', to: 'static_pages#root'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
