@@ -28,7 +28,7 @@
 }
 
 .session-actions {
-
+  text-align: center;
 }
 
 .login-button {
@@ -58,6 +58,27 @@
   padding: .7em 1.3em;
   font-weight: 700;
   line-height: 1.1em;
-  margin-left: auto;
+  margin-left: 15px;
   margin-right: auto;
+}
+
+.content {
+  position: relative;
+  top: 80px;
+  width: 100%;
+}
+
+.content-top {
+  background:
+  linear-gradient(
+      rgba(0, 121, 191, 0.7),
+      rgba(0, 121, 191, 0.7)
+    ), url('splash.jpg') center left / cover no-repeat;
+  height: 500px;
+}
+
+.header-content {
+  color: white;
+  top: 50%;
+  left: 50%;
 }
