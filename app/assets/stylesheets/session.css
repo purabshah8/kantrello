@@ -1,0 +1,69 @@
+.session-form {
+  position: absolute;
+  top: 5%;
+  margin-left: 33%;
+  margin-right: 33%;
+  display: flex;
+  flex-direction: column;
+  max-width: 440px;
+  width: 100%;
+}
+
+.session-form > * {
+  margin-bottom: 1.2em;
+}
+
+.session-form > p > span {
+  color: #298fca;
+  font-size: 18px;
+}
+
+.session-form p {
+  color: #999;
+  font-size: 18px;
+}
+
+.session-form-header {
+  font-size: 38px;
+  font-weight: 700;
+  width: 500px;
+  margin-bottom: 5px;
+}
+
+
+.session-form-input {
+  border: 1px solid #cdd2d4;
+  border-radius: 4px;
+  background-color: #edeff0;
+  font-size: 16px;
+  padding: 8px;
+}
+
+.submit-input {
+  color: white;
+  background: #61bd4f;
+  border-radius: 3px;
+  box-shadow: 0 2px 0 #3f6f21;
+  height: 42px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+}
+
+.input-label {
+  color: #4d4d4d;
+  margin-bottom: 10px;
+}
+
+.input-label > p {
+  display: inline;
+  color: #999;
+}
+
+.demo-user-button {
+  color: rgba(0,0,0,0.54);
+  border: 2px solid #cdd2d4;
+  border-radius: 3px;
+  height: 42px;
+  font-size: 16px;
+}

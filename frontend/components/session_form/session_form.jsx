@@ -6,6 +6,7 @@ export default class SessionForm extends React.Component {
     super(props);
     this.state = {name: '', email: '', password: ''};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogIn = this.demoLogIn.bind(this);
   }
 
   handleSubmit(e) {
@@ -38,35 +39,64 @@ export default class SessionForm extends React.Component {
   addField() {
     if (this.props.formType === 'Sign Up') {
       return(
-        <label>Name
-          <input type="text" onChange={this.update('name')} value={this.state.name} />
-        </label>
+        <>
+        <label htmlFor="name-input" className="input-label">Name</label>
+        <input id="name-input"
+          className="session-form-input"
+          type="text"
+          onChange={this.update('name')}
+          value={this.state.name}
+          placeholder="LeBron James"/>
+        </>
       );
     }
   }
 
+  demoLogIn() {
+    const that = this;
+    this.setState({email:'demouser', password:'default'}, () => {
+      that.props.processForm(merge({}, that.state));
+      if (that.props.loggedIn) {
+        that.props.history.push(`/users/${that.props.userId}`);
+      }
+    });
+  }
+
   render() {
-    const { formType, navLink } = this.props;
+    const { formType, navLink, demoLogIn } = this.props;
     const submitText = (formType === 'Sign Up') ? "Create New Account" : "Log In";
-    const emailText = (formType === 'Sign Up') ? "" : "(or username)";
+    const emailText = (formType === 'Sign Up') ? "" : " (or username)";
     const headerText = (formType === 'Sign Up') ? "Create a Kantrello Account" : "Log in to Kantrello";
-
+    const demoButton = (formType === 'Sign Up') ? "" : <button className="demo-user-button" onClick={this.demoLogIn}>Login as Demo User</button> ;
     return(
-      <form onSubmit={this.handleSubmit} >
-        <div>{this.renderErrors()}</div>
-        <h2>{headerText}</h2>
-        <p>or {navLink}</p>
-        {this.addField()}
-        <label>Email<p>{emailText}</p>
-          <input type="text" onChange={this.update('email')} value={this.state.email} default="name@example.com"/>
-        </label>
+      <>
+        <form className="session-form" onSubmit={this.handleSubmit} >
+          <div>{this.renderErrors()}</div>
+          <h2 className="session-form-header">{headerText}</h2>
+          <p>or <span>{navLink}</span></p>
 
-        <label>Password
-          <input type="password" onChange={this.update('password')} value={this.state.password} default="defaultpassword"/>
-        </label>
+          {this.addField()}
+          <label htmlFor="email-input" className="input-label">Email<p>{emailText}</p></label>
+          <input id="email-input"
+            className="session-form-input"
+            type="text"
+            onChange={this.update('email')}
+            value={this.state.email}
+            placeholder="lbj23@uninterrupted.com"/>
 
-        <button>{submitText}</button>
-      </form>
+          <label htmlFor="password-input" className="input-label">Password</label>
+          <input id="password-input"
+            className="session-form-input"
+            type="password"
+            onChange={this.update('password')}
+            value={this.state.password}
+            placeholder="StriveForGreatness"/>
+
+          <button className="submit-input">{submitText}</button>
+          {demoButton}
+
+        </form>
+      </>
     );
   }
 }

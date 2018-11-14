@@ -9,12 +9,14 @@
 
 User.destroy_all
 puts "Creating Users..."
-users = []
-16.times do |num|
-  name = Faker::DrWho.actor
-  email_num = num == 0 ? "" : num.to_s
-  email = name.split.join + email_num + "@gallifrey.com"
-  password = "default"
-  users << User.create!(name: name, email: email, password: password)
-end
+demo = User.create!(name: 'Demo User', email: 'demo@example.com', password: 'default' )
+purab = User.create!(name: 'Purab Shah', email:'purabshah8@gmail.com', password: 'default')
+# users = []
+# 16.times do |num|
+#   name = Faker::DrWho.actor
+#   email_num = num == 0 ? "" : num.to_s
+#   email = name.split.join + email_num + "@gallifrey.com"
+#   password = "default"
+#   users << User.create!(name: name, email: email, password: password)
+# end
 puts "Done!"
