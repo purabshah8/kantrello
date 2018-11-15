@@ -9,7 +9,7 @@
 
 User.destroy_all
 puts "Creating Users..."
-demo = User.create!(name: 'Demo User', username: 'demo-user', email: 'demo@example.com', password: 'default' )
+demo_user = User.create!(name: 'Demo User', username: 'demo-user', email: 'demo@example.com', password: 'default' )
 purab = User.create!(name: 'Purab Shah', email:'purabshah8@gmail.com', password: 'default')
 # users = []
 # 16.times do |num|
@@ -19,4 +19,10 @@ purab = User.create!(name: 'Purab Shah', email:'purabshah8@gmail.com', password:
 #   password = "default"
 #   users << User.create!(name: name, email: email, password: password)
 # end
+puts "Done!"
+
+Board.destroy_all
+puts "Creating Boards..."
+full_stack = Board.create!(title: "Full Stack Project", owner_id: demo_user.id)
+to_do = Board.create!(title: "Personal To Do", owner_id: demo_user.id)
 puts "Done!"

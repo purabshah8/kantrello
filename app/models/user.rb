@@ -23,6 +23,11 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  has_many :boards,
+    foreign_key: :owner_id,
+    class_name: :Board,
+    dependent: :destroy
+
   after_initialize :ensure_user_info
 
 
