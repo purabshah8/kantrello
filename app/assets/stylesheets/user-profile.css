@@ -91,6 +91,11 @@
   font-size: 14px;
 }
 
+.user-edit-errors li {
+  color: #eb5a46;
+  font-size: 14px;
+}
+
 .user-edit-label {
   font-size: 12px;
   margin-top: 12px;
