@@ -14,7 +14,7 @@ const Splash = () => {
       <section className="content">
         <div className="content-top">
           <div className="header-content">
-            <h1>Kantrello allows you work collaboratively and accomplish more than you thought was possible.</h1>
+            <h1>Kantrello allows you to work collaboratively and accomplish more than you thought was possible.</h1>
             <p className="content-top-text">Use Kantrello's boards to organize your workflow, your personal life, or anything you can think of!</p>
             <div className="large-button-container">
               <Link className="signup-button large-button"
@@ -27,12 +27,7 @@ const Splash = () => {
             </p>
           </div>
         </div>
-        <div className="content-middle">
-          <div className="header-content">
-          <h1>Be meticulous with Kantrello cards!</h1>
-          <p>You can add detailed info, comments and more on cards.</p>
-          </div>
-        </div>
+
       </section>
       <Footer />
     </div>
@@ -40,3 +35,11 @@ const Splash = () => {
 };
 
 export default Splash;
+
+
+// <div className="content-middle">
+//   <div className="header-content">
+//   <h1>Be meticulous with Kantrello cards!</h1>
+//   <p>You can add detailed info, comments and more on cards.</p>
+//   </div>
+// </div>

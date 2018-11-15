@@ -13,6 +13,18 @@
   margin-bottom: 1.2em;
 }
 
+.session-errors {
+  background: #eb5a46;
+  color: #fbedeb;
+  border-radius: 4px;
+}
+.session-errors li {
+  color: #fbedeb;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 300px;
+}
+
 .session-form > p > span {
   color: #298fca;
   font-size: 18px;
