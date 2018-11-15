@@ -8,7 +8,7 @@ const Auth = ({ component: Component, path, loggedIn, exact, currentUserId }) =>
       <Component {...props} />
     ) : (
       // Change redirect to user/boards when creating boards feature
-      <Redirect to={`/users/${currentUserId}/boards`} />
+      <Redirect to={`/users/${currentUserId}`} />
     )
   )} />
 );
