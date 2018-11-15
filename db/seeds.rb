@@ -9,7 +9,7 @@
 
 User.destroy_all
 puts "Creating Users..."
-demo = User.create!(name: 'Demo User', email: 'demo@example.com', password: 'default' )
+demo = User.create!(name: 'Demo User', username: 'demo-user', email: 'demo@example.com', password: 'default' )
 purab = User.create!(name: 'Purab Shah', email:'purabshah8@gmail.com', password: 'default')
 # users = []
 # 16.times do |num|
