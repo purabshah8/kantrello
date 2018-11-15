@@ -21,4 +21,3 @@ const App = () => {
 };
 
 export default App;
-// <ProtectedRoute path="/" component={Navbar} />
