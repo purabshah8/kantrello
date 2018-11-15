@@ -23,10 +23,18 @@ class User < ApplicationRecord
 
   attr_reader :password
 
-  has_many :boards,
+  has_many :owned_boards,
     foreign_key: :owner_id,
     class_name: :Board,
     dependent: :destroy
+
+  has_many :board_shares,
+    dependent: :destroy
+
+  has_many :shared_boards,
+    through: :board_shares,
+    source: :board
+
 
   after_initialize :ensure_user_info
 

@@ -20,6 +20,14 @@ class Board < ApplicationRecord
     foreign_key: :owner_id,
     class_name: :User
 
+  has_many :board_shares,
+    dependent: :destroy
+
+  has_many :users,
+    through: :board_shares,
+    source: :user
+
+
   private
 
   def ensure_starred

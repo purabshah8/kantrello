@@ -1,7 +1,8 @@
-class BoardsController < ApplicationController
+class Api::BoardsController < ApplicationController
 
   def index
-    @boards = Board.find_by(owner_id: params[:user_id])
+    @boards = Board.includes(:users).where(owner_id: params[:user_id])
+    # debugger
   end
 
   def create
@@ -33,6 +34,6 @@ class BoardsController < ApplicationController
 
   private
   def board_params
-    params.require(:board).permit(:title, :starred)
+    params.require(:board).permit(:title, :starred, :owner_id)
   end
 end

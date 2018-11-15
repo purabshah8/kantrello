@@ -25,4 +25,11 @@ Board.destroy_all
 puts "Creating Boards..."
 full_stack = Board.create!(title: "Full Stack Project", owner_id: demo_user.id)
 to_do = Board.create!(title: "Personal To Do", owner_id: demo_user.id)
+job_search = Board.create!(title: "Job Search", owner_id: purab.id)
+puts "Done!"
+
+BoardShare.destroy_all
+puts "Creating Board Shares..."
+share1 = BoardShare.create!(board_id: full_stack.id, user_id: purab.id)
+share2 = BoardShare.create!(board_id: job_search.id, user_id: demo_user.id)
 puts "Done!"

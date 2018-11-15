@@ -1,14 +1,14 @@
 export const fetchBoards = userId => {
   return $.ajax({
     method: "GET",
-    url: `api/${userId}/boards`
+    url: `/api/users/${userId}/boards`
   });
 };
 
 export const createBoard = board => {
   return $.ajax({
     method: "POST",
-    url: 'api/boards/',
+    url: '/api/boards/',
     data: { board }
   });
 };
@@ -16,7 +16,7 @@ export const createBoard = board => {
 export const updateBoard = board => {
   return $.ajax({
     method: "PATCH",
-    url: `api/boards/${board.id}`,
+    url: `/api/boards/${board.id}`,
     data: { board }
   });
 };
@@ -24,6 +24,6 @@ export const updateBoard = board => {
 export const deleteBoard = boardId => {
   return $.ajax({
     method: "DELETE",
-    url: `api/boards/${boardId}`,
+    url: `/api/boards/${boardId}`,
   });
 };
