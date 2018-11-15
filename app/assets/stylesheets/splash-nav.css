@@ -1,0 +1,76 @@
+.splash-nav {
+  position: fixed;
+  height: 80px;
+  background: #0079bf;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+  width: 100%;
+  z-index: 10;
+}
+
+.home-button {
+  font-family: "Damion";
+  color: white;
+  text-decoration: none;
+  vertical-align: middle;
+  display: flex;
+
+}
+
+.home-button:hover {
+  color: #0C3953;
+  opacity: 0.8;
+}
+
+.home-button p {
+  font-size: 3em;
+  color: white;
+}
+
+.logo {
+  height: 40px;
+}
+
+.session-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.login-button {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  background: rgba(0,0,0,0.15);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  border-radius: 5px;
+  padding: .7em 1.3em;
+  font-weight: 350;
+  line-height: 1.1em;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.signup-button {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #61BD4F 0, #5AAC44 100%);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  border-radius: 5px;
+  padding: .7em 1.3em;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin-left: 15px;
+  margin-right: auto;
+}
+
+.login-button:hover, .signup-button:hover {
+  background: rgba(0,0,0,0.25);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+}
+
+.signup-button:hover {
+  background-image: linear-gradient(rgb(90, 172, 68) 0px, rgb(81, 152, 57) 100%);
+}

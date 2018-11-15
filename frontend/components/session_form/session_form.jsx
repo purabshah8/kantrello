@@ -1,12 +1,16 @@
 import React from 'react';
 import merge from 'lodash/merge';
-
+import Footer from '../footer';
 export default class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {name: '', email: '', password: ''};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogIn = this.demoLogIn.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.clearErrors();
   }
 
   handleSubmit(e) {
@@ -54,7 +58,7 @@ export default class SessionForm extends React.Component {
 
   demoLogIn() {
     const that = this;
-    this.setState({email:'demouser', password:'default'}, () => {
+    this.setState({email:'demo-user', password:'default'}, () => {
       that.props.processForm(merge({}, that.state));
       if (that.props.loggedIn) {
         that.props.history.push(`/users/${that.props.userId}`);
