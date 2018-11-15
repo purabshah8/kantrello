@@ -8,11 +8,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const currentUserId = ownProps.match.params.id;
+const mapDispatchToProps = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
-    deleteUser: () => dispatch(deleteUser(currentUserId)),
+    deleteUser: (id) => dispatch(deleteUser(id)),
   };
 };
 

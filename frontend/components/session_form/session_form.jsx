@@ -46,7 +46,7 @@ export default class SessionForm extends React.Component {
           type="text"
           onChange={this.update('name')}
           value={this.state.name}
-          placeholder="LeBron James"/>
+          placeholder="e.g., LeBron James"/>
         </>
       );
     }
@@ -82,7 +82,7 @@ export default class SessionForm extends React.Component {
             type="text"
             onChange={this.update('email')}
             value={this.state.email}
-            placeholder="lbj23@uninterrupted.com"/>
+            placeholder="e.g., lbj23@uninterrupted.com"/>
 
           <label htmlFor="password-input" className="input-label">Password</label>
           <input id="password-input"
@@ -90,7 +90,7 @@ export default class SessionForm extends React.Component {
             type="password"
             onChange={this.update('password')}
             value={this.state.password}
-            placeholder="StriveForGreatness"/>
+            placeholder="e.g., StriveForGreatness"/>
 
           <button className="submit-input">{submitText}</button>
           {demoButton}

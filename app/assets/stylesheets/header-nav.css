@@ -1,5 +1,6 @@
 .header-nav {
-  height: 48px;
+  height: 40px;
+  padding: 4px;
   background: #026aa7;
   display: flex;
   justify-content: space-between;
@@ -8,11 +9,11 @@
 .home-button-header {
   font-family: "Damion";
   color: white;
-  /* font-size: 48px; */
+  font-size: 14px;
   text-decoration: none;
-  /* text-align: center; */
   vertical-align: middle;
   display: flex;
+  opacity: 0.5;
 
 }
 
@@ -22,4 +23,31 @@
 
 .logo-header {
   height: 24px;
+}
+
+.avatar-container {
+  background: #dfe3e6;
+  border-radius: 100%;
+  height: 32px;
+  width: 32px;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.avatar-container > * {
+  font-size: 12px;
+}
+
+.user-dropdown {
+  position: absolute;
+  z-index: 2;
+  top: 42px;
+  right: 2px;
+  background: white;
+  color: #17394d;
+  font-size: 14px;
+  box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
+  border-radius: 3px;
+  width: 304px;
 }

@@ -4,8 +4,8 @@ import LoginForm from './session_form/login_form_container';
 import SignupForm from './session_form/signup_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import Splash from './splash';
-import UserShow from './user/user_show_container';
-import Navbar from './navbar/navbar_container';
+import UserParent from './user/user_parent';
+
 const App = () => {
   const baseRender = () => <h1>Welcome to Kantrello!</h1>;
   return(
@@ -13,7 +13,7 @@ const App = () => {
       <Switch>
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
-        <ProtectedRoute exact path="/users/:id" component={UserShow} />
+        <ProtectedRoute exact path="/users/:id" component={UserParent} />
         <AuthRoute exact path="/" component={Splash}  />
       </Switch>
     </>
