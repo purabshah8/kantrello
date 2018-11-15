@@ -17,8 +17,14 @@
 
 }
 
+.home-button:hover {
+  color: #0C3953;
+  opacity: 0.8;
+}
+
 .home-button p {
   font-size: 3em;
+  color: white;
 }
 
 .logo {
@@ -26,11 +32,12 @@
 }
 
 .session-actions {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .login-button {
-  height: 40px;
   color: white;
   text-decoration: none;
   font-size: 16px;
@@ -44,9 +51,7 @@
   margin-right:auto;
 }
 
-
 .signup-button {
-  height: 40px;
   color: white;
   text-decoration: none;
   font-size: 16px;
@@ -60,11 +65,26 @@
   margin-right: auto;
 }
 
+.login-button:hover, .signup-button:hover {
+  background: rgba(0,0,0,0.25);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+}
+
+.signup-button:hover {
+  background-image: linear-gradient(rgb(90, 172, 68) 0px, rgb(81, 152, 57) 100%);
+}
+
+.large-button {
+  position: relative;
+  padding: .7em 54px;
+  left: 33%;
+  top: 20px;
+}
+
 .content {
   position: relative;
   top: 80px;
   width: 100%;
-  height: 90%;
 }
 
 .content-top {
@@ -77,7 +97,38 @@
 }
 
 .header-content {
+  position: relative;
   color: white;
-  top: 50%;
-  left: 50%;
+  top: 15%;
+  margin: 0 20%;
+
+}
+
+.header-content h1 {
+  text-align: center;
+  font-size: 3vw;
+  margin-bottom: 26px;
+  color: white;
+}
+
+.content-top-text {
+  font-size: 2vw;
+  font-weight: 325;
+  text-align: center;
+  margin: 20px 0;
+  color: white;
+}
+
+.content-top > p {
+  position: relative;
+  top: 0%;
+  left: 44%;
+  color: white;
+  font-size: 16px;
+  font-weight: 325;
+}
+
+.content-middle {
+  background: #315989;
+  height: 680px;
 }

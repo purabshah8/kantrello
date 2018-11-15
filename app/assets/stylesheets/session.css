@@ -28,6 +28,7 @@
   font-weight: 700;
   width: 500px;
   margin-bottom: 5px;
+  color: black;
 }
 
 
@@ -35,8 +36,13 @@
   border: 1px solid #cdd2d4;
   border-radius: 4px;
   background-color: #edeff0;
-  font-size: 16px;
-  padding: 8px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.session-form-input:focus {
+  border-color: #a5acb0;
+  box-shadow: 0 0 6px #cdd2d4;
 }
 
 .submit-input {
@@ -45,14 +51,20 @@
   border-radius: 3px;
   box-shadow: 0 2px 0 #3f6f21;
   height: 42px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   border: none;
 }
 
+.submit-input:hover {
+  background: #5aac44;
+}
+
 .input-label {
   color: #4d4d4d;
+  font-weight: 325;
   margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .input-label > p {
@@ -65,5 +77,5 @@
   border: 2px solid #cdd2d4;
   border-radius: 3px;
   height: 42px;
-  font-size: 16px;
+  font-size: 20px;
 }

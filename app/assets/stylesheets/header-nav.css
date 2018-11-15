@@ -14,11 +14,15 @@
   vertical-align: middle;
   display: flex;
   opacity: 0.5;
+}
 
+.home-button-header:hover {
+  opacity: 0.8;
 }
 
 .home-button-header p {
   font-size: 2em;
+  color: white;
 }
 
 .logo-header {
@@ -35,6 +39,11 @@
   font-weight: 700;
 }
 
+.avatar-container:hover {
+  background-color: #c2ccd1;
+  cursor: pointer;
+}
+
 .avatar-container > * {
   font-size: 12px;
 }
@@ -49,5 +58,48 @@
   font-size: 14px;
   box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
   border-radius: 3px;
-  width: 304px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-dropdown li {
+  color: #6b808c;
+}
+
+.user-dropdown li:first-of-type {
+  border-bottom: 1px solid rgba(9,45,66,.13);
+  margin: 0 12px;
+  /* padding: 0 32px; */
+  display: flex;
+  justify-content: flex-start;
+}
+
+.user-dropdown li:first-of-type:hover {
+  color: #6b808c;
+  background-color: white;
+}
+
+.user-dropdown li:hover{
+  color: white;
+  background-color: #298fca;
+}
+
+.user-dropdown-name {
+  color: #6b808c;
+  display: block;
+  font-size: 14px;
+  font-weight: 325;
+  width: 240px;
+  padding: 4px 8px;
+  height: 40px;
+  text-align: center;
+}
+
+.user-dropdown-close {
+  /* padding: 10px 12px 10px 8px; */
+  padding: 10px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
 }

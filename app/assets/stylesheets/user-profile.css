@@ -1,0 +1,149 @@
+.profile-details > p {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.user-profile-container {
+  background: #f5f6f7;
+
+}
+
+.user-profile {
+  max-width: 650px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 32px;
+  margin: 0 auto;
+}
+
+.avatar-large-container {
+  height: 85px;
+  width: 85px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.avatar-large > p {
+  font-size: 34px;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 15px;
+}
+
+.profile-basics {
+  display: flex;
+}
+
+.profile-basics > p {
+  font-size: 12px;
+  align-self: flex-end;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-username {
+  margin-left: 2px;
+  color: #6b808c;
+}
+
+.edit-profile-button {
+  display: inline-flex;
+  align-items: center;
+  width: 120px;
+  height: 32px;
+  color: #17394d;
+  background: #dfe3e6;
+  box-shadow: 0 1px 0 0 #c2ccd1;
+  border-radius: 3px;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 0;
+  line-height: 22px;
+}
+
+.edit-profile-button:hover {
+  background: #c2ccd1;
+  cursor: pointer;
+}
+
+.edit-profile-button > img {
+  margin-left: 10px;
+  margin-right: 5px;
+  height: 16px;
+  width: 16px;
+}
+
+.user-edit-form {
+  display: flex;
+  flex-direction: column;
+  height: 360px;
+  width: 250px;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.user-edit-label {
+  font-size: 12px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #6b808c;
+}
+
+.user-edit-input {
+  background-color: #ebeef0;
+  border: 1px solid #dfe3e6;
+  padding: 6px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+
+}
+
+.user-edit-input-last {
+  margin-bottom: 12px;
+}
+
+.edit-buttons {
+  display: flex;
+}
+
+.submit-update {
+  background-color: #5aac44;
+  box-shadow: 0 1px 0 0 #3f6f21;
+  border: none;
+  color: #fff;
+  padding: 6px 24px;
+  margin: 8px 4px 0 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 3px;
+}
+
+.submit-update:hover {
+  background: #519839;
+}
+
+.cancel-update {
+  background-color: #dfe3e6;
+  box-shadow: 0 1px 0 0 #c2ccd1;
+  border: none;
+  margin: 8px 4px 0 0;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 3px;
+}
+
+.cancel-update:hover {
+  background-color: #c2ccd1;
+}

@@ -44,7 +44,7 @@ export default class Navbar extends React.Component {
             className="avatar-container">
             {this.userIcon()}
             {
-              this.state.showUserDropdown ? (<UserDropdown user={this.props.currentUser} />) : (null)
+              this.state.showUserDropdown ? (<UserDropdown toggleDropdown={this.toggleDropdown} />) : (null)
             }
           </div>
         </div>
