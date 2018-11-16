@@ -13,7 +13,7 @@
 .boards-header > img {
   width: 20px;
   height: 20px;
-  font-weight: 900;
+  /* font-weight: 900; */
 }
 
 .boards-header > h1 {

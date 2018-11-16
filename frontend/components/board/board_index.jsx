@@ -30,7 +30,7 @@ export default class BoardIndex extends React.Component {
       <div className="all-boards-container">
         <div className="boards-container">
           <div className="boards-header">
-            <img src={window.starIcon} />
+            <img src={window.starGrayIcon} />
             <h1>Starred Boards</h1>
           </div>
           <ul className="boards">

@@ -42,7 +42,7 @@ export const fetchBoards = id => dispatch => {
 
 export const fetchBoard = id => dispatch => {
   return BoardApiUtil.fetchBoard(id).then(
-    board => dispatch(receiveBoards(board)),
+    board => dispatch(receiveBoard(board)),
     errors => dispatch(receiveBoardErrors(errors))
   );
 };

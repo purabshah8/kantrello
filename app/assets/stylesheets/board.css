@@ -1,0 +1,17 @@
+.board-container {
+  height: 100%;
+  background: #eeecec;
+}
+
+.board-header {
+  height: 48px;
+}
+
+.board-header .overlay {
+  color: #17394d;
+  /* text-decoration-color: # */
+}
+
+.board-header .star-icon {
+  width: 18px;
+}

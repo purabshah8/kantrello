@@ -20,7 +20,7 @@ export default class Navbar extends React.Component {
     }
   }
 
-  toggleDropdown() {
+  toggleDropdown(e) {
     this.setState({ showUserDropdown: !this.state.showUserDropdown });
   }
 
@@ -36,10 +36,10 @@ export default class Navbar extends React.Component {
           <p>Kantrello</p>
         </Link>
 
+
         <div className="right-nav">
           <div
-            onFocus={this.toggleDropdown}
-            onBlur={this.toggleDropdown}
+            onClick={this.toggleDropdown}
             tabIndex="0"
             className="avatar-container">
             {this.userIcon()}
