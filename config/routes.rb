@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :boards, only: [:index]
     end
     resource :session, only: [:create, :destroy]
-    resources :boards, only: [:create, :update, :destroy]
+    resources :boards, only: [:create, :show, :update, :destroy]
   end
 
   get '*path', to: 'static_pages#root'

@@ -2,7 +2,6 @@ class Api::BoardsController < ApplicationController
 
   def index
     @boards = Board.includes(:users).where(owner_id: params[:user_id])
-    # debugger
   end
 
   def create
@@ -12,6 +11,10 @@ class Api::BoardsController < ApplicationController
     else
       render json: @board.errors.full_messages, status: 422
     end
+  end
+
+  def show
+    @board = Board.find(params[:id])
   end
 
   def update

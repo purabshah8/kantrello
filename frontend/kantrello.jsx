@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () =>{
   window.updateUser = UserActions.updateUser;
   window.deleteUser = UserActions.deleteUser;
   window.fetchBoards = BoardApiUtil.fetchBoards;
+  window.fetchBoard = BoardApiUtil.fetchBoard;
   window.createBoard = BoardApiUtil.createBoard;
   window.updateBoard = BoardApiUtil.updateBoard;
   window.deleteBoard = BoardApiUtil.deleteBoard;

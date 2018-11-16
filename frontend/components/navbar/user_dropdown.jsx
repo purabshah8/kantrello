@@ -18,7 +18,7 @@ export default class UserDropdown extends React.Component {
     const { id, name, username } = this.props.user;
     return (
       <ul className="user-dropdown">
-        <li>
+        <li className= "dropdown-border">
           <span className="user-dropdown-name">{name} ({username})</span>
           <img
             onFocus={this.props.toggleDropdown}
@@ -26,8 +26,12 @@ export default class UserDropdown extends React.Component {
             className="user-dropdown-close"
             src={window.closeIcon} />
         </li>
-        <li className="logout-link" onClick={this.handleLogout(id)}>Log Out
+        <li className= "dropdown-border">
+          <Link to={`/users/${id}`}>Profile</Link>
         </li>
+        <li><span className="logout-link" onClick={this.handleLogout(id)}>Log Out</span>
+        </li>
+
       </ul>
     );
   }

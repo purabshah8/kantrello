@@ -7,23 +7,24 @@ const Auth = ({ component: Component, path, loggedIn, exact, currentUserId }) =>
     !loggedIn ? (
       <Component {...props} />
     ) : (
-      // Change redirect to user/boards when creating boards feature
-      <Redirect to={`/users/${currentUserId}`} />
+      <Redirect to={`/users/${currentUserId}/boards`} />
     )
   )} />
 );
 
-const Protected = ({ component: Component, path, loggedIn, exact }) => (
-  <Route path={path} exact={exact} render={(props) => (
+const Protected = ({ component: Component, path, loggedIn, exact }) => {
+  return(
+  <Route path={path} exact={exact} render={(props) => {
+    return (
      loggedIn ? (
       <Component {...props} />
     ) : (
       <Redirect to="/" />
-    )
-  )} />
-);
+    ));
+  }} />
+  );
+};
 
-// const
 
 const mapStateToProps = state => (
   {

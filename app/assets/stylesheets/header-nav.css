@@ -61,10 +61,12 @@
   width: 280px;
   display: flex;
   flex-direction: column;
+  /* padding: 0 10px; */
 }
 
 .user-dropdown li {
-  color: #6b808c;
+  /* color: #6b808c; */
+  text-align: left
 }
 
 .user-dropdown li:first-of-type {
@@ -80,9 +82,25 @@
   background-color: white;
 }
 
-.user-dropdown li:hover{
+.user-dropdown li:hover {
   color: white;
   background-color: #298fca;
+}
+
+.user-dropdown li > a {
+  text-decoration: none;
+  padding: 6px 12px;
+  color: #17394d;
+  font-size: 14px;
+}
+
+.logout-link {
+  display: block;
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
 }
 
 .user-dropdown-name {
