@@ -13,7 +13,6 @@
 .boards-header > img {
   width: 20px;
   height: 20px;
-  /* font-weight: 900; */
 }
 
 .boards-header > h1 {
@@ -160,14 +159,12 @@
   position: absolute;
   bottom: 8px;
   right: 8px;
-  /* right: -18px; */
-  height: 18px;
+  height: 20px;
   width: 0px;
   opacity: 0;
 }
 
 .unstarred a:hover .star-icon {
-  /* right: 8px; */
   opacity: 0.6;
   width: 18px;
   -webkit-transition: opacity, width .15s;
@@ -181,7 +178,7 @@
 }
 
 .starred > a .star-icon {
-  width: 18px;
+  width: 20px;
   opacity: 0.6;
 }
 
@@ -189,6 +186,10 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.overlay.add-board:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .add-board-text {

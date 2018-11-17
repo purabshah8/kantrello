@@ -6,7 +6,26 @@
   justify-content: space-between;
 }
 
-.home-button-header {
+.home-overlay {
+  display: block;
+  background: #72a3c6;
+  padding: 6px;
+  margin-right: 4px;
+  border-radius: 3px;
+}
+
+.home-overlay:hover {
+  background-color: hsla(0,0%,100%,.2);
+}
+
+.home-overlay img {
+  height: 18px;
+  width: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.kantrello-button-header {
   font-family: "Damion";
   color: white;
   font-size: 14px;
@@ -16,11 +35,11 @@
   opacity: 0.5;
 }
 
-.home-button-header:hover {
+.kantrello-button-header:hover {
   opacity: 0.8;
 }
 
-.home-button-header p {
+.kantrello-button-header p {
   font-size: 2em;
   color: white;
 }

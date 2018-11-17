@@ -29,9 +29,12 @@ export default class Navbar extends React.Component {
       <nav className="header-nav">
 
         <div className="left-nav">
+          <Link to="/" className="home-overlay">
+            <img className="home-button" src={window.homeIcon} />
+          </Link>
         </div>
 
-        <Link className="home-button-header" to="/">
+        <Link className="kantrello-button-header" to="/">
           <img className="logo-header"src={window.logo} />
           <p>Kantrello</p>
         </Link>
