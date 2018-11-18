@@ -22,6 +22,6 @@ class Card < ApplicationRecord
   private
   def ensure_position
     other_card_positions = self.list.cards.map() {|card| card[:position]}.sort
-    self.position = other_card_positions.empty? ? 1 : other_card_positions.last + 1
+    self.position ||= other_card_positions.empty? ? 1 : other_card_positions.last + 1
   end
 end

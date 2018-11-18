@@ -24,7 +24,7 @@ class List < ApplicationRecord
   private
   def ensure_position
     other_list_positions = self.board.lists.map() {|list| list[:position]}.sort
-    self.position = other_list_positions.empty? ? 1 : other_list_positions.last + 1
+    self.position ||= other_list_positions.empty? ? 1 : other_list_positions.last + 1
   end
 
 end
