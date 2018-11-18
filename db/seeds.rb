@@ -21,15 +21,28 @@ purab = User.create!(name: 'Purab Shah', email:'purabshah8@gmail.com', password:
 # end
 puts "Done!"
 
-Board.destroy_all
 puts "Creating Boards..."
+Board.destroy_all
 full_stack = Board.create!(title: "Full Stack Project", owner_id: demo_user.id)
 to_do = Board.create!(title: "Personal To Do", owner_id: demo_user.id)
 job_search = Board.create!(title: "Job Search", owner_id: purab.id)
 puts "Done!"
 
-BoardShare.destroy_all
 puts "Creating Board Shares..."
+BoardShare.destroy_all
 share1 = BoardShare.create!(board_id: full_stack.id, user_id: purab.id)
 share2 = BoardShare.create!(board_id: job_search.id, user_id: demo_user.id)
+puts "Done!"
+
+puts "Creating Lists..."
+List.destroy_all
+list1 = List.create!(title: 'New Features', board_id: full_stack.id)
+list2 = List.create!(title: 'Development', board_id: full_stack.id)
+puts "Done!"
+
+
+puts "Creating Cards..."
+Card.destroy_all
+card1 = Card.create!(title: 'Boards', list_id: list1.id)
+card2 = Card.create!(title: 'Lists & Cards', list_id: list1.id)
 puts "Done!"

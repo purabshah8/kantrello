@@ -27,6 +27,9 @@ class Board < ApplicationRecord
     through: :board_shares,
     source: :user
 
+  has_many :lists,
+    foreign_key: :board_id,
+    class_name: :List
 
   private
 
