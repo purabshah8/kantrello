@@ -38,6 +38,9 @@ puts "Creating Lists..."
 List.destroy_all
 list1 = List.create!(title: 'New Features', board_id: full_stack.id)
 list2 = List.create!(title: 'Development', board_id: full_stack.id)
+list3 = List.create!(title: 'Unit Testing', board_id: full_stack.id)
+list4 = List.create!(title: 'E2E Testing', board_id: full_stack.id)
+list5 = List.create!(title: 'Ready for Deployment', board_id: full_stack.id)
 puts "Done!"
 
 

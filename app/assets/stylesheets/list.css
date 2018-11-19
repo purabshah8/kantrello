@@ -1,0 +1,122 @@
+.list-title {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  padding: 4px 4px 4px 16px;
+}
+
+.list-title > span {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.list-actions-overlay {
+  height: 32px;
+  width: 32px;
+}
+
+.list-actions-overlay:hover {
+  background-color: rgba(9,45,66,.13);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.list-actions-overlay > img {
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
+.list-actions-container {
+  position: absolute;
+  z-index: 10;
+  background: white;
+  top: 40px;
+  left: 237px;
+  width: 304px;
+  padding: 12px;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
+}
+
+.list-actions-title {
+  width: 100%;
+  border-bottom: 1px solid rgba(9,45,66,.13);
+}
+
+.list-actions-title span {
+  display: block;
+  width: 100%;
+  color: #6b808c;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+.list-actions-title img {
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  height: 18px;
+}
+
+.list-actions-list {
+  border-bottom: 1px solid rgba(9,45,66,.13);
+  padding: 6px 0;
+  width: 100%;
+}
+
+
+.list-actions-list li, .delete-list span {
+  display: block;
+  padding: 6px 0;
+  font-size: 14px;
+  font-weight: 700;
+  width: 100%;
+}
+
+.list-actions-list li:hover, .delete-list span:hover {
+  color: white;
+  background: #298fca;
+  width: 304px;
+  margin-left: -12px;
+  padding-left: 12px;
+  padding-right: 12px;
+
+}
+
+.delete-list {
+  padding-top: 6px;
+}
+
+.rename-list-form {
+  width: 80%;
+}
+
+.rename-list-form input {
+  width: 100%;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 7px;
+  margin-top: 2px;
+  margin-left: -8px;
+  color: #17394d;
+  border: 1px solid #5ba4cf;
+  box-shadow: 0 0 0 1px #5ba4cf;
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 85ms;
+  transition-timing-function: ease;
+}
+
+.rename-list-form input:focus {
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 1px #5ba4cf;
+}
+
+.list-cards {
+  /* padding: 10px 8px 8px 8px; */
+}

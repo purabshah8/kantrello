@@ -29,7 +29,8 @@ class Board < ApplicationRecord
 
   has_many :lists,
     foreign_key: :board_id,
-    class_name: :List
+    class_name: :List,
+    dependent: :destroy
 
   private
 

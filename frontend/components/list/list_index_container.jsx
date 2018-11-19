@@ -5,7 +5,6 @@ import { fetchLists, createList, updateList, deleteList } from '../../actions/li
 import { selectLists } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   return {
     lists: selectLists(state, ownProps.boardId),
   };

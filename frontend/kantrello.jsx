@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
-import * as BoardApiUtil from './util/board_api_util';
+import * as ListApiUtil from './util/list_api_util';
 import * as UserActions from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () =>{
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () =>{
   window.createUser = UserActions.createUser;
   window.updateUser = UserActions.updateUser;
   window.deleteUser = UserActions.deleteUser;
-  window.fetchBoards = BoardApiUtil.fetchBoards;
-  window.fetchBoard = BoardApiUtil.fetchBoard;
-  window.createBoard = BoardApiUtil.createBoard;
-  window.updateBoard = BoardApiUtil.updateBoard;
-  window.deleteBoard = BoardApiUtil.deleteBoard;
+  window.fetchLists = ListApiUtil.fetchLists;
+  window.fetchList = ListApiUtil.fetchList;
+  window.createList = ListApiUtil.createList;
+  window.updateList = ListApiUtil.updateList;
+  window.deleteList = ListApiUtil.deleteList;
 });

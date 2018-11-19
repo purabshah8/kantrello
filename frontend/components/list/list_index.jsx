@@ -13,9 +13,6 @@ export default class ListIndex extends React.Component {
     this.props.fetchLists();
   }
 
-  componentDidUpdate(oldProps) {
-    debugger
-  }
 
   toggleNewList() {
     this.setState({ showNewList: !this.state.showNewList });

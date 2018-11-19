@@ -8,5 +8,15 @@ export const selectBoards = state => {
 export const selectLists = (state, boardId) => {
   const lists = Object.values(state.entities.lists);
   const boardLists = lists.filter(list => list.board_id === boardId);
-  return boardLists;
+  const sortedBoardLists = boardLists.sort(compare);
+  return sortedBoardLists;
+};
+
+const compare = (a,b) => {
+  if (a.position < b.position)
+    return -1;
+  else if (a.position > b.position)
+    return 1;
+  else
+  return 0;
 };

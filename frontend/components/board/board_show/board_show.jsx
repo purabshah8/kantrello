@@ -13,7 +13,6 @@ export default class BoardShow extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this);
     this.toggleEditBoard = this.toggleEditBoard.bind(this);
     this.deleteBoard = this.deleteBoard.bind(this);
-
   }
 
   componentDidMount() {
