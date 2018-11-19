@@ -11,6 +11,10 @@
   overflow-x: scroll;
 }
 
+.new-list-button:hover, .move-list-button:hover {
+  background: #519839;
+  cursor: pointer;
+}
 /* .lists::-webkit-scrollbar {
   top: 20px;
   height: 12px;
@@ -131,11 +135,16 @@
 .new-list-form > div {
   margin-top: -2px;
   display: flex;
+
 }
 
 .new-list-form > div > img {
   margin-top: 12px;
   height: 24px;
+}
+
+.new-list-form > div > img:hover {
+  cursor: pointer;
 }
 
 .new-list-form > input {

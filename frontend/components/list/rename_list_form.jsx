@@ -45,7 +45,7 @@ class RenameListForm extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <form className="rename-list-form"
         onSubmit={this.handleSubmit}>
         <input

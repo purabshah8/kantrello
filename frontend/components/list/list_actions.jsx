@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createList, updateList, deleteList } from '../../actions/list_actions';
 
-
 class ListActions extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +39,7 @@ class ListActions extends React.Component {
         <ul className="list-actions-list">
           <li>Add Card...</li>
           <li>Copy List...</li>
-          <li>Move List...</li>
+          <li onClick={this.props.toggleMoveListForm}>Move List...</li>
         </ul>
         <ul className="list-actions-list">
           <li>Move All Cards in this List...</li>
@@ -53,6 +52,7 @@ class ListActions extends React.Component {
       </div>
     );
   }
+
 }
 
 // const mapStateToProps = state => {

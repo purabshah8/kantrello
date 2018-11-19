@@ -23,7 +23,9 @@ export default class ListIndex extends React.Component {
     if (!this.props.lists) return null;
     const listIndexItems = this.props.lists.map(list => {
       return(
-        <ListIndexItem key={list.id} list={list} />
+        <ListIndexItem key={list.id}
+          list={list}
+          boardId={this.props.boardId} />
       );
     });
     return listIndexItems;

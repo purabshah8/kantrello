@@ -27,7 +27,7 @@
   margin-top: 4px;
 }
 
-.list-actions-container {
+.list-actions-container, .move-list-container {
   position: absolute;
   z-index: 10;
   background: white;
@@ -39,12 +39,12 @@
   box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
 }
 
-.list-actions-title {
+.list-actions-title, .move-list-title {
   width: 100%;
   border-bottom: 1px solid rgba(9,45,66,.13);
 }
 
-.list-actions-title span {
+.list-actions-title span, .move-list-title span {
   display: block;
   width: 100%;
   color: #6b808c;
@@ -84,6 +84,22 @@
   padding-left: 12px;
   padding-right: 12px;
 
+}
+
+.move-list-title img {
+  position: absolute;
+}
+
+.return-list-actions {
+  height: 14px;
+  top: 12px;
+  left: 11px;
+}
+
+.close-move-list {
+  height: 18px;
+  top: 10px;
+  right: 10px;
 }
 
 .delete-list {
