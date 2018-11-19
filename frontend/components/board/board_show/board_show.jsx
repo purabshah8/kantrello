@@ -1,5 +1,6 @@
 import React from 'react';
 import EditBoardForm from './edit_board_form';
+import ListIndex from '../../list/list_index_container';
 
 export default class BoardShow extends React.Component {
   constructor(props) {
@@ -68,6 +69,7 @@ export default class BoardShow extends React.Component {
 
   render() {
     const { id, title, starred } = this.props.board || { id: 0, title: '', starred: false};
+    const listIndex = (id !== 0) ? <ListIndex boardId={id} /> : null;
     return(
       <div className="board-container">
         {this.renderMenu()}
@@ -89,12 +91,12 @@ export default class BoardShow extends React.Component {
             <div onClick={this.toggleMenu}
               className="show-menu header-overlay">
               <img className="more-icon"
-                src={window.moreIcon}/>
+                src={window.moreWhiteIcon}/>
               <span>Show Menu</span>
             </div>
           </div>
-
         </div>
+        {listIndex}
       </div>
     );
   }

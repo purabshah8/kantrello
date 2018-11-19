@@ -32,7 +32,7 @@ export default class BoardIndex extends React.Component {
       <li key={-1} className="board-tile"
         onClick={this.toggleModal}>
           <div className="overlay add-board">
-            <span className="add-board-text">Create New Board...</span>
+            <span className="add-board-text">Create new board...</span>
           </div>
       </li>
     );

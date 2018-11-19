@@ -14,7 +14,7 @@ class Board < ApplicationRecord
   validates :title, presence: true
   validates :starred, inclusion: { in: [true, false] }
 
-  after_initialize :ensure_starred
+  before_validation :ensure_starred
 
   belongs_to :owner,
     foreign_key: :owner_id,

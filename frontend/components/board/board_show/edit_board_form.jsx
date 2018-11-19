@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateBoard } from '../../actions/board_actions';
+import { updateBoard } from '../../../actions/board_actions';
 import merge from 'lodash/merge';
 
 class EditBoardForm extends React.Component {

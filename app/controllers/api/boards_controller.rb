@@ -1,7 +1,7 @@
 class Api::BoardsController < ApplicationController
 
   def index
-    @boards = Board.includes(:users).where(owner_id: params[:user_id])
+    @boards = Board.includes(:users, :lists).where(owner_id: params[:user_id])
   end
 
   def create

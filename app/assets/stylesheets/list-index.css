@@ -1,0 +1,173 @@
+.lists-container {
+  width: 100%;
+  height: calc(100% - 48px);
+}
+
+.lists {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
+}
+
+/* .lists::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+}
+.lists::-webkit-scrollbar-button {
+    display: block;
+    height: 4px;
+    width: 4px;
+}
+
+.lists::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+
+.lists::-webkit-scrollbar-track-piece {
+    background: rgba(0,0,0,.15);
+} */
+
+
+.list-item-container {
+  width: 272px;
+  min-width: 272px;
+  height: 100%;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.list-item-container:first-of-type {
+  margin-left: 8px;
+}
+
+.list-item, .new-list-form-item {
+  width: 100%;
+  background: #dfe3e6;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-title {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  padding: 4px 4px 4px 16px;
+}
+
+.list-title > span {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.list-actions-overlay {
+  height: 32px;
+  width: 32px;
+}
+
+.list-actions-overlay:hover {
+  background-color: rgba(9,45,66,.13);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.list-actions-overlay > img {
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
+.list-cards {
+  /* padding: 10px 8px 8px 8px; */
+}
+
+.new-card {
+  height: 32px;
+  padding: 8px;
+  display: flex;
+}
+
+.new-card:hover {
+  background-color: rgba(9,45,66,.13);
+  cursor: pointer;
+}
+
+.new-card:hover > span {
+  text-decoration: underline;
+  color: #17394d;
+}
+
+.new-card > span {
+  display: block;
+  color: #6b808c;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.new-card > img {
+  display: block;
+  height: 22px;
+  margin-top: -3px;
+}
+
+.add-new-list-overlay {
+  background-color: rgba(0,0,0,.12);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.add-new-list-overlay:hover {
+  background-color: rgba(0,0,0,.24);
+}
+
+.new-list {
+  display: flex;
+  height: 40px;
+}
+
+.new-list > img {
+  padding: 0px;
+  height: 22px;
+  margin-left: 15px;
+  margin-top: 9px;
+}
+
+.new-list > span {
+  display: block;
+  color: hsla(0,0%,100%,.8);
+  font-size: 14px;
+  line-height: 14px;
+  padding: 13px 0px;
+}
+
+.new-list-form {
+  margin: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-list-form > div {
+  margin-top: -2px;
+  display: flex;
+}
+
+.new-list-form > div > img {
+  margin-top: 12px;
+  height: 24px;
+}
+
+.new-list-form > input {
+  background: #fff;
+  border: 1px solid #5ba4cf;
+  box-shadow: 0 0 0 1px #5ba4cf;
+  display: block;
+  margin: 0;
+  font-size: 14px;
+  border-radius: 3px;
+  transition: margin 85ms ease-in;
+/* transition: ßbackground 85ms ease-in; */
+  /* width: 100%; */
+  padding: 6px 8px;
+}

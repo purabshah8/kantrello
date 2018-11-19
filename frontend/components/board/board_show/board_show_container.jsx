@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BoardShow from './board_show';
-import { fetchBoard, updateBoard, deleteBoard } from '../../actions/board_actions';
-import { selectBoard } from '../../reducers/selectors';
+import { fetchBoard, updateBoard, deleteBoard } from '../../../actions/board_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const boardId = ownProps.match.params.id;

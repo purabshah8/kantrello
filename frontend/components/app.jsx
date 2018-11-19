@@ -5,8 +5,8 @@ import SignupForm from './session_form/signup_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import Splash from './splash';
 import UserParent from './user/user_parent';
-import BoardIndexParent from './board/board_index_parent';
-import BoardShowParent from './board/board_show_parent';
+import BoardIndexParent from './board/board_index/board_index_parent';
+import BoardShowParent from './board/board_show/board_show_parent';
 
 const App = () => {
   const baseRender = () => <h1>Welcome to Kantrello!</h1>;

@@ -4,7 +4,9 @@ export const selectBoards = state => {
   return userBoards;
 };
 
-export const selectBoard = (state, boardId, fetchBoard) => {
-  if (!state.entities.boards[boardId]) fetchBoard(boardId);
-  return state.entities.boards[boardId];
+
+export const selectLists = (state, boardId) => {
+  const lists = Object.values(state.entities.lists);
+  const boardLists = lists.filter(list => list.board_id === boardId);
+  return boardLists;
 };

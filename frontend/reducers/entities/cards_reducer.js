@@ -1,7 +1,7 @@
 import { RECEIVE_CARDS, RECEIVE_CARD, REMOVE_CARD } from '../../actions/card_actions';
 import merge from 'lodash/merge';
 
-const cardsReducer = (state ={}, action) => {
+const cardsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_CARDS:

@@ -36,7 +36,7 @@ class User < ApplicationRecord
     source: :board
 
 
-  after_initialize :ensure_user_info
+  before_validation :ensure_user_info
 
 
   def self.find_by_credentials(credentials)
