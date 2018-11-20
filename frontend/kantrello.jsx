@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
-import * as ListApiUtil from './util/list_api_util';
+import * as CardApiUtil from './util/card_api_util';
 import * as UserActions from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () =>{
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () =>{
   window.createUser = UserActions.createUser;
   window.updateUser = UserActions.updateUser;
   window.deleteUser = UserActions.deleteUser;
-  window.fetchLists = ListApiUtil.fetchLists;
-  // window.fetchList = ListApiUtil.fetchList;
-  window.createList = ListApiUtil.createList;
-  window.updateList = ListApiUtil.updateList;
-  window.deleteList = ListApiUtil.deleteList;
+  window.fetchCards = CardApiUtil.fetchCards;
+  // window.fetchCard = CardApiUtil.fetchCard;
+  window.createCard = CardApiUtil.createCard;
+  window.updateCard = CardApiUtil.updateCard;
+  window.deleteCard = CardApiUtil.deleteCard;
 });

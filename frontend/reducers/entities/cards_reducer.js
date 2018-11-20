@@ -5,7 +5,7 @@ const cardsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_CARDS:
-      return action.cards;
+      return merge({}, state, action.cards);
     case RECEIVE_CARD:
       const newState = {
         [action.card.id]: action.card,

@@ -12,6 +12,13 @@ export const selectLists = (state, boardId) => {
   return sortedBoardLists;
 };
 
+export const selectCards = (state, listId) => {
+  const cards = Object.values(state.entities.cards);
+  const listCards = cards.filter(card => card.list_id === listId);
+  const sortedListCards = listCards.sort(compare);
+  return sortedListCards;
+};
+
 const compare = (a,b) => {
   if (a.position < b.position)
     return -1;

@@ -150,7 +150,7 @@ class MoveListForm extends React.Component {
             {this.renderPositionOptions()}
           </div>
 
-          <button className="move-list-button">Move</button>
+          <button className="green-submit-button">Move</button>
 
         </form>
 

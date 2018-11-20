@@ -3,18 +3,19 @@ import ListActions from './list_actions';
 import RenameListForm from './rename_list_form';
 import MoveListForm from './move_list_form';
 import CopyListForm from './copy_list_form';
+import CardIndex from '../card/card_index_container';
 
 export default class ListIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showListActions: false,
       showRenameListForm: false,
+      showListActions: false,
       showMoveListForm: false,
       showCopyListForm: false,
      };
-    this.toggleListActions = this.toggleListActions.bind(this);
     this.toggleRenameList = this.toggleRenameList.bind(this);
+    this.toggleListActions = this.toggleListActions.bind(this);
     this.toggleMoveListForm = this.toggleMoveListForm.bind(this);
     this.toggleCopyListForm = this.toggleCopyListForm.bind(this);
   }
@@ -49,21 +50,6 @@ export default class ListIndexItem extends React.Component {
     }
   }
 
-  renderListActions() {
-    if (!this.state.showListActions) {
-      return null;
-    } else {
-      return <ListActions
-        list={this.props.list}
-        boardId={this.props.boardId}
-        toggleListActions={this.toggleListActions}
-        toggleMoveListForm={this.toggleMoveListForm}
-        toggleCopyListForm={this.toggleCopyListForm}
-        onBlur={this.toggleListActions}
-        tabIndex={0} />;
-    }
-  }
-
   renderRenameListForm() {
     if (!this.state.showRenameListForm) {
       return(
@@ -77,6 +63,21 @@ export default class ListIndexItem extends React.Component {
         toggleRenameList={this.toggleRenameList}
         list={this.props.list} />
     );
+  }
+
+  renderListActions() {
+    if (!this.state.showListActions) {
+      return null;
+    } else {
+      return <ListActions
+        list={this.props.list}
+        boardId={this.props.boardId}
+        toggleListActions={this.toggleListActions}
+        toggleMoveListForm={this.toggleMoveListForm}
+        toggleCopyListForm={this.toggleCopyListForm}
+        onBlur={this.toggleListActions}
+        tabIndex={0} />;
+    }
   }
 
   renderMoveListForm() {
@@ -102,7 +103,8 @@ export default class ListIndexItem extends React.Component {
   }
 
   render() {
-    return(
+    const addCardText = (this.props.list.cardIds.length !== 0) ? "Add another card":"Add a card";
+    return (
       <div className="list-item-container">
         {this.renderListActions()}
         {this.renderMoveListForm()}
@@ -118,12 +120,8 @@ export default class ListIndexItem extends React.Component {
               <img src={window.moreIcon}/>
             </div>
           </div>
-          <ul className="list-cards">
-          </ul>
-          <div className="new-card">
-            <img src={window.plusIcon} />
-            <span>Add another card</span>
-          </div>
+          <CardIndex
+            listId={this.props.list.id} />
         </li>
 
       </div>

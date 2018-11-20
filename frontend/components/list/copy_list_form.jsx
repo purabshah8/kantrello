@@ -72,7 +72,7 @@ class CopyListForm extends React.Component {
               value={this.state.title}/>
           </div>
 
-          <button className="copy-list-button">Create List</button>
+          <button className="green-submit-button">Create List</button>
         </form>
       </div>
     );

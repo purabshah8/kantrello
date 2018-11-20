@@ -11,7 +11,7 @@
   overflow-x: scroll;
 }
 
-.new-list-button:hover, .move-list-button:hover, .copy-list-button:hover {
+.green-submit-button:hover {
   background: #519839;
   cursor: pointer;
 }

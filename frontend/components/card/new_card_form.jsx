@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import merge from 'lodash/merge';
 
-export default class NewListForm extends React.Component {
+export default class NewCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { title: '' };
@@ -22,19 +21,19 @@ export default class NewListForm extends React.Component {
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleNewList();
+      this.props.toggleNewCard();
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.title.length > 0) {
-      const newList = {
+      const newCard = {
         title: this.state.title,
-        board_id : this.props.boardId,
+        list_id : this.props.listId,
       };
-      this.props.createList(newList);
-      this.props.toggleNewList();
+      this.props.createCard(newCard);
+      this.props.toggleNewCard();
     }
   }
 
@@ -46,17 +45,19 @@ export default class NewListForm extends React.Component {
 
   render() {
     return(
-      <li className="new-list-form-item">
-        <form className="new-list-form"
+      <li className="new-card-form-item">
+        <form className="new-card-form"
           onSubmit={this.handleSubmit}>
-          <input
-            placeholder="Enter list title..."
-            onChange={this.update('title')}
-            value={this.state.title}/>
-          <div>
-            <button className="green-submit-button">Add List</button>
+          <div className="new-card-form-input">
+            <textarea className="card-item-container"
+              placeholder="Enter a title for this card..."
+              onChange={this.update('title')}
+              value={this.state.title}/>
+          </div>
+          <div className="new-card-form-options">
+            <button className="green-submit-button">Add Card</button>
             <img src={window.closeIcon}
-              onClick={this.props.toggleNewList} />
+              onClick={this.props.toggleNewCard} />
           </div>
         </form>
       </li>

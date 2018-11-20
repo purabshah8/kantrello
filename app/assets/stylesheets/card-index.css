@@ -1,0 +1,94 @@
+.card-item-container {
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  width: 256px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 0 rgba(9,45,66,.25);
+  border-radius: 3px;
+}
+
+.card-item {
+  background-color: #fff;
+  cursor: pointer;
+  display: block;
+  max-width: 300px;
+  min-height: 20px;
+  padding: 6px 8px 2px;
+}
+
+.card-item:hover {
+  opacity: 0.8;
+}
+
+.card-title {
+  clear: both;
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-decoration: none;
+  word-wrap: break-word;
+  color: #17394d;
+}
+
+.edit-icon {
+  background-clip: padding-box;
+  background-origin: padding-box;
+  border-radius: 3px;
+  opacity: .8;
+  padding: 4px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  visibility: hidden;
+  z-index: 40;
+  color: #798d99;
+  height: 24px;
+  font-size: 12px;
+  line-height: 20px;
+  width: 24px;
+}
+
+.edit-icon:hover {
+  background-color: #f5f6f7;
+}
+
+.card-item:hover .edit-icon {
+  color: #516b7a;
+  visibility: visible;
+}
+
+.new-card-form-input {
+  display: block;
+  margin: 0 4px;
+  padding: 0 4px;
+  width: 248px;
+}
+
+.new-card-form-input textarea {
+  color: #6b808c;
+  height: 58px;
+  width: 100%;
+  border: none;
+  padding: 6px 8px 2px;
+  font-size: 14px;
+  resize: none;
+}
+
+.new-card-form-input textarea:focus {
+  color: #17394D;
+}
+
+.new-card-form-options {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 8px;
+  padding-bottom: 8px;
+}
+
+.new-card-form-options img {
+  margin-top: 10px;
+}

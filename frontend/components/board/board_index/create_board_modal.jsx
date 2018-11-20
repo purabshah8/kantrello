@@ -40,7 +40,7 @@ export default class  CreateBoardModal extends React.Component {
 
   render() {
     const blankTitle = (this.state.title === '');
-    const buttonClass = (blankTitle) ? "disabled-board-button" : "enabled-board-button";
+    const buttonClass = (blankTitle) ? "disabled-board-button" : "green-submit-button";
     return (
       <div className="modal-background">
         <form className="create-board-form" onSubmit={this.handleSubmit}>
