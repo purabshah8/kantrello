@@ -151,7 +151,7 @@
   border: none;
 }
 
-.enabled-board-button, .new-list-button, .move-list-button {
+.enabled-board-button, .new-list-button, .move-list-button, .copy-list-button {
   font-size: 14px;
   background-color: #5aac44;
   box-shadow: 0 1px 0 0 #3f6f21;

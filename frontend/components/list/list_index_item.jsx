@@ -2,6 +2,7 @@ import React from 'react';
 import ListActions from './list_actions';
 import RenameListForm from './rename_list_form';
 import MoveListForm from './move_list_form';
+import CopyListForm from './copy_list_form';
 
 export default class ListIndexItem extends React.Component {
   constructor(props) {
@@ -10,10 +11,12 @@ export default class ListIndexItem extends React.Component {
       showListActions: false,
       showRenameListForm: false,
       showMoveListForm: false,
+      showCopyListForm: false,
      };
     this.toggleListActions = this.toggleListActions.bind(this);
     this.toggleRenameList = this.toggleRenameList.bind(this);
     this.toggleMoveListForm = this.toggleMoveListForm.bind(this);
+    this.toggleCopyListForm = this.toggleCopyListForm.bind(this);
   }
 
   toggleListActions() {
@@ -25,6 +28,14 @@ export default class ListIndexItem extends React.Component {
       showMoveListForm: !this.state.showMoveListForm,
     });
     if (e && e.target.className !== "close-move-list")
+    this.toggleListActions();
+  }
+
+  toggleCopyListForm(e) {
+    this.setState({
+      showCopyListForm: !this.state.showCopyListForm,
+    });
+    if (e && e.target.className !== "close-copy-list")
     this.toggleListActions();
   }
 
@@ -43,11 +54,13 @@ export default class ListIndexItem extends React.Component {
       return null;
     } else {
       return <ListActions
-        onBlur={this.toggleListActions}
         list={this.props.list}
         boardId={this.props.boardId}
         toggleListActions={this.toggleListActions}
-        toggleMoveListForm={this.toggleMoveListForm} />;
+        toggleMoveListForm={this.toggleMoveListForm}
+        toggleCopyListForm={this.toggleCopyListForm}
+        onBlur={this.toggleListActions}
+        tabIndex={0} />;
     }
   }
 
@@ -77,11 +90,23 @@ export default class ListIndexItem extends React.Component {
     );
   }
 
+  renderCopyListForm() {
+    if (!this.state.showCopyListForm) return null;
+    return(
+      <CopyListForm
+        toggleCopyListForm={this.toggleCopyListForm}
+        toggleListActions={this.toggleListActions}
+        boardId={this.props.boardId}
+        list={this.props.list}/>
+    );
+  }
+
   render() {
     return(
       <div className="list-item-container">
         {this.renderListActions()}
         {this.renderMoveListForm()}
+        {this.renderCopyListForm()}
         <li className="list-item">
           <div
             className="list-title">

@@ -46,15 +46,22 @@ class MoveListForm extends React.Component {
       position: this.state.position,
       board_id: this.state.boardId,
     };
-    this.props.updateList(updatedList);
+    this.props.updateList(updatedList).then(() => this.props.fetchLists(this.props.boardId));
     this.props.toggleMoveListForm();
-    this.props.fetchLists(this.props.boardId);
   }
 
   update(field) {
-    return e => {
-      this.setState({[field]: e.target.value});
-    };
+    if (field === 'boardId') {
+      return e => {
+        this.setState({[field]: e.target.value}, () => {
+          this.props.fetchLists(this.state.boardId);
+        });
+      };
+    } else {
+      return e => {
+        this.setState({[field]: e.target.value});
+      };
+    }
   }
 
   renderBoardOptions() {
@@ -72,36 +79,43 @@ class MoveListForm extends React.Component {
       <select value={this.state.boardId}
         onChange={this.update('boardId')}
         id="select-board-dropdown" >
-        <option key={0} disabled>Board</option>
-        {boardOptions}
+        <optgroup label="Board">
+          {boardOptions}
+        </optgroup>
       </select>
     );
   }
 
 
   renderPositionOptions() {
-    if (this.state.boardId !== this.props.boardId)
-      this.props.fetchLists(this.state.boardId);
-    debugger
-    const positionOptions = this.props.lists.filter(list => {
-      if (list.board_id !== this.state.boardId)
-        return false;
-      return true;
-    }).map(list => {
-      const current = (list.id === this.props.list.id) ? "(current)" : "";
-      return (
-          <option key={list.id}
-          value={list.position}>
-          {list.position + current}
-          </option>
-      );
-    });
+    let positionOptions = [];
+    if (this.props.boardId == this.state.boardId) {
+      positionOptions = this.props.lists.filter(list => {
+        if (list.board_id != this.state.boardId)
+          return false;
+        return true;
+      }).map(list => {
+        const current = (list.id === this.props.list.id) ? "(current)" : "";
+        return (
+            <option key={list.id}
+            value={list.position}>
+            {list.position + current}
+            </option>
+        );
+      });
+    } else {
+      const selectedBoard = this.props.boards.filter(board => board.id == this.state.boardId);
+      const numLists = selectedBoard[0].listIds.length;
+      for (var i = 1; i <= numLists + 1; i++)
+        positionOptions.push(<option key={i} value={i}>{i}</option>);
+    }
     return (
       <select value={this.state.position}
         onChange={this.update('position')}
         id="select-position-dropdown">
-        <option key={0} disabled>Positions</option>
-        {positionOptions}
+        <optgroup label="Position">
+          {positionOptions}
+        </optgroup>
       </select>
     );
   }
@@ -122,13 +136,17 @@ class MoveListForm extends React.Component {
 
         <form className="move-list-form" onSubmit={this.handleSubmit}>
 
-          <div className="select-board">
+          <div className="select-option">
             <label htmlFor="select-board-dropdown">Board</label>
+            <span className="select-value">
+              {this.props.boards.filter(board => board.id == this.state.boardId)[0].title}
+            </span>
             {this.renderBoardOptions()}
           </div>
 
-          <div className="select-position">
+          <div className="select-option">
             <label htmlFor="select-position-dropdown">Position</label>
+            <span className="select-value">{this.state.position}</span>
             {this.renderPositionOptions()}
           </div>
 
@@ -151,9 +169,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateList: list => dispatch(updateList(list)),
+    updateList: list => {
+      return dispatch(updateList(list));
+    },
     fetchBoards: userId => dispatch(fetchBoards(userId)),
-    fetchLists: boardId => dispatch(fetchLists(boardId)),
+    fetchLists: boardId => {
+      return dispatch(fetchLists(boardId));
+    },
   };
 };
 

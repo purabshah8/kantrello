@@ -38,8 +38,12 @@ class ListActions extends React.Component {
         </div>
         <ul className="list-actions-list">
           <li>Add Card...</li>
-          <li>Copy List...</li>
-          <li onClick={this.props.toggleMoveListForm}>Move List...</li>
+          <li onClick={this.props.toggleCopyListForm}>
+            Copy List...
+          </li>
+          <li onClick={this.props.toggleMoveListForm}>
+            Move List...
+          </li>
         </ul>
         <ul className="list-actions-list">
           <li>Move All Cards in this List...</li>

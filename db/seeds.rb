@@ -41,6 +41,7 @@ list2 = List.create!(title: 'Development', board_id: full_stack.id)
 list3 = List.create!(title: 'Unit Testing', board_id: full_stack.id)
 list4 = List.create!(title: 'E2E Testing', board_id: full_stack.id)
 list5 = List.create!(title: 'Ready for Deployment', board_id: full_stack.id)
+list6 = List.create!(title: 'Ongoing', board_id: to_do.id)
 puts "Done!"
 
 

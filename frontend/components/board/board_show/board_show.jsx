@@ -80,7 +80,7 @@ export default class BoardShow extends React.Component {
               {title}
             </div>
             <div onClick={this.toggleStar}
-              className="star header-overlay">
+              className={(starred === true) ? "starred star header-overlay": "star header-overlay"}>
               <img className="header-star-icon"
                 src={(starred === true) ? (window.starGoldIcon) : (window.starIcon)} />
             </div>

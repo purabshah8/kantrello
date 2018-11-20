@@ -28,6 +28,12 @@
   margin: 8px 10px 8px 0;
 }
 
+.starred {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
 .header-star-icon {
   height: 18px;
   width: 18px;
