@@ -1,0 +1,12 @@
+.card-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 500px;
+  width: 768px;
+  background: #dfe3e6;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}

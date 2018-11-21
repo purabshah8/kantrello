@@ -1,6 +1,7 @@
 import React from 'react';
 import EditBoardForm from './edit_board_form';
 import ListIndex from '../../list/list_index_container';
+import { ProtectedRoute } from '../../../util/route_util';
 
 export default class BoardShow extends React.Component {
   constructor(props) {
@@ -68,7 +69,7 @@ export default class BoardShow extends React.Component {
 
   render() {
     const { id, title, starred } = this.props.board || { id: 0, title: '', starred: false};
-    const listIndex = (id !== 0) ? <ListIndex boardId={id} /> : null;
+    const listIndex = (id !== 0) ? <ListIndex boardId={id} history={this.props.history} /> : null;
     return(
       <div className="board-container">
         {this.renderMenu()}

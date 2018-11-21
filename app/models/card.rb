@@ -19,6 +19,10 @@ class Card < ApplicationRecord
 
   belongs_to :list
 
+  has_one :board,
+    through: :list,
+    source: :board
+
   private
   def ensure_position
     other_card_positions = self.list.cards.map() {|card| card[:position]}.sort

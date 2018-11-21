@@ -121,7 +121,8 @@ export default class ListIndexItem extends React.Component {
             </div>
           </div>
           <CardIndex
-            listId={this.props.list.id} />
+            history={this.props.history}
+            list={this.props.list} />
         </li>
 
       </div>

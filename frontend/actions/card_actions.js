@@ -40,13 +40,13 @@ export const fetchCards = id => dispatch => {
   );
 };
 
-// export const fetchCard = id => dispatch => {
-//   return CardApiUtil.fetchCard(id).then(
-//     card => dispatch(receiveCard(card)),
-//     errors => dispatch(receiveCardErrors(errors))
-//   );
-// };
-//
+export const fetchCard = id => dispatch => {
+  return CardApiUtil.fetchCard(id).then(
+    card => dispatch(receiveCard(card)),
+    errors => dispatch(receiveCardErrors(errors))
+  );
+};
+
 export const createCard =  card => dispatch => {
   return CardApiUtil.createCard(card).then(
     newCard => dispatch(receiveCard(newCard)),

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :cards, only: [:index]
     end
 
-    resources :cards, only: [:create, :update, :destroy] 
+    resources :cards, only: [:create, :show, :update, :destroy] 
   end
 
   get '*path', to: 'static_pages#root'

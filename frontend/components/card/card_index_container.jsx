@@ -6,13 +6,13 @@ import { selectCards } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    cards: selectCards(state, ownProps.listId),
+    cards: selectCards(state, ownProps.list.id),
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchCards: () => dispatch(fetchCards(ownProps.listId)),
+    fetchCards: () => dispatch(fetchCards(ownProps.list.id)),
     createCard: card => dispatch(createCard(card)),
     updateCard: card => dispatch(updateCard(card)),
     deleteCard: cardId => dispatch(deleteCard(cardId)),

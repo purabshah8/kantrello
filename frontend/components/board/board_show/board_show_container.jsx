@@ -4,7 +4,7 @@ import BoardShow from './board_show';
 import { fetchBoard, updateBoard, deleteBoard } from '../../../actions/board_actions';
 
 const mapStateToProps = (state, ownProps) => {
-  const boardId = ownProps.match.params.id;
+  const boardId = ownProps.selectedBoard ? ownProps.selectedBoard.id : ownProps.match.params.id;
   return {
     board: state.entities.boards[boardId],
     userId: state.session.currentUserId,
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const boardId = ownProps.match.params.id;
+  const boardId = ownProps.selectedBoard || ownProps.match.params.id;
   return {
     updateBoard: board => dispatch(updateBoard(board)),
     fetchBoard: () => dispatch(fetchBoard(boardId)),

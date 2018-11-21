@@ -33,7 +33,7 @@ export default class CardIndex extends React.Component {
       <NewCardForm
         createCard={this.props.createCard}
         toggleNewCard={this.toggleNewCard}
-        listId={this.props.listId}/>
+        listId={this.props.list.id}/>
   );
 
   }
@@ -43,8 +43,9 @@ export default class CardIndex extends React.Component {
     const cardIndexItems = this.props.cards.map(card => {
       return(
         <CardIndexItem key={card.id}
+          history={this.props.history}
           card={card}
-          listId={this.props.listId} />
+          list={this.props.list} />
       );
     });
     return cardIndexItems;

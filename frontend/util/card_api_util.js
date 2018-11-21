@@ -5,12 +5,12 @@ export const fetchCards = listId => {
   });
 };
 
-// export const fetchCard = id => {
-//   return $.ajax({
-//     method: "GET",
-//     url: `/api/cards/${id}`
-//   });
-// };
+export const fetchCard = id => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/cards/${id}`
+  });
+};
 
 export const createCard = card => {
   return $.ajax({

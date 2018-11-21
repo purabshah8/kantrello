@@ -94,17 +94,7 @@ class Api::ListsController < ApplicationController
     end
 
   end
-
-  # def prepare_other_lists(board_id, new_pos)
-  #   other_lists = lists_with_higher_pos(board_id, new_pos-1).sort{ |x,y| y.position <=> x.position }
-  #   p other_lists
-  #   # debugger
-  #   other_lists.each do |list|
-  #     list.position += 1
-  #     list.save
-  #   end
-  # end
-
+  
   def lists_with_higher_pos(board_id, position)
     List.where("board_id = ? AND position > ?", board_id, position).sort{ |x,y| x.position <=> y.position }
   end
