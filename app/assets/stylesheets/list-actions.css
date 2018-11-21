@@ -16,7 +16,7 @@
 
 .list-actions-container, .move-list-container, .copy-list-container {
   position: absolute;
-  z-index: 10;
+  z-index: 15;
   background: white;
   top: 40px;
   left: 237px;
@@ -26,12 +26,13 @@
   box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
 }
 
-.list-actions-title, .move-list-title, .copy-list-title {
+.list-actions-title, .move-list-title, .copy-list-title, .move-card-title {
   width: 100%;
   border-bottom: 1px solid rgba(9,45,66,.13);
+  margin-bottom: 8px;
 }
 
-.list-actions-title span, .move-list-title span, .copy-list-title span {
+.list-actions-title span, .move-list-title span, .copy-list-title span, .move-card-title span {
   display: block;
   width: 100%;
   color: #6b808c;
@@ -54,6 +55,10 @@
   width: 100%;
 }
 
+.list-actions-list:first-of-type {
+  padding-top: 0px;
+}
+
 
 .list-actions-list li, .delete-list span {
   display: block;
@@ -73,7 +78,7 @@
 
 }
 
-.move-list-title img, .copy-list-title img {
+.move-list-title img, .copy-list-title img, .move-card-title img {
   position: absolute;
 }
 
@@ -97,7 +102,7 @@
   margin-bottom: 8px;
 }
 
-.select-option label {
+.select-option label, .select-option-list label, .select-option-position label {
   color: #6b808c;
   display: block;
   font-size: 12px;
@@ -105,7 +110,7 @@
   margin-bottom: 0;
 }
 
-.select-option:hover {
+.select-option:hover, .select-option-list:hover, .select-option-position:hover {
   background-color: #c2ccd1;
   box-shadow: 0 1px 0 0 #b3bec4;
   border: none;
@@ -119,7 +124,7 @@
   text-overflow: ellipsis
 }
 
-#select-position-dropdown, #select-board-dropdown {
+#select-position-dropdown, #select-board-dropdown, #select-board-dropdown-card {
   color: #17394d;
   font-size: 14px;
   line-height: 20px;

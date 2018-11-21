@@ -73,7 +73,9 @@ export default class CardShow extends React.Component {
   renderMoveCardForm() {
     if (!this.state.showMoveCardForm) return null;
     return (
-      <MoveCardForm />
+      <MoveCardForm
+        toggleMoveCardForm={this.toggleMoveCardForm}
+        card={this.props.card} />
     );
   }
 
@@ -104,6 +106,7 @@ export default class CardShow extends React.Component {
         className="modal-background">
         <div className="card-container"
           onClick={e => e.stopPropagation()}>
+          {this.renderMoveCardForm()}
           <div onClick={this.closeCardShow}
             onMouseOver={this.changeIcon(window.closeDarkIcon)}
             onMouseOut={this.changeIcon(window.closeIcon)}
@@ -129,7 +132,8 @@ export default class CardShow extends React.Component {
             </div>
             <div className="show-card-sidebar">
               <h3>Actions</h3>
-              <button className="gray-button">
+              <button onClick={this.toggleMoveCardForm}
+                className="gray-button">
                 <img src={window.arrowIcon} />
                 <span>Move</span>
               </button>

@@ -31,3 +31,78 @@
   left: 385px;
   font-size: 12px;
 }
+
+.move-card-container {
+  position: absolute;
+  left: 498px;
+  top: 132px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
+  width: 304px;
+  z-index: 70;
+}
+
+.move-card-title img {
+  height: 18px;
+  top: 10px;
+  right: 14px;
+}
+
+.select-options-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.select-option-list {
+  width: 192px;
+}
+
+
+.select-option-position {
+  width: 80px;
+}
+
+.select-option-position, .select-option-list {
+  height: 48px;
+  background-color: #dfe3e6;
+  box-shadow: 0 1px 0 0 #c2ccd1;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: 700;
+  padding: 6px 12px;
+  margin-bottom: 8px;
+}
+
+#select-board-dropdown-card {
+  top: 44px;
+  left: 13px;
+}
+
+#select-position-dropdown-card, #select-list-dropdown {
+  color: #17394d;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+#select-list-dropdown {
+  top: 100px;
+  left: 12px;
+  width: 192px;
+}
+
+#select-position-dropdown-card {
+  bottom: 100px;
+  right: 12px;
+  width: 80px;
+}

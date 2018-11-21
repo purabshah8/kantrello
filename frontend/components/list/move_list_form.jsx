@@ -68,11 +68,10 @@ class MoveListForm extends React.Component {
     const boardOptions = this.props.boards.map(board => {
       const current = (board.id === this.props.boardId) ? "(current)" : "";
       return (
-          <option key={board.id}
-          value={board.id}>
-          {board.title + current}
-          </option>
-
+        <option key={board.id}
+        value={board.id}>
+        {board.title + current}
+        </option>
       );
     });
     return (
