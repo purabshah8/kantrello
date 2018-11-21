@@ -48,7 +48,7 @@ puts "Done!"
 puts "Creating Cards..."
 Card.destroy_all
 card1 = Card.create!(title: 'Boards', list_id: list2.id)
-card2 = Card.create!(title: 'Lists & Cards', list_id: list2.id)
-card3 = Card.create!(title: 'Board Shares', list_id: list1.id)
+card2 = Card.create!(title: 'Lists & Cards', list_id: list2.id, description: 'create lists that contain cards, both of which are draggable')
+card3 = Card.create!(title: 'Board Shares', list_id: list1.id, description: "## Board Shares! \n\n this is the board share description")
 card3 = Card.create!(title: 'Comments', list_id: list1.id)
 puts "Done!"

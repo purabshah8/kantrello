@@ -1,0 +1,33 @@
+.edit-description-form > textarea {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  resize: none;
+  height: 154px;
+  width: 100%;
+  background: #fff;
+  box-shadow: none;
+  border-color: rgba(9,45,66,.13);
+  margin-bottom: 4px;
+  border: 1px solid #dfe3e6;
+  border-radius: 3px;
+  padding: 6px 8px;
+  line-height: 20px;
+  box-sizing: border-box;
+  transition-property: background-color,border-color,box-shadow;
+  transition-duration: 85ms;
+  transition-timing-function: ease;
+  position: relative;
+}
+
+.edit-description-options img {
+  position: absolute;
+  top: 280px;
+  left: 120px;
+}
+
+.edit-description-options span {
+  position: absolute;
+  top: 265px;
+  left: 385px;
+  font-size: 12px;
+}

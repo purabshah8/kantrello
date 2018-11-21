@@ -5,12 +5,12 @@ export const fetchLists = boardId => {
   });
 };
 
-// export const fetchList = id => {
-//   return $.ajax({
-//     method: "GET",
-//     url: `/api/lists/${id}`
-//   });
-// };
+export const fetchList = id => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/lists/${id}`
+  });
+};
 
 export const createList = list => {
   return $.ajax({

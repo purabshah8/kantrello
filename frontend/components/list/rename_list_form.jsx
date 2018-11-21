@@ -8,7 +8,6 @@ class RenameListForm extends React.Component {
     this.state = { title: this.props.list.title };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
-
   }
 
   componentDidMount() {
@@ -18,7 +17,6 @@ class RenameListForm extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
   }
-
 
   escFunction(e) {
     if(e.keyCode === 27) {

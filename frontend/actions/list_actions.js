@@ -40,12 +40,12 @@ export const fetchLists = id => dispatch => {
   );
 };
 
-// export const fetchList = id => dispatch => {
-//   return ListApiUtil.fetchList(id).then(
-//     list => dispatch(receiveList(list)),
-//     errors => dispatch(receiveListErrors(errors))
-//   );
-// };
+export const fetchList = id => dispatch => {
+  return ListApiUtil.fetchList(id).then(
+    list => dispatch(receiveList(list)),
+    errors => dispatch(receiveListErrors(errors))
+  );
+};
 
 export const createList =  list => dispatch => {
   return ListApiUtil.createList(list).then(

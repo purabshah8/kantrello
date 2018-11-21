@@ -1,12 +1,140 @@
 .card-container {
+  background-color: #ebeef0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 500px;
   width: 768px;
-  background: #dfe3e6;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
+}
+
+.close-card-icon-overlay {
+  border-radius: 50%;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  overflow: hidden;
+  padding: 4px;
+  margin: 4px;
+  width: 40px;
+}
+
+.close-card-icon-overlay:hover {
+  background-color: rgba(9,45,66,.13);
+}
+
+.close-card-icon {
+  height: 32px;
+}
+
+.show-card-title {
+  margin: 12px 40px 8px 56px;
+  min-height: 32px;
+  display: relative;
+}
+
+.show-card-title > span {
+  display: block;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.show-card-title > p {
+  color: #6b808c;
+  font-size: 14px;
+}
+
+.show-card-description {
+  margin-bottom: 24px;
+}
+
+.card-icon {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+}
+
+.description-icon {
+  position: absolute;
+  top: 82px;
+  left: 18px;
+}
+
+.show-card-main {
+  display: flex;
+}
+
+.show-card-content {
+  margin: 10px 0 4px 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 24px;
+  padding: 0 8px 8px 16px;
+  width: 552px;
+}
+
+.description-header {
+  padding: 8px 0;
+}
+
+.description-header h2 {
+  display: inline-block;
+}
+
+.description-header u {
+  margin-left: 5px;
+  color: #6b808c;
+  font-size: 14px;
+}
+
+.show-card-sidebar {
+  padding: 8px 16px 8px 8px;
+  width: 168px;
+  display: flex;
+  flex-direction: column;
+}
+
+.show-card-sidebar h3 {
+  text-transform: uppercase;
+  color: #6b808c;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.gray-button {
+  color: #17394d;
+  background-color: #dfe3e6;
+  box-shadow: 0 1px 0 0 #c2ccd1;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  height: 32px;
+  margin-top: 8px;
+  max-width: 300px;
+  padding: 6px 12px;
+}
+
+.gray-button:hover {
+  background-color: #c2ccd1;
+  box-shadow: 0 1px 0 0 #b3bec4;
+  border: none;
+}
+
+.gray-button img {
+  margin-top: 2px;
+  height: 18px;
+}
+
+.gray-button span {
+  margin-left: 5px;
 }

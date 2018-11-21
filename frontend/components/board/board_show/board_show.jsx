@@ -51,7 +51,7 @@ export default class BoardShow extends React.Component {
           </div>
           <ul className="menu-top">
             <li className="menu-item" onClick={this.deleteBoard}>
-              <img src={window.trashIcon} />
+              <img src={window.trashDarkIcon} />
               <span>Delete Board</span>
             </li>
           </ul>

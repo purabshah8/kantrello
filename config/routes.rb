@@ -13,11 +13,11 @@ Rails.application.routes.draw do
       resources :lists, only: [:index]
     end
 
-    resources :lists, only: [:create, :update, :destroy] do
+    resources :lists, only: [:create, :show, :update, :destroy] do
       resources :cards, only: [:index]
     end
 
-    resources :cards, only: [:create, :show, :update, :destroy] 
+    resources :cards, only: [:create, :show, :update, :destroy]
   end
 
   get '*path', to: 'static_pages#root'

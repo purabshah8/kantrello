@@ -4,7 +4,6 @@ export const selectBoards = state => {
   return userBoards;
 };
 
-
 export const selectLists = (state, boardId) => {
   const lists = Object.values(state.entities.lists);
   const boardLists = lists.filter(list => list.board_id === boardId);
@@ -17,6 +16,11 @@ export const selectCards = (state, listId) => {
   const listCards = cards.filter(card => card.list_id === listId);
   const sortedListCards = listCards.sort(compare);
   return sortedListCards;
+};
+
+export const selectCardList = (state, cardId) => {
+  const card = state.entities.cards[cardId];
+  return (Object.keys(state.entities.lists).length === 0) ? null : state.entities.lists[card.list_id];
 };
 
 const compare = (a,b) => {

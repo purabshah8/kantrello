@@ -22,6 +22,10 @@ class Api::ListsController < ApplicationController
     end
   end
 
+  def show
+    @list = List.find(params[:id])
+  end
+
   def update
     @list = List.find(params[:id])
     if list_params.has_key?(:position)
@@ -94,7 +98,7 @@ class Api::ListsController < ApplicationController
     end
 
   end
-  
+
   def lists_with_higher_pos(board_id, position)
     List.where("board_id = ? AND position > ?", board_id, position).sort{ |x,y| x.position <=> y.position }
   end
