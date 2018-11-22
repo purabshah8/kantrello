@@ -16,6 +16,7 @@ class ListActions extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    this.listActions.focus();
   }
 
   componentWillUnmount() {
@@ -28,16 +29,23 @@ class ListActions extends React.Component {
     }
   }
 
+  openNewCardForm() {
+    
+  }
+
   render() {
     return(
-      <div className="list-actions-container">
+      <div ref={(listActions) => {this.listActions = listActions;}}
+        onBlur={this.props.toggleListActions}
+        tabIndex="0"
+        className="list-actions-container">
         <div className="list-actions-title">
           <span>List Actions</span>
           <img src={window.closeIcon}
             onClick={this.props.toggleListActions} />
         </div>
         <ul className="list-actions-list">
-          <li>Add Card...</li>
+          <li onClick={this.openNewCardForm}>Add Card...</li>
           <li onClick={this.props.toggleCopyListForm}>
             Copy List...
           </li>

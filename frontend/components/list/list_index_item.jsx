@@ -74,9 +74,7 @@ export default class ListIndexItem extends React.Component {
         boardId={this.props.boardId}
         toggleListActions={this.toggleListActions}
         toggleMoveListForm={this.toggleMoveListForm}
-        toggleCopyListForm={this.toggleCopyListForm}
-        onBlur={this.toggleListActions}
-        tabIndex={0} />;
+        toggleCopyListForm={this.toggleCopyListForm}/>;
     }
   }
 
@@ -114,8 +112,7 @@ export default class ListIndexItem extends React.Component {
             className="list-title">
             {this.renderRenameListForm()}
             <div
-              onFocus={this.toggleListActions}
-              tabIndex="0"
+              onClick={this.toggleListActions}
               className="list-actions-overlay">
               <img src={window.moreIcon}/>
             </div>

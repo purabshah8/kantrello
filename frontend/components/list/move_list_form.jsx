@@ -21,6 +21,7 @@ class MoveListForm extends React.Component {
     document.addEventListener('keydown', this.escFunction);
     this.props.fetchBoards(this.props.currentUserId);
     this.props.fetchLists(this.props.boardId);
+    this.moveListForm.focus();
   }
 
   componentWillUnmount() {
@@ -121,7 +122,10 @@ class MoveListForm extends React.Component {
 
   render() {
     return(
-      <div className="move-list-container">
+      <div ref={(moveListForm) => {this.moveListForm = moveListForm;}}
+        onBlur={this.props.toggleMoveListForm}
+        tabIndex="0"
+        className="move-list-container">
 
         <div className="move-list-title">
           <img className="return-list-actions"

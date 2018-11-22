@@ -12,10 +12,11 @@ export const receiveCards = cards => {
   };
 };
 
-export const receiveCard = card => {
+export const receiveCard = ({card, comments}) => {
   return {
     type: RECEIVE_CARD,
     card,
+    comments,
   };
 };
 
@@ -42,7 +43,7 @@ export const fetchCards = id => dispatch => {
 
 export const fetchCard = id => dispatch => {
   return CardApiUtil.fetchCard(id).then(
-    card => dispatch(receiveCard(card)),
+    payload => dispatch(receiveCard(payload)),
     errors => dispatch(receiveCardErrors(errors))
   );
 };

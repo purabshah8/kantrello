@@ -1,6 +1,8 @@
 export const selectBoards = state => {
   const boards = Object.values(state.entities.boards);
-  const userBoards = boards.filter(board => board.userIds.includes(state.session.currentUserId));
+  const userBoards = boards.filter(board => {
+    return board.userIds.includes(state.session.currentUserId) || board.owner_id === state.session.currentUserId;
+  });
   return userBoards;
 };
 

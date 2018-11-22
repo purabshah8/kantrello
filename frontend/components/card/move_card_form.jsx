@@ -24,6 +24,7 @@ class MoveCardForm extends React.Component {
     this.props.fetchBoards(this.props.currentUserId);
     this.props.fetchLists(this.props.card.board_id);
     this.props.fetchCards(this.props.card.list_id);
+    this.moveCardForm.focus();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -39,7 +40,7 @@ class MoveCardForm extends React.Component {
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleMoveListForm();
+      this.props.toggleMoveCardForm();
     }
   }
 
@@ -164,7 +165,10 @@ class MoveCardForm extends React.Component {
     const selectedList = this.props.lists.filter(list => list.id == this.state.listId);
     const listText = selectedList.length > 0 ? selectedList[0].title : '';
     return(
-      <div className="move-card-container">
+      <div ref={(moveCardForm) => {this.moveCardForm = moveCardForm;}}
+        onBlur={this.props.toggleMoveCardForm}
+        tabIndex="0"
+        className="move-card-container">
 
         <div className="move-card-title">
           <span>Move Card</span>

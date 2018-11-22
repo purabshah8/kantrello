@@ -37,7 +37,7 @@ export default class CardShow extends React.Component {
   }
 
   escFunction(e) {
-    if(e.keyCode === 27) {
+    if(e.keyCode === 27 && !this.state.showCardDescriptionForm && !this.state.showMoveCardForm) {
       this.closeCardShow();
     }
   }

@@ -44,7 +44,7 @@ class BoardShareForm extends React.Component {
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleCopyListForm();
+      this.props.toggleBoardShare();
     }
   }
 

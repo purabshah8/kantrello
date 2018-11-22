@@ -16,6 +16,7 @@ class CopyListForm extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    this.copyListForm.focus();
   }
 
   componentWillUnmount() {
@@ -51,7 +52,10 @@ class CopyListForm extends React.Component {
 
   render() {
     return(
-      <div className="copy-list-container">
+      <div ref={(copyListForm) => {this.copyListForm = copyListForm;}}
+        onBlur={this.props.toggleCopyListForm}
+        tabIndex="0"
+        className="copy-list-container">
         <div className="copy-list-title">
           <img className="return-list-actions"
           onClick={this.toggleShow}
