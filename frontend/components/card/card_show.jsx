@@ -2,6 +2,7 @@ import React from 'react';
 import showdown from 'showdown';
 import MoveCardForm from './move_card_form';
 import EditCardDescriptionForm from './edit_card_description_form';
+import NewCommentForm from '../comment/new_comment_form';
 
 export default class CardShow extends React.Component {
   constructor(props) {
@@ -19,11 +20,15 @@ export default class CardShow extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+
   }
 
   componentDidUpdate() {
     if (!this.props.list) {
       this.props.fetchList(this.props.card.list_id);
+    }
+    if (!this.props.comments) {
+      this.props.fetchComments();
     }
   }
 
@@ -70,6 +75,10 @@ export default class CardShow extends React.Component {
     this.props.deleteCard();
   }
 
+  deleteComment(commentId) {
+    return e => this.props.deleteComment(commentId);
+  }
+
   renderMoveCardForm() {
     if (!this.state.showMoveCardForm) return null;
     return (
@@ -95,6 +104,38 @@ export default class CardShow extends React.Component {
         card={this.props.card}
         toggleEditCardDescription={this.toggleEditCardDescription} />;
     }
+  }
+
+  renderComments() {
+    const commentsList = (this.props.comments) ? this.props.comments : [];
+    const comments = commentsList.map(comment => {
+      return (
+        <li key={comment.id}>
+          <h3>{comment.author}</h3>
+          <div className="comment-body"
+            dangerouslySetInnerHTML={{__html: this.convertMarkdown(comment.body)}}>
+          </div>
+          <div className="comment-options">
+            <u>Edit</u> - <u onClick={this.deleteComment(comment.id)}>Delete</u>
+          </div>
+        </li>
+      );
+    });
+    return (
+      <div className="show-card-comments">
+        <div className="comments-form-container">
+          <h2>Add Comment</h2>
+          <NewCommentForm card={this.props.card}/>
+        </div>
+        <div className="comments-header">
+          <h2>Activity</h2>
+        </div>
+        <div className="card-comments"></div>
+        <ul className="comments">
+          {comments}
+        </ul>
+      </div>
+    );
   }
 
   render() {
@@ -129,6 +170,7 @@ export default class CardShow extends React.Component {
                 </div>
                 {this.renderEditDescription()}
               </div>
+              {this.renderComments()}
             </div>
             <div className="show-card-sidebar">
               <h3>Actions</h3>

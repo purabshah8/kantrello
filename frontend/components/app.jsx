@@ -7,8 +7,8 @@ import Splash from './splash';
 import UserParent from './user/user_parent';
 import BoardIndexParent from './board/board_index/board_index_parent';
 import BoardShowParent from './board/board_show/board_show_parent';
-import Modal from './modal';
 import OpenCardShow from './card/open_card_show';
+
 const App = () => {
   const baseRender = () => <h1>Welcome to Kantrello!</h1>;
   return(

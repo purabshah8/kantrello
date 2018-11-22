@@ -23,6 +23,22 @@ export const selectCardList = (state, cardId) => {
   return (Object.keys(state.entities.lists).length === 0) ? null : state.entities.lists[card.list_id];
 };
 
+export const selectComments = (state, cardId) => {
+  const card = state.entities.cards[cardId];
+  const comments = Object.values(state.entities.comments);
+  const selectedComments = (comments.length === 0) ? null : comments.filter(comment => {
+    return (card.commentIds.includes(comment.id));
+  });
+  return selectedComments;
+};
+
+export const selectBoardUsers = (state, boardId) => {
+  const users = Object.values(state.entities.users);
+  const board = state.entities.boards[boardId];
+  const boardUsers = users.filter(user => board.userIds.includes(user.id));
+  return boardUsers;
+};
+
 const compare = (a,b) => {
   if (a.position < b.position)
     return -1;

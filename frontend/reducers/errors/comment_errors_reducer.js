@@ -1,10 +1,10 @@
-import { RECEIVE_BOARD_ERRORS } from '../../actions/board_actions';
+import { RECEIVE_COMMENT_ERRORS } from '../../actions/comment_actions';
 import { CLEAR_ERRORS } from '../../actions/error_actions';
 
-const boardErrorsReducer = (state = [], action) => {
+const commentErrorsReducer = (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_BOARD_ERRORS:
+    case RECEIVE_COMMENT_ERRORS:
       return action.errors.responseText;
     case CLEAR_ERRORS:
       return [];
@@ -13,4 +13,4 @@ const boardErrorsReducer = (state = [], action) => {
   }
 };
 
-export default boardErrorsReducer;
+export default commentErrorsReducer;

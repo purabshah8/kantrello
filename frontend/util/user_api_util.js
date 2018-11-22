@@ -1,8 +1,22 @@
+export const searchUsers = searchString => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/users/?search=${searchString}`
+  });
+};
+
+export const fetchUsers = boardId => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/boards/${boardId}/users`
+  });
+};
+
 
 export const createUser = user => {
   return $.ajax({
     method: "POST",
-    url: 'api/users',
+    url: '/api/users',
     data: { user }
   });
 };

@@ -7,17 +7,25 @@ Rails.application.routes.draw do
       resources :boards, only: [:index]
     end
 
+    get 'users', to: 'users#search'
     resource :session, only: [:create, :destroy]
 
     resources :boards, only: [:create, :show, :update, :destroy] do
       resources :lists, only: [:index]
+      resources :users, only: [:index]
     end
 
     resources :lists, only: [:create, :show, :update, :destroy] do
       resources :cards, only: [:index]
     end
 
-    resources :cards, only: [:create, :show, :update, :destroy]
+    resources :cards, only: [:create, :show, :update, :destroy] do
+      resources :comments, only: [:index]
+    end
+
+    resources :comments, only: [:create, :update, :destroy]
+
+    resources :board_shares, only: [:create, :destroy]
   end
 
   get '*path', to: 'static_pages#root'

@@ -1,9 +1,7 @@
 class Api::CardsController < ApplicationController
 
   def index
-    # use this when comments feature exists
-    # @cards = Card.includes(:comments).where(:list_id params[:list_id])
-    @cards = Card.where(list_id: params[:list_id])
+    @cards = Card.includes(:comments).where(list_id: params[:list_id])
   end
 
   def create

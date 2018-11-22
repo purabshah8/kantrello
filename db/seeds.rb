@@ -7,23 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.destroy_all
 puts "Creating Users..."
+User.destroy_all
 demo_user = User.create!(name: 'Demo User', username: 'demo-user', email: 'demo@example.com', password: 'default' )
 purab = User.create!(name: 'Purab Shah', email:'purabshah8@gmail.com', password: 'default')
-# users = []
-# 16.times do |num|
-#   name = Faker::DrWho.actor
-#   email_num = num == 0 ? "" : num.to_s
-#   email = name.split.join + email_num + "@gallifrey.com"
-#   password = "default"
-#   users << User.create!(name: name, email: email, password: password)
-# end
+users = []
+li = User.create!(name: 'Li Yi Yu', email: 'liyiyu@gmail.com', password: 'default')
+brian = User.create!(name: 'Brian Lee', email: 'b_lee@hotmail.com', password: 'default')
+paul = User.create!(name: 'Paul Van Duyn', email: 'pvd@outlook.com', password: 'default')
+john = User.create!(name: 'John Kim', email: 'jkimmy4eva@yahoo.com', password: 'default')
+sallem = User.create!(name: 'Sallem Ahmed', email: 'dj_sal@gmail.com', password: 'default')
+aaron = User.create!(name: 'Aaron Zheng', email: 'a_a_ron@live.com', password: 'default')
+amir = User.create!(name: 'Amir Sojitra', email: 'amir@amir-acle.com', password: 'default')
+soon_mi = User.create!(name: 'Soon-Mi Sugihara', email: 'soon-mi@appacademy.io', password: 'default')
 puts "Done!"
 
 puts "Creating Boards..."
 Board.destroy_all
-full_stack = Board.create!(title: "Full Stack Project", owner_id: demo_user.id)
+full_stack = Board.create!(title: "Full Stack Project", owner_id: demo_user.id, starred: true)
 to_do = Board.create!(title: "Personal To Do", owner_id: demo_user.id)
 job_search = Board.create!(title: "Job Search", owner_id: purab.id)
 puts "Done!"
@@ -50,5 +51,14 @@ Card.destroy_all
 card1 = Card.create!(title: 'Boards', list_id: list2.id)
 card2 = Card.create!(title: 'Lists & Cards', list_id: list2.id, description: 'create lists that contain cards, both of which are draggable')
 card3 = Card.create!(title: 'Board Shares', list_id: list1.id, description: "## Board Shares! \n\n this is the board share description")
-card3 = Card.create!(title: 'Comments', list_id: list1.id)
+card4 = Card.create!(title: 'Comments', list_id: list1.id)
+puts "Done!"
+
+puts "Creating Comments..."
+Comment.destroy_all
+comment1 = Comment.create!(body: 'This looks really good!', user_id: demo_user.id, card_id: card1.id)
+comment2 = Comment.create!(body: 'Thanks!', user_id: purab.id, card_id: card1.id)
+comment3 = Comment.create!(body: 'How can this be done better? ', user_id: demo_user.id, card_id: card3.id)
+comment4 = Comment.create!(body: 'Comments on comments!', user_id: demo_user.id, card_id: card4.id)
+comment5 = Comment.create!(body: 'This is harder than it looks...', user_id: purab.id, card_id: card2.id)
 puts "Done!"

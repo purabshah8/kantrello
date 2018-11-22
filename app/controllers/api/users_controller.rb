@@ -1,5 +1,14 @@
 class Api::UsersController < ApplicationController
 
+  def search
+    @users = User.where('name ILIKE :search OR username ILIKE :search OR email ILIKE :search', search: "%#{params[:search]}%")
+    render :index
+  end
+
+  def index
+    @users = User.includes(:shared_boards).where(board_shares: {board_id: params[:board_id]})
+  end
+
   def create
     @user = User.new(new_user_params)
     if @user.save
@@ -36,6 +45,10 @@ class Api::UsersController < ApplicationController
 
   def edit_user_params
     params.require(:user).permit(:name, :username, :email, :initials, :password, :avatar_url, :bio)
+  end
+
+  def search_user_params
+    params.require(:user).permit(:name, :username, :email)
   end
 
 end

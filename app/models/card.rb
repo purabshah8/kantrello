@@ -23,6 +23,8 @@ class Card < ApplicationRecord
     through: :list,
     source: :board
 
+  has_many :comments
+
   private
   def ensure_position
     other_card_positions = self.list.cards.map() {|card| card[:position]}.sort

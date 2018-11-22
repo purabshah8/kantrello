@@ -1,9 +1,17 @@
 import * as UserApiUtil from '../util/user_api_util';
 
+export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
+
+export const receiveUsers = users => {
+  return {
+    type: RECEIVE_USERS,
+    users,
+  };
+};
 
 export const receiveCurrentUser = user => {
   return {
@@ -31,6 +39,21 @@ export const receiveSessionErrors = errors => {
     type: RECEIVE_SESSION_ERRORS,
     errors,
   };
+};
+
+export const searchUsers = searchString => dispatch => {
+  return UserApiUtil.searchUsers(searchString).then(
+    users => dispatch(receiveUsers(users)),
+    errors => dispatch(receiveUserErrors(errors))
+  );
+};
+
+
+export const fetchUsers = boardId => dispatch => {
+  return UserApiUtil.fetchUsers(boardId).then(
+    users => dispatch(receiveUsers(users)),
+    errors => dispatch(receiveUserErrors(errors))
+  );
 };
 
 

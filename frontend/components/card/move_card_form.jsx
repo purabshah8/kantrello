@@ -63,7 +63,6 @@ class MoveCardForm extends React.Component {
     if (field === 'boardId') {
       return e => {
         const newBoard = this.props.boards.filter(board => board.id == e.target.value);
-        debugger
         this.setState({
           [field]: e.target.value,
           listId: newBoard[0].listIds[0],
@@ -162,7 +161,6 @@ class MoveCardForm extends React.Component {
   }
 
   render() {
-    debugger
     const selectedList = this.props.lists.filter(list => list.id == this.state.listId);
     const listText = selectedList.length > 0 ? selectedList[0].title : '';
     return(

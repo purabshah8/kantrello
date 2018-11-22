@@ -35,6 +35,8 @@ class User < ApplicationRecord
     through: :board_shares,
     source: :board
 
+  has_many :comments
+
 
   before_validation :ensure_user_info
 

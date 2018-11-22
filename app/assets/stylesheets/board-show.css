@@ -3,53 +3,6 @@
   background: #298FCA;
 }
 
-.board-header {
-  display: flex;
-  height: 48px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.board-header-left {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-.board-title {
-  margin: auto 10px;
-  color: #f6f6f6;
-  font-weight: 700;
-}
-
-
-.star {
-  margin: 8px 10px 8px 0;
-}
-
-.starred {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.header-star-icon {
-  height: 18px;
-  width: 18px;
-}
-
-.header-overlay {
-  display: inline-block;
-  padding: 8px;
-}
-
-.header-overlay:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  cursor: pointer;
-}
-
 .show-menu {
   margin: 8px 10px;
   height: 32px;
@@ -146,7 +99,7 @@
 }
 
 .edit-board-container {
-  z-index: 5;
+  z-index: 15;
   width: 300px;
   height: 170px;
   background: white;

@@ -67,3 +67,17 @@ export const deleteBoard = id => dispatch => {
     errors => dispatch(receiveBoardErrors(errors))
   );
 };
+
+export const createBoardShare =  boardShare => dispatch => {
+  return BoardApiUtil.createBoardShare(boardShare).then(
+    newBoard => dispatch(receiveBoard(newBoard)),
+    errors => dispatch(receiveBoardErrors(errors))
+  );
+};
+
+export const deleteBoardShare =  boardShareId => dispatch => {
+  return BoardApiUtil.deleteBoardShare(boardShareId).then(
+    newBoard => dispatch(receiveBoard(newBoard)),
+    errors => dispatch(receiveBoardErrors(errors))
+  );
+};

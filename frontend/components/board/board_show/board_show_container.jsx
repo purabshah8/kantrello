@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const boardId = ownProps.selectedBoard || ownProps.match.params.id;
+  const boardId = ownProps.selectedBoard ? ownProps.selectedBoard.id : ownProps.match.params.id;
   return {
     updateBoard: board => dispatch(updateBoard(board)),
     fetchBoard: () => dispatch(fetchBoard(boardId)),

@@ -14,11 +14,11 @@ class Api::BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.find(params[:id])
+    @board = Board.includes(:users).find(params[:id])
   end
 
   def update
-    @board = Board.find(params[:id])
+    @board = Board.includes(:users).find(params[:id])
     if @board.update(board_params)
       render :show
     else

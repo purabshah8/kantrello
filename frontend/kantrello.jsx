@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
 import * as CardApiUtil from './util/card_api_util';
+import * as UserApiUtil from './util/user_api_util';
 import * as UserActions from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () =>{
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () =>{
   window.getState = store.getState;
   window.login = UserActions.login;
   window.logout = UserActions.logout;
+  window.searchUsers = UserApiUtil.searchUsers;
   window.createUser = UserActions.createUser;
   window.updateUser = UserActions.updateUser;
   window.deleteUser = UserActions.deleteUser;

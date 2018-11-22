@@ -34,3 +34,18 @@ export const deleteBoard = boardId => {
     url: `/api/boards/${boardId}`,
   });
 };
+
+export const createBoardShare = board_share => {
+  return $.ajax({
+    method: "POST",
+    url: '/api/board_shares',
+    data: { board_share }
+  });
+};
+
+export const deleteBoardShare = boardShareId => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/board_shares/${boardShareId}`,
+  });
+};
