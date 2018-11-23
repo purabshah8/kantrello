@@ -1,6 +1,7 @@
 import React from 'react';
 import ListIndexItem from './list_index_item';
 import NewListForm from './new_list_form';
+import { Draggable } from 'react-beautiful-dnd';
 
 export default class ListIndex extends React.Component {
   constructor(props) {
@@ -22,11 +23,23 @@ export default class ListIndex extends React.Component {
   renderLists() {
     if (!this.props.lists) return null;
     const listIndexItems = this.props.lists.map(list => {
+      debugger
       return(
-        <ListIndexItem key={list.id}
-          list={list}
-          boardId={this.props.boardId}
-          history={this.props.history} />
+        <Draggable draggableId={list.id}
+          index={list.position-1}>
+          {
+            provided => {
+              return <ListIndexItem key={list.id}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                innerRef={provided.innerRef}
+                list={list}
+                boardId={this.props.boardId}
+                history={this.props.history} />;
+            }
+          }
+
+        </Draggable>
       );
     });
     return listIndexItems;
@@ -54,7 +67,8 @@ export default class ListIndex extends React.Component {
     const Lists = this.renderLists();
     const addListText = (Lists.length !== 0) ? "Add another list":"Add a list";
     return(
-      <div className="lists-container">
+      <div ref={this.props.innerRef}
+        className="lists-container">
         <ul className="lists">
           {Lists}
           <div className="list-item-container">

@@ -103,7 +103,8 @@ export default class ListIndexItem extends React.Component {
   render() {
     const addCardText = (this.props.list.cardIds.length !== 0) ? "Add another card":"Add a card";
     return (
-      <div className="list-item-container">
+      <div ref={this.props.innerRef}
+        className="list-item-container">
         {this.renderListActions()}
         {this.renderMoveListForm()}
         {this.renderCopyListForm()}
