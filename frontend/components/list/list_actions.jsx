@@ -52,7 +52,6 @@ class ListActions extends React.Component {
             onClick={this.props.toggleListActions} />
         </div>
         <ul className="list-actions-list">
-          <li onClick={this.openNewCardForm}>Add Card...</li>
           <li onClick={this.props.toggleCopyListForm}>
             Copy List...
           </li>
@@ -61,7 +60,7 @@ class ListActions extends React.Component {
           </li>
         </ul>
         <ul className="list-actions-list">
-          <li>Move All Cards in this List...</li>
+
           <li onClick={this.deleteAllCards}>
             Delete All Cards in this List...</li>
         </ul>
@@ -74,6 +73,12 @@ class ListActions extends React.Component {
   }
 
 }
+// add above Copy list...
+// <li onClick={this.openNewCardForm}>Add Card...</li>
+
+
+// add above delete all cards in list
+// <li>Move All Cards in this List...</li>
 
 const mapStateToProps = (state, ownProps) => {
   return {
