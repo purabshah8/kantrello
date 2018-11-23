@@ -5,7 +5,11 @@
   padding: 4px 4px 4px 16px;
 }
 
-.list-title > span {
+.list-title-div {
+  width: calc(100% - 32px);
+}
+
+.list-title > div > span {
   font-size: 14px;
   font-weight: 700;
   line-height: 32px;
@@ -36,6 +40,22 @@
 .rename-list-form input:focus {
   border: 1px solid transparent;
   box-shadow: 0 0 0 1px #5ba4cf;
+}
+
+.list-actions-overlay {
+  height: 32px;
+  width: 32px;
+}
+
+.list-actions-overlay:hover {
+  background-color: rgba(9,45,66,.13);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.list-actions-overlay > img {
+  margin-left: 4px;
+  margin-top: 4px;
 }
 
 .list-cards {

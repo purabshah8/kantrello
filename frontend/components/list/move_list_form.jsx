@@ -123,7 +123,6 @@ class MoveListForm extends React.Component {
   render() {
     return(
       <div ref={(moveListForm) => {this.moveListForm = moveListForm;}}
-        onBlur={this.props.toggleMoveListForm}
         tabIndex="0"
         className="move-list-container">
 

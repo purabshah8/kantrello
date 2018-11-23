@@ -36,8 +36,6 @@ export default class ListIndexItem extends React.Component {
     this.setState({
       showCopyListForm: !this.state.showCopyListForm,
     });
-    if (e && e.target.className !== "close-copy-list")
-    this.toggleListActions();
   }
 
   toggleRenameList(e) {
@@ -53,10 +51,12 @@ export default class ListIndexItem extends React.Component {
   renderRenameListForm() {
     if (!this.state.showRenameListForm) {
       return(
-        <span
-          onClick={this.toggleRenameList}>
-          {this.props.list.title}
-        </span>
+        <div onClick={this.toggleRenameList}
+          className="list-title-div">
+          <span>
+            {this.props.list.title}
+          </span>
+        </div>
       );
     } else return(
       <RenameListForm
@@ -72,6 +72,7 @@ export default class ListIndexItem extends React.Component {
       return <ListActions
         list={this.props.list}
         boardId={this.props.boardId}
+        toggleCardsDeleted={this.toggleCardsDeleted}
         toggleListActions={this.toggleListActions}
         toggleMoveListForm={this.toggleMoveListForm}
         toggleCopyListForm={this.toggleCopyListForm}/>;
@@ -108,8 +109,7 @@ export default class ListIndexItem extends React.Component {
         {this.renderMoveListForm()}
         {this.renderCopyListForm()}
         <li className="list-item">
-          <div
-            className="list-title">
+          <div className="list-title">
             {this.renderRenameListForm()}
             <div
               onClick={this.toggleListActions}

@@ -12,6 +12,7 @@ class RenameListForm extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    this.renameListForm.focus();
   }
 
   componentWillUnmount() {
@@ -44,7 +45,9 @@ class RenameListForm extends React.Component {
 
   render() {
     return (
-      <form className="rename-list-form"
+      <form ref={(renameListForm) => {this.renameListForm = renameListForm;}}
+        onBlur={this.props.toggleRenameList}
+        className="rename-list-form"
         onSubmit={this.handleSubmit}>
         <input
           onChange={this.update('title')}

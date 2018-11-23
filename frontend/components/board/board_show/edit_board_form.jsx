@@ -8,6 +8,21 @@ class EditBoardForm extends React.Component {
     super(props);
     this.state = { title: this.props.board.title };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.escFunction = this.escFunction.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.escFunction);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction);
+  }
+
+  escFunction(e) {
+    if(e.keyCode === 27) {
+      this.props.toggleEditBoard();
+    }
   }
 
   handleSubmit(e) {
@@ -27,7 +42,7 @@ class EditBoardForm extends React.Component {
   }
 
   render() {
-    if (!this.props.showEditBoard) return null;
+    // if (!this.props.showEditBoard) return null;
     return (
       <div className="edit-board-container">
         <div className="edit-board-content-container">

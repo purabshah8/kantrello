@@ -41,7 +41,6 @@ export default class BoardIndex extends React.Component {
 
   render() {
     const [starredBoards, personalBoards] = this.renderAllBoards();
-    debugger
     const createBoard = this.state.modal ? <CreateBoardModal
       createBoard={this.props.createBoard}
       modal={this.state.modal}
