@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchList: listId => dispatch(fetchList(listId)),
     closeModal: () => dispatch(closeModal()),
     fetchComments: () => dispatch(fetchComments(cardId)),
-    createComment: comment => dispatch(createComment(comment)),
     deleteComment: commentId => dispatch(deleteComment(commentId)),
 
   };

@@ -71,8 +71,9 @@ export default class CardShow extends React.Component {
   }
 
   deleteCard() {
+    const listId = this.props.card.list_id;
     this.closeCardShow();
-    this.props.deleteCard();
+    this.props.deleteCard().then(this.props.fetchList(listId));
   }
 
   deleteComment(commentId) {

@@ -23,7 +23,8 @@ class Card < ApplicationRecord
     through: :list,
     source: :board
 
-  has_many :comments
+  has_many :comments,
+    dependent: :destroy
 
   private
   def ensure_position

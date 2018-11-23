@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchLists, createList } from '../../actions/list_actions';
-import { selectBoards, selectLists } from '../../reducers/selectors';
+import { fetchCards, createCard } from '../../actions/card_actions';
+import { selectCards, selectLists } from '../../reducers/selectors';
 
 class CopyListForm extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class CopyListForm extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    this.props.fetchCards(this.props.list.id);
     this.copyListForm.focus();
   }
 
@@ -26,6 +28,15 @@ class CopyListForm extends React.Component {
   escFunction(e) {
     if(e.keyCode === 27) {
       this.props.toggleCopyListForm();
+    }
+  }
+
+  createCopiedCards() {
+    const listId = this.props.lists[this.props.lists.length-1];
+    for (var i = 0; i < this.props.cards.length; i++) {
+      const card = this.props.cards[i];
+      card["list_id"] = listId;
+      this.props.createCard(listId);
     }
   }
 
@@ -40,7 +51,11 @@ class CopyListForm extends React.Component {
       board_id: this.props.list.board_id,
       title: this.state.title,
     };
-    this.props.createList(copiedList).then(() => this.props.fetchLists(this.props.boardId));
+    this.props.createList(copiedList).then(
+      () => this.props.fetchLists(this.props.boardId)
+    ).then(
+      () => this.createCopiedCards()
+    );
     this.props.toggleCopyListForm();
   }
 
@@ -83,13 +98,13 @@ class CopyListForm extends React.Component {
   }
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     boards: selectBoards(state),
-//     lists: selectLists(state, ownProps.boardId),
-//     currentUserId: state.session.currentUserId,
-//   };
-// };
+const mapStateToProps = (state, ownProps) => {
+  return {
+    cards: selectCards(state, ownProps.list.id),
+    lists: selectLists(state, ownProps.boardId),
+    currentUserId: state.session.currentUserId,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -99,7 +114,14 @@ const mapDispatchToProps = dispatch => {
     fetchLists: boardId => {
       return dispatch(fetchLists(boardId));
     },
+    createCard: card => {
+      return dispatch(createCard(card));
+    },
+    fetchCards: listId => {
+      return dispatch(fetchCards(listId));
+    },
+
   };
 };
 
-export default connect(null, mapDispatchToProps)(CopyListForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CopyListForm);

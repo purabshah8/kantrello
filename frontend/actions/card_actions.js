@@ -20,10 +20,10 @@ export const receiveCard = ({card, comments}) => {
   };
 };
 
-export const removeCard = id => {
+export const removeCard = card => {
   return {
     type: REMOVE_CARD,
-    cardId: id,
+    card,
   };
 };
 
@@ -64,7 +64,7 @@ export const updateCard =  card => dispatch => {
 
 export const deleteCard = id => dispatch => {
   return CardApiUtil.deleteCard(id).then(
-    card => dispatch(removeCard(card.id)),
+    deletedCard => dispatch(removeCard(deletedCard)),
     errors => dispatch(receiveCardErrors(errors))
   );
 };

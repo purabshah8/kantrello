@@ -12,7 +12,6 @@ const boardsReducer = (state = {}, action) => {
       const newState = {
         [action.board.id]: action.board,
       };
-      debugger
       return merge({}, copiedState, newState);
     case REMOVE_BOARD:
       const deletedState = merge({}, state);

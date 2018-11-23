@@ -19,10 +19,10 @@ export const receiveComment = comment => {
   };
 };
 
-export const removeComment = id => {
+export const removeComment = comment => {
   return {
     type: REMOVE_COMMENT,
-    commentId: id,
+    comment,
   };
 };
 
@@ -63,7 +63,7 @@ export const updateComment =  comment => dispatch => {
 
 export const deleteComment = id => dispatch => {
   return CommentApiUtil.deleteComment(id).then(
-    comment => dispatch(removeComment(comment.id)),
+    deletedComment => dispatch(removeComment(deletedComment)),
     errors => dispatch(receiveCommentErrors(errors))
   );
 };
