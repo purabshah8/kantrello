@@ -13,8 +13,27 @@ class CardIndexItem extends React.Component {
     this.props.history.push(`/cards/${this.props.card.id}`);
   }
 
+  renderBadges() {
+    const { card } = this.props;
+    const descriptionIcon = (card.description && card.description.length > 0) ?
+      <div className="badge-container">
+        <img src={window.descriptionIcon} />
+      </div> : null;
+    const commentsIcon = (card.commentIds.length > 0) ?
+    <div className="badge-container">
+      <img src={window.commentsIcon} />
+      <span>{card.commentIds.length}</span>
+     </div> : null;
+    return (
+      <>
+        {descriptionIcon}
+        {commentsIcon}
+      </>
+    );
+  }
+
   render() {
-    const { provided, innerRef } = this.props;
+    const { provided, innerRef, card } = this.props;
     return (
       <div ref={innerRef}
       {...provided.draggableProps}
@@ -23,13 +42,15 @@ class CardIndexItem extends React.Component {
           <li onClick={this.openCardShow}
             className="card-item">
             <span className="card-title">
-              {this.props.card.title}
+              {card.title}
             </span>
             <img className="edit-icon"
               onMouseOver={e => (e.currentTarget.src = window.editDarkIcon)}
               onMouseOut={e => (e.currentTarget.src = window.editIcon)}
               src={window.editIcon} />
-            <div className="badges"></div>
+            <div className="badges">
+              {this.renderBadges()}
+            </div>
           </li>
       </div>
     );

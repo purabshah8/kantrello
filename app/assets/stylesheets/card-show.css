@@ -98,6 +98,18 @@
   min-height: 108px;
 }
 
+.comments-icon {
+  position: absolute;
+  top: 246px;
+  left: 18px;
+}
+
+.activity-icon {
+  position: absolute;
+  top: 414px;
+  left: 18px;
+}
+
 .show-card-sidebar {
   padding: 8px 16px 8px 8px;
   width: 168px;

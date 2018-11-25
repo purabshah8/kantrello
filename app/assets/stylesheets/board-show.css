@@ -1,6 +1,7 @@
 .board-container {
-  height: 100%;
+  height: calc(100% - 40px);
   background: #298FCA;
+  overflow-x: scroll;
 }
 
 .show-menu {

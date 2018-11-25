@@ -33,7 +33,7 @@ export default class ListIndexItem extends React.Component {
     this.toggleListActions();
   }
 
-  toggleCopyListForm(e) {
+  toggleCopyListForm() {
     this.setState({
       showCopyListForm: !this.state.showCopyListForm,
     });
@@ -103,7 +103,6 @@ export default class ListIndexItem extends React.Component {
   }
 
   render() {
-    const addCardText = (this.props.list.cardIds.length !== 0) ? "Add another card":"Add a card";
     return (
       <div ref={this.props.innerRef}
         className="list-item-container">
@@ -120,13 +119,13 @@ export default class ListIndexItem extends React.Component {
             </div>
           </div>
           <Droppable droppableId={this.props.list.id}>
-            { (provided) => (
+            { (provided,snapshot) => (
               <CardIndex 
               provided={provided}
               innerRef={provided.innerRef}
+              snapshot={snapshot.isDraggingOver}
               history={this.props.history} 
               list={this.props.list}>
-              {provided.placeholder}
               </CardIndex>
             )}
           </Droppable>

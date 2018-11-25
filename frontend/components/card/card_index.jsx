@@ -45,10 +45,11 @@ export default class CardIndex extends React.Component {
       return(
         <Draggable key={card.id} draggableId={card.id} index={card.position-1}>
           {
-            (provided) => (
+            (provided, snapshot) => (
               <CardIndexItem key={card.id}
                 provided={provided}
                 innerRef={provided.innerRef}
+                isDragging={snapshot.isDragging}
                 history={this.props.history}
                 card={card}
                 list={this.props.list} />

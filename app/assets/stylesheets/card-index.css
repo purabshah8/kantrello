@@ -56,6 +56,28 @@
   background-color: #f5f6f7;
 }
 
+.badges {
+  color: #6b808c;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 4px;
+}
+
+.badge-container {
+  margin-right: 4px; 
+  display: flex; 
+}
+
+.badge-container img {
+  height: 18px;
+}
+
+.badge-container span {
+  color: #6b808c;
+  font-size: 11px;
+  line-height: 18px;
+}
+
 .card-item:hover .edit-icon {
   color: #516b7a;
   visibility: visible;

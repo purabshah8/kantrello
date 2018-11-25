@@ -124,11 +124,13 @@ export default class CardShow extends React.Component {
     });
     return (
       <div className="show-card-comments">
+        <img className="comments-icon" src={window.commentsIcon} />
         <div className="comments-form-container">
           <h2>Add Comment</h2>
           <NewCommentForm card={this.props.card}/>
         </div>
         <div className="comments-header">
+          <img className="activity-icon" src={window.activityIcon} />
           <h2>Activity</h2>
         </div>
         <div className="card-comments"></div>
