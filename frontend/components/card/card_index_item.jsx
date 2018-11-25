@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { openModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 
@@ -15,8 +14,12 @@ class CardIndexItem extends React.Component {
   }
 
   render() {
+    const { provided, innerRef } = this.props;
     return (
-      <div className="card-item-container">
+      <div ref={innerRef}
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      className="card-item-container">
           <li onClick={this.openCardShow}
             className="card-item">
             <span className="card-title">

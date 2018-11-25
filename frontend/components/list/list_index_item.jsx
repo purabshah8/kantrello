@@ -1,4 +1,5 @@
 import React from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import ListActions from './list_actions';
 import RenameListForm from './rename_list_form';
 import MoveListForm from './move_list_form';
@@ -118,9 +119,17 @@ export default class ListIndexItem extends React.Component {
               <img src={window.moreIcon}/>
             </div>
           </div>
-          <CardIndex
-            history={this.props.history}
-            list={this.props.list} />
+          <Droppable droppableId={this.props.list.id}>
+            { (provided) => (
+              <CardIndex 
+              provided={provided}
+              innerRef={provided.innerRef}
+              history={this.props.history} 
+              list={this.props.list}>
+              {provided.placeholder}
+              </CardIndex>
+            )}
+          </Droppable>
         </li>
 
       </div>

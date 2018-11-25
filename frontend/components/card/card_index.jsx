@@ -1,4 +1,5 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import CardIndexItem from './card_index_item';
 import NewCardForm from './new_card_form';
 
@@ -42,10 +43,18 @@ export default class CardIndex extends React.Component {
     if (!this.props.cards) return null;
     const cardIndexItems = this.props.cards.map(card => {
       return(
-        <CardIndexItem key={card.id}
-          history={this.props.history}
-          card={card}
-          list={this.props.list} />
+        <Draggable key={card.id} draggableId={card.id} index={card.position-1}>
+          {
+            (provided) => (
+              <CardIndexItem key={card.id}
+                provided={provided}
+                innerRef={provided.innerRef}
+                history={this.props.history}
+                card={card}
+                list={this.props.list} />
+            )
+          }
+        </Draggable>
       );
     });
     return cardIndexItems;
@@ -54,10 +63,14 @@ export default class CardIndex extends React.Component {
   render() {
     const Cards = this.renderCards();
     const addCardText = (Cards.length !== 0) ? "Add another card":"Add a card";
+    const { provided } = this.props;
     return(
-      <div className="list-cards-container">
+      <div ref={this.props.innerRef}
+      {...provided.droppableProps}
+      className="list-cards-container">
         <ul className="list-cards">
           {Cards}
+          {provided.placeholder}
         </ul>
         {this.renderNewCardForm(addCardText)}
       </div>

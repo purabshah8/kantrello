@@ -1,5 +1,5 @@
 import React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+// import { Droppable } from 'react-beautiful-dnd';
 import EditBoardForm from './edit_board_form';
 import BoardShareForm from './board_share_form';
 import ListIndex from '../../list/list_index_container';
@@ -89,23 +89,25 @@ export default class BoardShow extends React.Component {
     if(!this.props.board) return null;
     const boardId = this.props.board.id;
     return (
-      <Droppable  droppableId={boardId}>
-        {
-          provided => {
-            return <ListIndex
-              {...provided.droppableProps}
-              innerRef={provided.innerRef}
-              boardId={boardId}
-              history={this.props.history}>
-              {provided.placeholder}
-            </ListIndex>;
-          }
-        }
-
-      </Droppable>
-
+      <ListIndex boardId={boardId} history={this.props.history} />
     );
   }
+
+  //droppable for renderListIndex
+  // <Droppable  droppableId={boardId}>
+  //       {
+  //         (provided) => {
+  //           return <ListIndex
+  //             {...provided.droppableProps}
+  //             innerRef={provided.innerRef}
+  //             boardId={boardId}
+  //             history={this.props.history}>
+  //             {provided.placeholder}
+  //           </ListIndex>;
+  //         }
+  //       }
+
+  //     </Droppable>
 
   render() {
     const { id, title, starred } = this.props.board || { id: 0, title: '', starred: false};

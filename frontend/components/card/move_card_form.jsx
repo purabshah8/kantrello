@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchLists, updateList } from '../../actions/list_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchCards, updateCard } from '../../actions/card_actions';
-import { selectBoards, selectLists, selectCards } from '../../reducers/selectors';
+import { selectBoards, selectCards } from '../../reducers/selectors';
 
 
 class MoveCardForm extends React.Component {
@@ -29,7 +29,7 @@ class MoveCardForm extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.boardId != this.state.boardId) {
-      this.props.fetchLists(this.state.boardId)
+      this.props.fetchLists(this.state.boardId);
     }
   }
 
@@ -53,7 +53,6 @@ class MoveCardForm extends React.Component {
     const updatedCard = {
       id: this.props.card.id,
       position: this.state.position,
-      board_id: this.state.boardId,
       list_id: this.state.listId,
     };
     this.props.updateCard(updatedCard).then(() => this.props.fetchCards(this.props.card.list_id));
@@ -166,8 +165,6 @@ class MoveCardForm extends React.Component {
     const listText = selectedList.length > 0 ? selectedList[0].title : '';
     return(
       <div ref={(moveCardForm) => {this.moveCardForm = moveCardForm;}}
-        onBlur={this.props.toggleMoveCardForm}
-        tabIndex="0"
         className="move-card-container">
 
         <div className="move-card-title">

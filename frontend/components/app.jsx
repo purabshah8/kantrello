@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import LoginForm from './session_form/login_form_container';
 import SignupForm from './session_form/signup_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
