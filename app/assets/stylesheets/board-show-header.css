@@ -49,12 +49,13 @@
   margin: 8px 10px 8px 0;
   height: 32px;
   width: 32px;
+  position: relative;
 }
 
 .board-users > p {
   font-size: 11px;
-  top: 52px;
-  left: 220px;
+  top: 4px;
+  left: 4px;
   z-index: 2;
   position: absolute;
   color: #f6f6f6;
