@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createList, updateList, deleteList } from '../../actions/list_actions';
+import { updateCard, deleteCard } from '../../actions/card_actions';
+import { selectCards } from '../../reducers/selectors';
 
 class ListActions extends React.Component {
   constructor(props) {
     super(props);
+    this.deleteAllCards = this.deleteAllCards.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.escFunction = this.escFunction.bind(this);
   }
@@ -29,8 +32,12 @@ class ListActions extends React.Component {
     }
   }
 
-  openNewCardForm() {
-    
+  deleteAllCards() {
+    for (let i = 0; i < this.props.cards.length; i++) {
+      const cardId = this.props.cards[i].id;
+      this.props.deleteCard(cardId);
+    }
+    this.props.toggleListActions();
   }
 
   render() {
@@ -45,7 +52,6 @@ class ListActions extends React.Component {
             onClick={this.props.toggleListActions} />
         </div>
         <ul className="list-actions-list">
-          <li onClick={this.openNewCardForm}>Add Card...</li>
           <li onClick={this.props.toggleCopyListForm}>
             Copy List...
           </li>
@@ -54,8 +60,9 @@ class ListActions extends React.Component {
           </li>
         </ul>
         <ul className="list-actions-list">
-          <li>Move All Cards in this List...</li>
-          <li>Delete All Cards in this List...</li>
+
+          <li onClick={this.deleteAllCards}>
+            Delete All Cards in this List...</li>
         </ul>
         <div onClick={this.handleDelete}
           className="delete-list">
@@ -66,19 +73,26 @@ class ListActions extends React.Component {
   }
 
 }
+// add above Copy list...
+// <li onClick={this.openNewCardForm}>Add Card...</li>
 
-// const mapStateToProps = state => {
-//   return {
-//
-//   };
-// };
+
+// add above delete all cards in list
+// <li>Move All Cards in this List...</li>
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    cards: selectCards(state, ownProps.list.id)
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     createList: list => dispatch(createList(list)),
     updateList: list => dispatch(updateList(list)),
     deleteList: listId => dispatch(deleteList(listId)),
+    deleteCard: cardId => dispatch(deleteCard(cardId)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ListActions);
+export default connect(mapStateToProps, mapDispatchToProps)(ListActions);

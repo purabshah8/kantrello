@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchLists, createList } from '../../actions/list_actions';
 import { fetchCards, createCard } from '../../actions/card_actions';
 import { selectCards, selectLists } from '../../reducers/selectors';
+import merge from 'lodash/merge';
 
 class CopyListForm extends React.Component {
   constructor(props) {
@@ -31,12 +32,12 @@ class CopyListForm extends React.Component {
     }
   }
 
-  createCopiedCards() {
-    const listId = this.props.lists[this.props.lists.length-1];
+  createCopiedCards(action) {
+    const listId = action.list.id;
     for (var i = 0; i < this.props.cards.length; i++) {
-      const card = this.props.cards[i];
+      const card = merge({}, this.props.cards[i]);
       card["list_id"] = listId;
-      this.props.createCard(listId);
+      this.props.createCard(card);
     }
   }
 
@@ -52,9 +53,7 @@ class CopyListForm extends React.Component {
       title: this.state.title,
     };
     this.props.createList(copiedList).then(
-      () => this.props.fetchLists(this.props.boardId)
-    ).then(
-      () => this.createCopiedCards()
+      (action) => this.createCopiedCards(action)
     );
     this.props.toggleCopyListForm();
   }
@@ -68,7 +67,6 @@ class CopyListForm extends React.Component {
   render() {
     return(
       <div ref={(copyListForm) => {this.copyListForm = copyListForm;}}
-        onBlur={this.props.toggleCopyListForm}
         tabIndex="0"
         className="copy-list-container">
         <div className="copy-list-title">

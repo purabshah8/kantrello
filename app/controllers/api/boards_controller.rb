@@ -1,7 +1,7 @@
 class Api::BoardsController < ApplicationController
 
   def index
-    @boards = Board.includes(:users, :lists).where(owner_id: params[:user_id])
+    @boards = Board.joins(:users, :lists).where('owner_id = :user OR users.id = :user', user: params[:user_id]).distinct
   end
 
   def create
