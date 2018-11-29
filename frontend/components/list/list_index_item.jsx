@@ -19,6 +19,16 @@ export default class ListIndexItem extends React.Component {
     this.toggleListActions = this.toggleListActions.bind(this);
     this.toggleMoveListForm = this.toggleMoveListForm.bind(this);
     this.toggleCopyListForm = this.toggleCopyListForm.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal(modal) {
+    debugger
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
   }
 
   toggleListActions() {
@@ -50,59 +60,68 @@ export default class ListIndexItem extends React.Component {
   }
 
   renderRenameListForm() {
-    if (!this.state.showRenameListForm) {
+    const { list, modals } = this.props;
+    if (!modals || !modals.includes(`RenameList-${list.id}`)) {
       return(
-        <div onClick={this.toggleRenameList}
+        <div onClick={() => this.toggleModal(`RenameList-${list.id}`)}
           className="list-title-div">
           <span>
-            {this.props.list.title}
+            {list.title}
           </span>
         </div>
       );
     } else return(
       <RenameListForm
-        toggleRenameList={this.toggleRenameList}
-        list={this.props.list} />
+        toggleModal={this.toggleModal}
+        list={list} />
     );
   }
 
   renderListActions() {
-    if (!this.state.showListActions) {
+    const { boardId, list, modals } = this.props;
+    if (!modals || !modals.includes(`ListActions-${list.id}`)) {
       return null;
     } else {
       return <ListActions
-        list={this.props.list}
-        boardId={this.props.boardId}
-        toggleCardsDeleted={this.toggleCardsDeleted}
-        toggleListActions={this.toggleListActions}
-        toggleMoveListForm={this.toggleMoveListForm}
-        toggleCopyListForm={this.toggleCopyListForm}/>;
+      list={list}
+      boardId={boardId}
+      toggleModal={this.toggleModal}
+      toggleCardsDeleted={this.toggleCardsDeleted}
+      toggleListActions={this.toggleListActions}
+      toggleMoveListForm={this.toggleMoveListForm}
+      toggleCopyListForm={this.toggleCopyListForm}/>;
     }
   }
 
   renderMoveListForm() {
-    if (!this.state.showMoveListForm) return null;
+    const { boardId, list, modals } = this.props;
+    if (!modals || !modals.includes(`MoveList-${list.id}`)) 
+     return null;
     return(
       <MoveListForm
+        toggleModal={this.toggleModal}
         toggleMoveListForm={this.toggleMoveListForm}
         toggleListActions={this.toggleListActions}
-        boardId={this.props.boardId}
-        list={this.props.list}/>
+        boardId={boardId}
+        list={list}/>
     );
   }
 
   renderCopyListForm() {
-    if (!this.state.showCopyListForm) return null;
+    const { boardId, list, modals } = this.props;
+    if (!modals || !modals.includes(`CopyList-${list.id}`))
+     return null;
     return(
       <CopyListForm
         toggleCopyListForm={this.toggleCopyListForm}
         toggleListActions={this.toggleListActions}
-        boardId={this.props.boardId}
-        list={this.props.list}/>
+        boardId={boardId}
+        list={list}/>
     );
   }
 
   render() {
+    const { list, history } = this.props;
     return (
       <div className="list-item-container">
         {this.renderListActions()}
@@ -112,19 +131,19 @@ export default class ListIndexItem extends React.Component {
           <div className="list-title">
             {this.renderRenameListForm()}
             <div
-              onClick={this.toggleListActions}
+              onClick={() => this.toggleModal(`ListActions-${list.id}`)}
               className="list-actions-overlay">
               <img src={window.moreIcon}/>
             </div>
           </div>
-          <Droppable droppableId={this.props.list.id} type="card">
+          <Droppable droppableId={list.id} type="card">
             { (provided,snapshot) => (
               <CardIndex 
               provided={provided}
               innerRef={provided.innerRef}
               snapshot={snapshot.isDraggingOver}
-              history={this.props.history} 
-              list={this.props.list}>
+              history={history} 
+              list={list}>
               </CardIndex>
             )}
           </Droppable>

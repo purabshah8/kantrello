@@ -8,15 +8,12 @@ export default class BoardShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showEditBoard: false,
       showMenu: false,
-      showBoardShare: false,
     };
     this.toggleStar = this.toggleStar.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.toggleEditBoard = this.toggleEditBoard.bind(this);
-    this.toggleBoardShare = this.toggleBoardShare.bind(this);
     this.deleteBoard = this.deleteBoard.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -30,16 +27,16 @@ export default class BoardShow extends React.Component {
     this.props.updateBoard({id, starred: !starred });
   }
 
-  toggleBoardShare() {
-    this.setState({ showBoardShare: !this.state.showBoardShare });
+  toggleModal(modal) {
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
   }
 
   toggleMenu() {
     this.setState({ showMenu: !this.state.showMenu });
-  }
-
-  toggleEditBoard() {
-    this.setState({ showEditBoard: !this.state.showEditBoard });
   }
 
   deleteBoard() {
@@ -48,12 +45,11 @@ export default class BoardShow extends React.Component {
   }
 
   renderBoardShare() {
-    if (!this.state.showBoardShare) return null;
+    if (!this.props.modals || !this.props.modals.includes("BoardShare"))
+     return null;
     return(
       <BoardShareForm board={this.props.board}
-        onBlur={this.toggleBoardShare}
-        tabIndex={0}
-        toggleBoardShare={this.toggleBoardShare} />
+        toggleModal={this.toggleModal} />
     );
   }
 
@@ -79,8 +75,10 @@ export default class BoardShow extends React.Component {
   }
 
   renderEditForm() {
-    if (!this.state.showEditBoard) return null;
-    return <EditBoardForm toggleEditBoard={this.toggleEditBoard}
+    if (!this.props.modals || !this.props.modals.includes("EditBoard")) 
+      return null;
+    return <EditBoardForm
+      toggleModal={this.toggleModal}
       showEditBoard={this.state.showEditBoard}
       board={this.props.board}/>;
   }
@@ -110,7 +108,6 @@ export default class BoardShow extends React.Component {
 
   render() {
     const { id, title, starred } = this.props.board || { id: 0, title: '', starred: false};
-
     const sharedUserCount = (this.props.board && this.props.board.userIds.length > 1) ? <p>{this.props.board.userIds.length}</p> : null;
     return(
       <div className="board-container">
@@ -118,7 +115,7 @@ export default class BoardShow extends React.Component {
         {this.renderEditForm()}
         <div className="board-header">
           <div className="board-header-left">
-            <div onClick={this.toggleEditBoard}
+            <div onClick={() => this.toggleModal("EditBoard")}
               className="board-title header-overlay">
               {title}
             </div>
@@ -127,7 +124,7 @@ export default class BoardShow extends React.Component {
               <img className="header-star-icon"
                 src={(starred === true) ? (window.starGoldIcon) : (window.starIcon)} />
             </div>
-            <div onClick={this.toggleBoardShare}
+            <div onClick={() => this.toggleModal("BoardShare")}
               className="header-overlay board-users">
               {sharedUserCount}
               <img src={window.shareIcon} />

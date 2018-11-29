@@ -8,20 +8,35 @@ class RenameListForm extends React.Component {
     this.state = { title: this.props.list.title };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+
+  }
+
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
-    this.renameListForm.focus();
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
+
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleRenameList();
+      this.props.toggleModal(`RenameList-${this.props.list.id}`);
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal(`RenameList-${this.props.list.id}`);
     }
   }
 
@@ -33,7 +48,7 @@ class RenameListForm extends React.Component {
         title: this.state.title,
       };
       this.props.updateList(updatedList);
-      this.props.toggleRenameList();
+      this.props.toggleModal(`RenameList-${this.props.list.id}`);
     }
   }
 
@@ -45,8 +60,7 @@ class RenameListForm extends React.Component {
 
   render() {
     return (
-      <form ref={(renameListForm) => {this.renameListForm = renameListForm;}}
-        onBlur={this.props.toggleRenameList}
+      <form ref={this.setRef}
         className="rename-list-form"
         onSubmit={this.handleSubmit}>
         <input

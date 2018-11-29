@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchLists, updateList } from '../../actions/list_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { selectBoards, selectLists } from '../../reducers/selectors';
+import { openModal, closeModal, closeAllModals } from '../../actions/modal_actions';
 
 
 class MoveListForm extends React.Component {
@@ -15,29 +16,48 @@ class MoveListForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
     this.props.fetchBoards(this.props.currentUserId);
     this.props.fetchLists(this.props.boardId);
-    this.moveListForm.focus();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleMoveListForm();
+      this.props.toggleModal(`MoveList-${this.props.list.id}`);
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal(`MoveList-${this.props.list.id}`);
+    }
+  }
+
+  escFunction(e) {
+    if(e.keyCode === 27) {
+      this.props.toggleModal(`MoveList-${this.props.list.id}`);
     }
   }
 
   toggleShow() {
-    this.props.toggleMoveListForm();
-    this.props.toggleListActions();
+    this.props.closeModal(`MoveList-${this.props.list.id}`);
+    this.props.openModal(`ListActions-${this.props.list.id}`);
   }
 
   handleSubmit(e) {
@@ -48,7 +68,7 @@ class MoveListForm extends React.Component {
       board_id: this.state.boardId,
     };
     this.props.updateList(updatedList).then(() => this.props.fetchLists(this.props.boardId));
-    this.props.toggleMoveListForm();
+    this.props.toggleModal(`MoveList-${this.props.list.id}`);
   }
 
   update(field) {
@@ -122,8 +142,7 @@ class MoveListForm extends React.Component {
 
   render() {
     return(
-      <div ref={(moveListForm) => {this.moveListForm = moveListForm;}}
-        tabIndex="0"
+      <div ref={this.setRef}
         className="move-list-container">
 
         <div className="move-list-title">
@@ -132,7 +151,7 @@ class MoveListForm extends React.Component {
           src={window.backArrowIcon} />
           <span>Move List</span>
           <img className="close-move-list"
-          onClick={this.props.toggleMoveListForm}
+          onClick={this.props.toggleModal(`MoveList-${this.props.list.id}`)}
           src={window.closeIcon} />
         </div>
 
@@ -166,6 +185,7 @@ const mapStateToProps = (state, ownProps) => {
     boards: selectBoards(state),
     lists: selectLists(state, ownProps.boardId),
     currentUserId: state.session.currentUserId,
+    modals: state.ui.modals,
   };
 };
 
@@ -178,6 +198,9 @@ const mapDispatchToProps = dispatch => {
     fetchLists: boardId => {
       return dispatch(fetchLists(boardId));
     },
+    openModal: modal => dispatch(openModal(modal)),
+    closeModal: modal => dispatch(closeModal(modal)),
+    closeAllModals: () => dispatch(closeAllModals()),
   };
 };
 

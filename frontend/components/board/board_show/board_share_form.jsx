@@ -22,10 +22,17 @@ class BoardShareForm extends React.Component {
     this.deleteBoardShare = this.deleteBoardShare.bind(this);
     this.callSearch = this.callSearch.bind(this);
     this.renderUsers = this.renderUsers.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+  
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
     this.props.fetchUsers();
   }
 
@@ -40,11 +47,18 @@ class BoardShareForm extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleBoardShare();
+      this.props.toggleModal("BoardShare");
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal("BoardShare");
     }
   }
 
@@ -134,11 +148,12 @@ class BoardShareForm extends React.Component {
 
   render() {
     return (
-      <div className="board-share-container">
+      <div ref={this.setRef}
+      className="board-share-container">
         <div className="board-share-title">
           <span>Share Board</span>
             <img src={window.closeIcon}
-              onClick={this.props.toggleBoardShare} />
+              onClick={() => this.props.toggleModal("BoardShare")} />
         </div>
         <div className="shared-users-container">
           <span>Board Members</span>

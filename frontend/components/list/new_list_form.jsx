@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import merge from 'lodash/merge';
 
 export default class NewListForm extends React.Component {
   constructor(props) {
@@ -8,21 +6,34 @@ export default class NewListForm extends React.Component {
     this.state = { title: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
 
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleNewList();
+      this.props.toggleModal("NewList");
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal("NewList");
     }
   }
 
@@ -34,7 +45,7 @@ export default class NewListForm extends React.Component {
         board_id : this.props.boardId,
       };
       this.props.createList(newList);
-      this.props.toggleNewList();
+      this.props.toggleModal("NewList");
     }
   }
 
@@ -46,7 +57,8 @@ export default class NewListForm extends React.Component {
 
   render() {
     return(
-      <li className="new-list-form-item">
+      <li ref={this.setRef}
+      className="new-list-form-item">
         <form className="new-list-form"
           onSubmit={this.handleSubmit}>
           <input
@@ -56,7 +68,7 @@ export default class NewListForm extends React.Component {
           <div>
             <button className="green-submit-button">Add List</button>
             <img src={window.closeIcon}
-              onClick={this.props.toggleNewList} />
+              onClick={() => this.props.toggleModal("NewList")} />
           </div>
         </form>
       </li>

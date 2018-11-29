@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateBoard } from '../../../actions/board_actions';
-import merge from 'lodash/merge';
 
 class EditBoardForm extends React.Component {
   constructor(props) {
@@ -9,19 +8,33 @@ class EditBoardForm extends React.Component {
     this.state = { title: this.props.board.title };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+  
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleEditBoard();
+      this.props.toggleModal("EditBoard");
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal("EditBoard");
     }
   }
 
@@ -32,7 +45,7 @@ class EditBoardForm extends React.Component {
       title: this.state.title,
     };
     this.props.updateBoard(editedBoard);
-    this.props.toggleEditBoard();
+    this.props.toggleModal("EditBoard");
   }
 
   update(field) {
@@ -42,13 +55,13 @@ class EditBoardForm extends React.Component {
   }
 
   render() {
-    // if (!this.props.showEditBoard) return null;
     return (
-      <div className="edit-board-container">
+      <div ref={this.setRef}
+      className="edit-board-container">
         <div className="edit-board-content-container">
           <div className="edit-board-title">
             <span>Rename Board</span>
-            <img onClick={this.props.toggleEditBoard}
+            <img onClick={() => this.props.toggleModal("EditBoard")}
               src={window.closeIcon} />
           </div>
           <form className="edit-board-form"

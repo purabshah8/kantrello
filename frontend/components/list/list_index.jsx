@@ -6,19 +6,20 @@ import NewListForm from './new_list_form';
 export default class ListIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showNewList: false };
-    this.toggleNewList = this.toggleNewList.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchLists();
   }
 
-
-  toggleNewList() {
-    this.setState({ showNewList: !this.state.showNewList });
+  toggleModal(modal) {
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
   }
-
 
   renderLists() {
     if (!this.props.lists) return null;
@@ -27,6 +28,10 @@ export default class ListIndex extends React.Component {
         <ListIndexItem key={list.id}
         list={list}
         boardId={this.props.boardId}
+        modals={this.props.modals}
+        openModal={this.props.openModal}
+        closeModal={this.props.closeModal}
+        closeAllModals={this.props.closeAllModals}
         history={this.props.history}/>
       );
     });
@@ -48,10 +53,10 @@ export default class ListIndex extends React.Component {
   //       </Draggable>
 
   renderNewListForm(addListText) {
-    if (!this.state.showNewList) {
+    if (!this.props.modals || !this.props.modals.includes("NewList")) {
       return (
         <div className="add-new-list-overlay">
-        <li onClick={this.toggleNewList}
+        <li onClick={() => this.toggleModal("NewList")}
           className="new-list">
           <img src={window.plusWhiteIcon} />
           <span>{addListText}</span>
@@ -61,14 +66,14 @@ export default class ListIndex extends React.Component {
     }
     return <NewListForm
       createList={this.props.createList}
-      toggleNewList={this.toggleNewList}
+      toggleModal={this.toggleModal}
       boardId={this.props.boardId}/>;
   }
 
   render() {
     const lists = this.renderLists();
     const addListText = (lists.length !== 0) ? "Add another list":"Add a list";
-    const { provided, innerRef } = this.props;
+    // const { provided, innerRef } = this.props;
     return(
       <div className="lists-container">
         <ul className="lists">
