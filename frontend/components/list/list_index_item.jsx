@@ -104,8 +104,7 @@ export default class ListIndexItem extends React.Component {
 
   render() {
     return (
-      <div ref={this.props.innerRef}
-        className="list-item-container">
+      <div className="list-item-container">
         {this.renderListActions()}
         {this.renderMoveListForm()}
         {this.renderCopyListForm()}
@@ -118,7 +117,7 @@ export default class ListIndexItem extends React.Component {
               <img src={window.moreIcon}/>
             </div>
           </div>
-          <Droppable droppableId={this.props.list.id}>
+          <Droppable droppableId={this.props.list.id} type="card">
             { (provided,snapshot) => (
               <CardIndex 
               provided={provided}
@@ -135,3 +134,15 @@ export default class ListIndexItem extends React.Component {
     );
   }
 }
+
+// const { provided, innerRef } = this.props;
+//     return (
+// <div ref={innerRef}
+// {...provided.draggableProps}
+// className="list-item-container">
+//   {this.renderListActions()}
+//   {this.renderMoveListForm()}
+//   {this.renderCopyListForm()}
+//   <li className="list-item">
+//     <div {...provided.dragHandleProps}
+//     className="list-title">

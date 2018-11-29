@@ -58,6 +58,8 @@
 
 .select-option-list {
   width: 192px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 

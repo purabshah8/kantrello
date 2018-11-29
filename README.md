@@ -21,6 +21,3 @@ Boards are the main context of Kantrello. Boards can be starred for easy access 
 ### Cards
 
 ### Comments
-
-## Usage
-Clone this repo and run the rails server using `rails server`. Navigate to localhost:3000 to see the website.

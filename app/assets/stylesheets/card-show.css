@@ -89,12 +89,14 @@
 }
 
 .description-header u {
+  cursor: pointer;
   margin-left: 5px;
   color: #6b808c;
   font-size: 14px;
 }
 
 .description {
+  cursor: pointer;
   min-height: 108px;
 }
 

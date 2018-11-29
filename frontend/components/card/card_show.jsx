@@ -161,7 +161,7 @@ export default class CardShow extends React.Component {
           <div className="show-card-title">
             <img className="card-icon" src={window.cardIcon}/>
             <span>{title}</span>
-            <p>in list <u>{listName}</u></p>
+            <p>in list <u onClick={this.toggleMoveCardForm}>{listName}</u></p>
           </div>
           <div className="show-card-main">
             <div className="show-card-content">

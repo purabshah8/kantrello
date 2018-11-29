@@ -89,25 +89,24 @@ export default class BoardShow extends React.Component {
     if(!this.props.board) return null;
     const boardId = this.props.board.id;
     return (
-      <ListIndex boardId={boardId} history={this.props.history} />
+      <ListIndex
+      boardId={boardId} 
+      history={this.props.history} />
     );
   }
 
-  //droppable for renderListIndex
-  // <Droppable  droppableId={boardId}>
-  //       {
-  //         (provided) => {
-  //           return <ListIndex
-  //             {...provided.droppableProps}
-  //             innerRef={provided.innerRef}
-  //             boardId={boardId}
-  //             history={this.props.history}>
-  //             {provided.placeholder}
-  //           </ListIndex>;
-  //         }
-  //       }
-
-  //     </Droppable>
+//   <Droppable droppableId={boardId} direction="horizontal" type="list">
+//   {
+//     (provided, snapshot) => (
+//       <ListIndex
+//       provided={provided}
+//       innerRef={provided.innerRef}
+//       snapshot={snapshot.isDraggingOver}
+//       boardId={boardId} 
+//       history={this.props.history} />
+//     )
+//   }
+// </Droppable>
 
   render() {
     const { id, title, starred } = this.props.board || { id: 0, title: '', starred: false};

@@ -69,7 +69,7 @@
 
 .user-dropdown {
   position: absolute;
-  z-index: 2;
+  z-index: 20;
   top: 42px;
   right: 2px;
   background: white;

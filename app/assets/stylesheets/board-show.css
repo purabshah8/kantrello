@@ -1,7 +1,6 @@
 .board-container {
   height: calc(100% - 40px);
   background: #298FCA;
-  overflow-x: scroll;
 }
 
 .show-menu {
@@ -80,6 +79,7 @@
   display: flex;
   justify-content: flex-start;
   padding: 6px;
+  cursor: pointer;
 }
 
 .menu-item:hover {

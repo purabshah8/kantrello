@@ -47,12 +47,12 @@ export default class CardIndex extends React.Component {
           {
             (provided, snapshot) => (
               <CardIndexItem key={card.id}
-                provided={provided}
-                innerRef={provided.innerRef}
-                isDragging={snapshot.isDragging}
-                history={this.props.history}
-                card={card}
-                list={this.props.list} />
+              provided={provided}
+              innerRef={provided.innerRef}
+              isDragging={snapshot.isDragging}
+              history={this.props.history}
+              card={card}
+              list={this.props.list} />
             )
           }
         </Draggable>
@@ -64,9 +64,9 @@ export default class CardIndex extends React.Component {
   render() {
     const Cards = this.renderCards();
     const addCardText = (Cards.length !== 0) ? "Add another card":"Add a card";
-    const { provided } = this.props;
+    const { provided, innerRef } = this.props;
     return(
-      <div ref={this.props.innerRef}
+      <div ref={innerRef}
       {...provided.droppableProps}
       className="list-cards-container">
         <ul className="list-cards">
