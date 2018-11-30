@@ -70,6 +70,9 @@ class ListActions extends React.Component {
             onClick={() => this.props.toggleModal(`ListActions-${this.props.list.id}`)} />
         </div>
         <ul className="list-actions-list">
+          <li onClick={() => this.openModal("NewCard")}>
+          Add Card...
+          </li>
           <li onClick={() => this.openModal("CopyList")}>
             Copy List...
           </li>
@@ -91,9 +94,6 @@ class ListActions extends React.Component {
   }
 
 }
-// add above Copy list...
-// <li onClick={this.openNewCardForm}>Add Card...</li>
-
 
 // add above delete all cards in list
 // <li>Move All Cards in this List...</li>

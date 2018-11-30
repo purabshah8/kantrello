@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 export default class NewCardForm extends React.Component {
   constructor(props) {
@@ -7,21 +6,34 @@ export default class NewCardForm extends React.Component {
     this.state = { title: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
 
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleNewCard();
+      this.props.toggleModal(`NewCard-${this.props.listId}`);
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal(`NewCard-${this.props.listId}`);
     }
   }
 
@@ -33,7 +45,7 @@ export default class NewCardForm extends React.Component {
         list_id : this.props.listId,
       };
       this.props.createCard(newCard);
-      this.props.toggleNewCard();
+      this.props.toggleModal(`NewCard-${this.props.listId}`);
     }
   }
 
@@ -45,7 +57,8 @@ export default class NewCardForm extends React.Component {
 
   render() {
     return(
-      <li className="new-card-form-item">
+      <li ref={this.setRef}
+      className="new-card-form-item">
         <form className="new-card-form"
           onSubmit={this.handleSubmit}>
           <div className="new-card-form-input">
@@ -57,7 +70,7 @@ export default class NewCardForm extends React.Component {
           <div className="new-card-form-options">
             <button className="green-submit-button">Add Card</button>
             <img src={window.closeIcon}
-              onClick={this.props.toggleNewCard} />
+            onClick={() => this.props.toggleModal(`NewCard-${this.props.listId}`)} />
           </div>
         </form>
       </li>

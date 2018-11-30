@@ -8,6 +8,15 @@ export default class CardIndex extends React.Component {
     super(props);
     this.state = { showNewCard: false };
     this.toggleNewCard = this.toggleNewCard.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal(modal) {
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
   }
 
   componentDidMount() {
@@ -19,10 +28,10 @@ export default class CardIndex extends React.Component {
   }
 
   renderNewCardForm(addCardText) {
-    if (!this.state.showNewCard) {
+    if (!this.props.modals || !this.props.modals.includes(`NewCard-${this.props.list.id}`)) {
       return (
         <div className="new-card-container">
-          <div onClick={this.toggleNewCard}
+          <div onClick={() => this.toggleModal(`NewCard-${this.props.list.id}`)}
             className="new-card">
             <img src={window.plusIcon} />
             <span>{addCardText}</span>
@@ -33,6 +42,7 @@ export default class CardIndex extends React.Component {
     return (
       <NewCardForm
         createCard={this.props.createCard}
+        toggleModal={this.toggleModal}
         toggleNewCard={this.toggleNewCard}
         listId={this.props.list.id}/>
   );

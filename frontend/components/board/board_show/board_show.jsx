@@ -124,6 +124,7 @@ export default class BoardShow extends React.Component {
               <img className="header-star-icon"
                 src={(starred === true) ? (window.starGoldIcon) : (window.starIcon)} />
             </div>
+            <div className="divider"></div>
             <div onClick={() => this.toggleModal("BoardShare")}
               className="header-overlay board-users">
               {sharedUserCount}

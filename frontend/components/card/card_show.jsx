@@ -171,6 +171,7 @@ export default class CardShow extends React.Component {
     const { title, description } = this.props.card || fakeCard;
     const { card, list } = this.props;
     const listName = list ? list.title : "listName";
+    const editDescriptionLink = description ? <u onClick={() => this.toggleModal('EditCardDescription')}>Edit</u> : null;
     return(
       <div onClick={this.closeCardShow}
         className="modal-background">
@@ -187,7 +188,7 @@ export default class CardShow extends React.Component {
           <div className="show-card-title">
             <img className="card-icon" src={window.cardIcon}/>
             <span>{title}</span>
-            <p>in list <u onClick={this.toggleMoveCardForm}>{listName}</u></p>
+            <p>in list <u onClick={() => this.toggleModal(`MoveCard-${card.id}`)}>{listName}</u></p>
           </div>
           <div className="show-card-main">
             <div className="show-card-content">
@@ -195,7 +196,7 @@ export default class CardShow extends React.Component {
                 <img className="description-icon" src={window.descriptionIcon}/>
                 <div className="description-header">
                   <h2>Description</h2>
-                  <u onClick={() => this.toggleModal('EditCardDescription')}>Edit</u>
+                  {editDescriptionLink}
                 </div>
                 {this.renderEditDescription()}
               </div>

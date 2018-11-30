@@ -7,6 +7,7 @@ class UserDropdown extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.setRef = this.setRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
   }
 
   setRef(node) {
@@ -43,27 +44,34 @@ class UserDropdown extends React.Component {
     };
   }
 
+  goToProfile() {
+    this.props.toggleModal('UserDropdown');
+    this.props.history.push(`/users/${this.props.user.id}`);
+  }
+
   render() {
     const { id, name, username } = this.props.user;
     return (
-      <>
-        <ul ref={this.setRef}
-        className="user-dropdown">
-          <li className= "dropdown-border">
-            <span className="user-dropdown-name">{name} ({username})</span>
-            <img onClick={() => this.props.toggleModal('UserDropdown')}
-              className="user-dropdown-close"
-              src={window.closeIcon} />
-          </li>
-          <li className= "dropdown-border">
-            <Link className="profile-link"
-              to={`/users/${id}`}>Profile</Link>
-          </li>
-          <li><span className="logout-link" onClick={this.handleLogout(id)}>Log Out</span>
-          </li>
+      <ul ref={this.setRef}
+      className="user-dropdown">
+        <li className= "dropdown-item">
+          <span className="user-dropdown-name">{name} ({username})</span>
+          <img onClick={() => this.props.toggleModal('UserDropdown')}
+            className="user-dropdown-close"
+            src={window.closeIcon} />
+        </li>
+        <li className= "dropdown-item" onClick={this.goToProfile}>
+          <span className="profile-link">
+            Profile
+          </span>
+        </li>
+        <li className="dropdown-item">
+          <span className="logout-link" onClick={this.handleLogout(id)}>
+            Log Out
+          </span>
+        </li>
 
-        </ul>
-      </>
+      </ul>
     );
   }
 

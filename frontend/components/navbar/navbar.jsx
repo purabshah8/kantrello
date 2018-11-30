@@ -5,10 +5,6 @@ import UserDropdown from './user_dropdown_container';
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showUserDropdown: false,
-    };
-    // this.toggleDropdown = this.toggleDropdown.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
 
@@ -28,10 +24,6 @@ export default class Navbar extends React.Component {
       return <p className="user-avatar">{initials}</p>;
     }
   }
-
-  // toggleDropdown(e) {
-  //   this.setState({ showUserDropdown: !this.state.showUserDropdown });
-  // }
 
   renderUserDropdown() {
     if (!this.props.modals || !this.props.modals.includes('UserDropdown'))
@@ -58,11 +50,11 @@ export default class Navbar extends React.Component {
 
 
         <div className="right-nav">
+          {this.renderUserDropdown()}
           <div
             onClick={() => this.toggleModal('UserDropdown')}
             className="avatar-container">
             {this.renderUserIcon()}
-            {this.renderUserDropdown()}
           </div>
         </div>
 

@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   margin: 44px 0px;
-
 }
 
 .close-card-icon-overlay {
@@ -101,6 +100,11 @@
 .description {
   cursor: pointer;
   min-height: 108px;
+}
+
+.show-card-title u:hover, .description-header u:hover {
+  cursor: pointer;
+  color: #17394D;
 }
 
 .no-description {

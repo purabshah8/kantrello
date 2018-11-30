@@ -26,6 +26,6 @@ body {
   height: 100%;
 }
 
-button:focus {
+textarea:focus, button:focus {
   outline: none;
 }

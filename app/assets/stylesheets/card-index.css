@@ -114,3 +114,7 @@
 .new-card-form-options img {
   margin-top: 10px;
 }
+
+.new-card-form-options img:hover {
+  cursor: pointer;
+}
