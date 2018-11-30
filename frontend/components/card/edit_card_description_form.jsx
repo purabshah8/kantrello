@@ -61,6 +61,7 @@ class EditCardDescriptionForm extends React.Component {
         <form onSubmit={this.handleSubmit}
           className="edit-description-form">
           <textarea
+            placeholder="Add a more detailed description..."
             onChange={this.update('description')}
             value={this.state.description} />
           <div className="edit-description-options">

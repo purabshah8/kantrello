@@ -1,31 +1,31 @@
-.description > * {
+/* .markdown > * {
   margin: 0 0 8px;
-}
+} */
 
 
-.description h1 {
+.markdown h1 {
   font-size: 24px;
   line-height: 28px;
   margin-bottom: 12px;
 }
 
-.description h2 {
+.markdown h2 {
   font-size: 20px;
   line-height: 24px;
   margin-top: 16px;
 }
 
-.description h3, .description h4, .description h5, .description h6 {
+.markdown h3, .markdown h4, .markdown h5, .markdown h6 {
   font-size: 16px;
   line-height: 20px;
 }
 
-.description p {
+.markdown p {
   font-size: 14px;
   line-height: 20px;
 }
 
-.description code {
+.markdown code {
   background-color: #f5f6f7;
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(9,45,66,.13);
@@ -34,10 +34,11 @@
   margin: -1px 2px;
 }
 
-.description ul {
+.markdown ul {
   list-style: disc;
 }
 
-.description ul > li {
+.markdown ul > li {
   margin: 8px 8px 8px 24px;
+  font-size: 14px;
 }

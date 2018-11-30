@@ -3,18 +3,13 @@ import showdown from 'showdown';
 import MoveCardForm from './move_card_form';
 import EditCardDescriptionForm from './edit_card_description_form';
 import NewCommentForm from '../comment/new_comment_form';
+import EditCommentForm from '../comment/edit_comment_form';
 
 export default class CardShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showMoveCardForm: false,
-      showCardDescriptionForm: false,
-    };
     this.closeCardShow = this.closeCardShow.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
-    this.toggleMoveCardForm = this.toggleMoveCardForm.bind(this);
-    this.toggleEditCardDescription = this.toggleEditCardDescription.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
@@ -29,7 +24,6 @@ export default class CardShow extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
-
   }
 
   componentDidUpdate() {
@@ -57,18 +51,6 @@ export default class CardShow extends React.Component {
     this.props.history.push(`/boards/${this.props.card.board_id}`);
   }
 
-  toggleMoveCardForm() {
-    this.setState({
-      showMoveCardForm: !this.state.showMoveCardForm,
-    });
-  }
-
-  toggleEditCardDescription() {
-    this.setState({
-      showCardDescriptionForm: !this.state.showCardDescriptionForm,
-    });
-  }
-
   changeIcon(icon) {
     return (e) => {
       e.currentTarget.children[0].src = icon;
@@ -94,7 +76,6 @@ export default class CardShow extends React.Component {
     const { card, modals } = this.props;
     if (!modals || !card || !modals.includes(`MoveCard-${card.id}`))
      return null;
-    // if (!this.state.showMoveCardForm) return null;
     return (
       <MoveCardForm
         toggleModal={this.toggleModal}
@@ -107,13 +88,21 @@ export default class CardShow extends React.Component {
     const fakeCard = { title: '', description: '' };
     const { title, description } = this.props.card || fakeCard;
     if (!this.props.modals || !this.props.modals.includes('EditCardDescription')) {
-      const descriptionText = description ? this.convertMarkdown(description) : "No details";
-      return(
-        <div onClick={() => this.toggleModal('EditCardDescription')}
-          dangerouslySetInnerHTML={{__html: descriptionText} }
-          className="description">
-        </div>
-      );
+      if (description) {
+        return(
+          <div onClick={() => this.toggleModal('EditCardDescription')}
+            dangerouslySetInnerHTML={{__html: this.convertMarkdown(description)} }
+            className="description markdown">
+          </div>
+        );
+      } else {
+        return (
+          <div onClick={() => this.toggleModal('EditCardDescription')}
+          className="description no-description">
+            Add a more detailed description...
+          </div>
+        );
+      }
     } else {
       return <EditCardDescriptionForm
         card={this.props.card}
@@ -125,17 +114,34 @@ export default class CardShow extends React.Component {
   renderComments() {
     const commentsList = (this.props.comments) ? this.props.comments : [];
     const comments = commentsList.map(comment => {
+      const commentOptions = comment.user_id === this.props.userId ? 
+      (
+        <div className="comment-options">
+          <u onClick={() => this.toggleModal(`EditComment-${comment.id}`)}>Edit</u> - <u onClick={this.deleteComment(comment.id)}>Delete</u>
+        </div>
+        ) : null;
+      if (!this.props.modals || !this.props.modals.includes(`EditComment-${comment.id}`)) {
       return (
         <li key={comment.id}>
           <h3>{comment.author}</h3>
-          <div className="comment-body"
-            dangerouslySetInnerHTML={{__html: this.convertMarkdown(comment.body)}}>
+          <div className="comment-body">
+            <div className="markdown"
+              dangerouslySetInnerHTML={{__html: this.convertMarkdown(comment.body)}}>
+            </div>
           </div>
-          <div className="comment-options">
-            <u>Edit</u> - <u onClick={this.deleteComment(comment.id)}>Delete</u>
-          </div>
+          {commentOptions}
         </li>
-      );
+      );} else {
+        return (
+          <li key={comment.id}>
+            <h3>{comment.author}</h3>
+            <EditCommentForm
+            toggleModal={this.toggleModal}
+            comment={comment}
+            />
+          </li>
+        );
+      }
     });
     return (
       <div className="show-card-comments">
@@ -154,6 +160,10 @@ export default class CardShow extends React.Component {
         </ul>
       </div>
     );
+  }
+
+  renderEditComments() {
+
   }
 
   render() {
@@ -185,7 +195,7 @@ export default class CardShow extends React.Component {
                 <img className="description-icon" src={window.descriptionIcon}/>
                 <div className="description-header">
                   <h2>Description</h2>
-                  <u onClick={this.toggleEditCardDescription}>Edit</u>
+                  <u onClick={() => this.toggleModal('EditCardDescription')}>Edit</u>
                 </div>
                 {this.renderEditDescription()}
               </div>

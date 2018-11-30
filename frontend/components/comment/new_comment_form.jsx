@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createComment, deleteComment } from '../../actions/comment_actions';
+import { createComment } from '../../actions/comment_actions';
 
 class NewCommentForm extends React.Component {
   constructor(props) {
@@ -31,18 +31,20 @@ class NewCommentForm extends React.Component {
 
   render() {
     return(
-        <form className="new-comment-form"
+        <form className="comment-form"
           onSubmit={this.handleSubmit}>
 
-            <textarea className="new-comment-input"
+            <textarea className="comment-input"
               placeholder="Write a comment..."
               onChange={this.update('body')}
               value={this.state.body}/>
-
-            <button
-              className={this.state.body ? ("green-submit-button") : ("disabled-save-button")}>
-              Save
-            </button>
+            <div className="comment-form-options">
+              <button
+                className={this.state.body ? ("green-submit-button") : ("disabled-save-button")}>
+                Save
+              </button>
+              <span>This field supports markdown syntax</span>
+            </div>
         </form>
     );
   }

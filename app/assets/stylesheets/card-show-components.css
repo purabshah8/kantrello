@@ -11,6 +11,7 @@
   border: 1px solid #dfe3e6;
   border-radius: 3px;
   padding: 6px 8px;
+  font-size: 14px;
   line-height: 20px;
   box-sizing: border-box;
   transition-property: background-color,border-color,box-shadow;
@@ -19,10 +20,18 @@
   position: relative;
 }
 
+.edit-description-form > textarea:focus {
+  outline: none;
+}
+
 .edit-description-options img {
   position: absolute;
   top: 280px;
   left: 120px;
+}
+
+.edit-description-options img:hover {
+  cursor: pointer;
 }
 
 .edit-description-options span {
