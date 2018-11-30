@@ -9,54 +9,15 @@ import CardIndex from '../card/card_index_container';
 export default class ListIndexItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showRenameListForm: false,
-      showListActions: false,
-      showMoveListForm: false,
-      showCopyListForm: false,
-     };
-    this.toggleRenameList = this.toggleRenameList.bind(this);
-    this.toggleListActions = this.toggleListActions.bind(this);
-    this.toggleMoveListForm = this.toggleMoveListForm.bind(this);
-    this.toggleCopyListForm = this.toggleCopyListForm.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
 
   toggleModal(modal) {
-    debugger
     if (!this.props.modals) return;
     if (this.props.modals.includes(modal)) {
       this.props.closeModal(modal);
     } else
     this.props.openModal(modal);
-  }
-
-  toggleListActions() {
-    this.setState({ showListActions: !this.state.showListActions});
-  }
-
-  toggleMoveListForm(e) {
-    this.setState({
-      showMoveListForm: !this.state.showMoveListForm,
-    });
-    if (e && e.target.className !== "close-move-list")
-    this.toggleListActions();
-  }
-
-  toggleCopyListForm() {
-    this.setState({
-      showCopyListForm: !this.state.showCopyListForm,
-    });
-  }
-
-  toggleRenameList(e) {
-    if (e) {
-      if (e.target.type !== "text") {
-        this.setState({ showRenameListForm: !this.state.showRenameListForm});
-      }
-    } else {
-      this.setState({ showRenameListForm: !this.state.showRenameListForm});
-    }
   }
 
   renderRenameListForm() {
@@ -85,11 +46,7 @@ export default class ListIndexItem extends React.Component {
       return <ListActions
       list={list}
       boardId={boardId}
-      toggleModal={this.toggleModal}
-      toggleCardsDeleted={this.toggleCardsDeleted}
-      toggleListActions={this.toggleListActions}
-      toggleMoveListForm={this.toggleMoveListForm}
-      toggleCopyListForm={this.toggleCopyListForm}/>;
+      toggleModal={this.toggleModal}/>;
     }
   }
 
@@ -100,8 +57,6 @@ export default class ListIndexItem extends React.Component {
     return(
       <MoveListForm
         toggleModal={this.toggleModal}
-        toggleMoveListForm={this.toggleMoveListForm}
-        toggleListActions={this.toggleListActions}
         boardId={boardId}
         list={list}/>
     );
@@ -113,8 +68,7 @@ export default class ListIndexItem extends React.Component {
      return null;
     return(
       <CopyListForm
-        toggleCopyListForm={this.toggleCopyListForm}
-        toggleListActions={this.toggleListActions}
+        toggleModal={this.toggleModal}
         boardId={boardId}
         list={list}/>
     );

@@ -4,6 +4,7 @@ import { fetchLists, updateList } from '../../actions/list_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchCards, updateCard } from '../../actions/card_actions';
 import { selectBoards, selectCards } from '../../reducers/selectors';
+import { openModal, closeModal, closeAllModals } from '../../actions/modal_actions';
 
 
 class MoveCardForm extends React.Component {
@@ -17,17 +18,24 @@ class MoveCardForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
+
+  setRef(node) {
+    this.containerRef = node;
+  }
+
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
     this.props.fetchBoards(this.props.currentUserId);
     this.props.fetchLists(this.props.card.board_id);
     this.props.fetchCards(this.props.card.list_id);
-    this.moveCardForm.focus();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     if (prevState.boardId != this.state.boardId) {
       this.props.fetchLists(this.state.boardId);
     }
@@ -35,12 +43,19 @@ class MoveCardForm extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal(`MoveCard-${this.props.card.id}`);
+    }
   }
 
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleMoveCardForm();
+      this.props.toggleModal(`MoveCard-${this.props.card.id}`);
     }
   }
 
@@ -56,7 +71,7 @@ class MoveCardForm extends React.Component {
       list_id: this.state.listId,
     };
     this.props.updateCard(updatedCard).then(() => this.props.fetchCards(this.props.card.list_id));
-    this.props.toggleMoveCardForm();
+    this.props.toggleModal();
   }
 
   update(field) {
@@ -164,13 +179,13 @@ class MoveCardForm extends React.Component {
     const selectedList = this.props.lists.filter(list => list.id == this.state.listId);
     const listText = selectedList.length > 0 ? selectedList[0].title : '';
     return(
-      <div ref={(moveCardForm) => {this.moveCardForm = moveCardForm;}}
+      <div ref={this.setRef}
         className="move-card-container">
 
         <div className="move-card-title">
           <span>Move Card</span>
           <img className="close-move-card"
-          onClick={this.props.toggleMoveCardForm}
+          onClick={() => this.props.toggleModal(`MoveCard-${this.props.card.id}`)}
           src={window.closeIcon} />
         </div>
 
@@ -225,6 +240,9 @@ const mapDispatchToProps = dispatch => {
     fetchLists: boardId => dispatch(fetchLists(boardId)),
     fetchCards: listId => dispatch(fetchCards(listId)),
     updateCard: card => dispatch(updateCard(card)),
+    openModal: modal => dispatch(openModal(modal)),
+    closeModal: modal => dispatch(closeModal(modal)),
+    closeAllModals: () => dispatch(closeAllModals()),
   };
 };
 

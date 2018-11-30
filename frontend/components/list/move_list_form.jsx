@@ -49,12 +49,6 @@ class MoveListForm extends React.Component {
     }
   }
 
-  escFunction(e) {
-    if(e.keyCode === 27) {
-      this.props.toggleModal(`MoveList-${this.props.list.id}`);
-    }
-  }
-
   toggleShow() {
     this.props.closeModal(`MoveList-${this.props.list.id}`);
     this.props.openModal(`ListActions-${this.props.list.id}`);
@@ -144,14 +138,13 @@ class MoveListForm extends React.Component {
     return(
       <div ref={this.setRef}
         className="move-list-container">
-
         <div className="move-list-title">
           <img className="return-list-actions"
           onClick={this.toggleShow}
           src={window.backArrowIcon} />
           <span>Move List</span>
           <img className="close-move-list"
-          onClick={this.props.toggleModal(`MoveList-${this.props.list.id}`)}
+          onClick={() => this.props.toggleModal(`MoveList-${this.props.list.id}`)}
           src={window.closeIcon} />
         </div>
 

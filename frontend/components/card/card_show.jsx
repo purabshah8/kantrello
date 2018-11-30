@@ -16,6 +16,15 @@ export default class CardShow extends React.Component {
     this.toggleMoveCardForm = this.toggleMoveCardForm.bind(this);
     this.toggleEditCardDescription = this.toggleEditCardDescription.bind(this);
     this.escFunction = this.escFunction.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal(modal) {
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
   }
 
   componentDidMount() {
@@ -37,13 +46,14 @@ export default class CardShow extends React.Component {
   }
 
   escFunction(e) {
-    if(e.keyCode === 27 && !this.state.showCardDescriptionForm && !this.state.showMoveCardForm) {
+    const possibleModals = [`MoveCard-${this.props.card.id}`, 'EditCardDescription'];
+    const otherModalsDisplayed = possibleModals.some((modal) => this.props.modals.indexOf(modal) !== -1);
+    if(e.keyCode === 27 && !otherModalsDisplayed) {
       this.closeCardShow();
     }
   }
 
   closeCardShow() {
-    this.props.closeModal();
     this.props.history.push(`/boards/${this.props.card.board_id}`);
   }
 
@@ -81,21 +91,25 @@ export default class CardShow extends React.Component {
   }
 
   renderMoveCardForm() {
-    if (!this.state.showMoveCardForm) return null;
+    const { card, modals } = this.props;
+    if (!modals || !card || !modals.includes(`MoveCard-${card.id}`))
+     return null;
+    // if (!this.state.showMoveCardForm) return null;
     return (
       <MoveCardForm
+        toggleModal={this.toggleModal}
         toggleMoveCardForm={this.toggleMoveCardForm}
-        card={this.props.card} />
+        card={card} />
     );
   }
 
   renderEditDescription() {
     const fakeCard = { title: '', description: '' };
     const { title, description } = this.props.card || fakeCard;
-    if (!this.state.showCardDescriptionForm) {
+    if (!this.props.modals || !this.props.modals.includes('EditCardDescription')) {
       const descriptionText = description ? this.convertMarkdown(description) : "No details";
       return(
-        <div onClick={this.toggleEditCardDescription}
+        <div onClick={() => this.toggleModal('EditCardDescription')}
           dangerouslySetInnerHTML={{__html: descriptionText} }
           className="description">
         </div>
@@ -103,6 +117,7 @@ export default class CardShow extends React.Component {
     } else {
       return <EditCardDescriptionForm
         card={this.props.card}
+        toggleModal={this.toggleModal}
         toggleEditCardDescription={this.toggleEditCardDescription} />;
     }
   }
@@ -144,7 +159,8 @@ export default class CardShow extends React.Component {
   render() {
     const fakeCard = { title: '', description: '' };
     const { title, description } = this.props.card || fakeCard;
-    const listName = this.props.list ? this.props.list.title : "listName";
+    const { card, list } = this.props;
+    const listName = list ? list.title : "listName";
     return(
       <div onClick={this.closeCardShow}
         className="modal-background">
@@ -177,7 +193,7 @@ export default class CardShow extends React.Component {
             </div>
             <div className="show-card-sidebar">
               <h3>Actions</h3>
-              <button onClick={this.toggleMoveCardForm}
+              <button onClick={() => this.toggleModal(`MoveCard-${card.id}`)}
                 className="gray-button">
                 <img src={window.arrowIcon} />
                 <span>Move</span>

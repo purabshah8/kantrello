@@ -5,11 +5,9 @@ export default function modalReducer(state = [], action) {
   const newState = state.slice();
   switch (action.type) {
     case OPEN_MODAL:
-      debugger
       newState.push(action.modal);
       return newState;
     case CLOSE_MODAL:
-      debugger
       const modalIndex = newState.indexOf(action.modal);
       if (modalIndex > -1)
         newState.splice(modalIndex, 1);

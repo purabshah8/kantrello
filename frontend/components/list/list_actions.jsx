@@ -47,9 +47,7 @@ class ListActions extends React.Component {
   }
 
   openModal(modal) {
-    debugger
     this.props.closeModal(`ListActions-${this.props.list.id}`);
-    debugger
     this.props.openModal(`${modal}-${this.props.list.id}`);
   }
 

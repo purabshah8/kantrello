@@ -1,5 +1,4 @@
 import React from 'react';
-import { merge } from 'lodash/merge';
 
 export default class  CreateBoardModal extends React.Component {
   constructor(props) {
@@ -7,20 +6,34 @@ export default class  CreateBoardModal extends React.Component {
     this.state = { title: ''};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);    
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleModal();
+      this.props.toggleModal('CreateBoard');
+    }
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal('CreateBoard');
     }
   }
 
@@ -29,7 +42,7 @@ export default class  CreateBoardModal extends React.Component {
     const ownerId = parseInt(this.props.userId);
     const newBoard = { owner_id: ownerId, title: this.state.title };
     this.props.createBoard(newBoard);
-    this.props.toggleModal();
+    this.props.toggleModal('CreateBoard');
   }
 
   update(field) {
@@ -43,13 +56,15 @@ export default class  CreateBoardModal extends React.Component {
     const buttonClass = (blankTitle) ? "disabled-board-button" : "green-submit-button";
     return (
       <div className="modal-background">
-        <form className="create-board-form" onSubmit={this.handleSubmit}>
+        <form ref={this.setRef}
+        className="create-board-form" 
+        onSubmit={this.handleSubmit}>
           <div className="create-board-tile">
             <input className="create-board-title"
               onChange={this.update('title')}
               placeholder="Add board title">
             </input>
-            <img onClick={this.props.toggleModal}
+            <img onClick={() => this.props.toggleModal('CreateBoard')}
               src={window.closeWhiteIcon} />
           </div>
           <button className={buttonClass} disabled={blankTitle} >Create Board</button>

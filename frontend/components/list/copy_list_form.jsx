@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchLists, createList } from '../../actions/list_actions';
 import { fetchCards, createCard } from '../../actions/card_actions';
 import { selectCards, selectLists } from '../../reducers/selectors';
+import { openModal, closeModal, closeAllModals } from '../../actions/modal_actions';
 import merge from 'lodash/merge';
 
 class CopyListForm extends React.Component {
@@ -14,21 +15,34 @@ class CopyListForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
+    this.setRef = this.setRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  setRef(node) {
+    this.containerRef = node;
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('mousedown', this.handleClickOutside);
     this.props.fetchCards(this.props.list.id);
-    this.copyListForm.focus();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside(e) {
+    if (this.containerRef && !this.containerRef.contains(e.target)) {
+      this.props.toggleModal(`CopyList-${this.props.list.id}`);
+    }
   }
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleCopyListForm();
+      this.props.toggleModal(`CopyList-${this.props.list.id}`);
     }
   }
 
@@ -42,8 +56,8 @@ class CopyListForm extends React.Component {
   }
 
   toggleShow() {
-    this.props.toggleCopyListForm();
-    this.props.toggleListActions();
+    this.props.closeModal(`CopyList-${this.props.list.id}`);
+    this.props.openModal(`ListActions-${this.props.list.id}`);
   }
 
   handleSubmit(e) {
@@ -55,7 +69,7 @@ class CopyListForm extends React.Component {
     this.props.createList(copiedList).then(
       (action) => this.createCopiedCards(action)
     );
-    this.props.toggleCopyListForm();
+    this.props.toggleModal(`CopyList-${this.props.list.id}`);
   }
 
   update(field) {
@@ -66,8 +80,7 @@ class CopyListForm extends React.Component {
 
   render() {
     return(
-      <div ref={(copyListForm) => {this.copyListForm = copyListForm;}}
-        tabIndex="0"
+      <div ref={this.setRef}
         className="copy-list-container">
         <div className="copy-list-title">
           <img className="return-list-actions"
@@ -75,7 +88,7 @@ class CopyListForm extends React.Component {
           src={window.backArrowIcon} />
           <span>Copy List</span>
           <img className="close-copy-list"
-          onClick={this.props.toggleCopyListForm}
+          onClick={() => this.props.toggleModal(`CopyList-${this.props.list.id}`)}
           src={window.closeIcon} />
         </div>
 
@@ -101,24 +114,19 @@ const mapStateToProps = (state, ownProps) => {
     cards: selectCards(state, ownProps.list.id),
     lists: selectLists(state, ownProps.boardId),
     currentUserId: state.session.currentUserId,
+    modals: state.ui.modals,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createList: list => {
-      return dispatch(createList(list));
-    },
-    fetchLists: boardId => {
-      return dispatch(fetchLists(boardId));
-    },
-    createCard: card => {
-      return dispatch(createCard(card));
-    },
-    fetchCards: listId => {
-      return dispatch(fetchCards(listId));
-    },
-
+    createList: list => dispatch(createList(list)),
+    fetchLists: boardId => dispatch(fetchLists(boardId)),
+    createCard: card => dispatch(createCard(card)),
+    fetchCards: listId => dispatch(fetchCards(listId)),
+    openModal: modal => dispatch(openModal(modal)),
+    closeModal: modal => dispatch(closeModal(modal)),
+    closeAllModals: () => dispatch(closeAllModals()),
   };
 };
 

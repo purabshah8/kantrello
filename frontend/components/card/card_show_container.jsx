@@ -4,7 +4,7 @@ import CardShow from './card_show';
 import { fetchCard, updateCard, deleteCard } from '../../actions/card_actions';
 import { fetchComments, deleteComment } from '../../actions/comment_actions';
 import { fetchList } from '../../actions/list_actions';
-import { closeModal } from '../../actions/modal_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router-dom';
 import { selectCardList, selectComments } from '../../reducers/selectors';
 
@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => {
     comments: selectComments(state, cardId),
     list: selectCardList(state, cardId),
     userId: state.session.currentUserId,
+    modals: state.ui.modals,
   };
 };
 
@@ -26,10 +27,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchCard: () => dispatch(fetchCard(cardId)),
     deleteCard: () => dispatch(deleteCard(cardId)),
     fetchList: listId => dispatch(fetchList(listId)),
-    closeModal: () => dispatch(closeModal()),
+    openModal: modal => dispatch(openModal(modal)),
+    closeModal: modal => dispatch(closeModal(modal)),
     fetchComments: () => dispatch(fetchComments(cardId)),
     deleteComment: commentId => dispatch(deleteComment(commentId)),
-
   };
 };
 

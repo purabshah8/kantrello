@@ -8,10 +8,19 @@ export default class Navbar extends React.Component {
     this.state = {
       showUserDropdown: false,
     };
-    this.toggleDropdown = this.toggleDropdown.bind(this);
+    // this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  userIcon() {
+  toggleModal(modal) {
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
+  }
+
+  renderUserIcon() {
     const { initials, avatar_url } = this.props.currentUser;
     if (avatar_url) {
       return <img className="user-avatar" src={avatar_url} />;
@@ -20,8 +29,16 @@ export default class Navbar extends React.Component {
     }
   }
 
-  toggleDropdown(e) {
-    this.setState({ showUserDropdown: !this.state.showUserDropdown });
+  // toggleDropdown(e) {
+  //   this.setState({ showUserDropdown: !this.state.showUserDropdown });
+  // }
+
+  renderUserDropdown() {
+    if (!this.props.modals || !this.props.modals.includes('UserDropdown'))
+     return null;
+    return (
+      <UserDropdown toggleModal={this.toggleModal} />
+    );
   }
 
   render() {
@@ -42,13 +59,10 @@ export default class Navbar extends React.Component {
 
         <div className="right-nav">
           <div
-            onClick={this.toggleDropdown}
-            tabIndex="0"
+            onClick={() => this.toggleModal('UserDropdown')}
             className="avatar-container">
-            {this.userIcon()}
-            {
-              this.state.showUserDropdown ? (<UserDropdown toggleDropdown={this.toggleDropdown} />) : (null)
-            }
+            {this.renderUserIcon()}
+            {this.renderUserDropdown()}
           </div>
         </div>
 

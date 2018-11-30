@@ -6,16 +6,30 @@ import CreateBoardModal from './create_board_modal';
 export default class BoardIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {modal: false};
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal() {
-    this.setState({ modal: !this.state.modal });
+  toggleModal(modal) {
+    if (!this.props.modals) return;
+    if (this.props.modals.includes(modal)) {
+      this.props.closeModal(modal);
+    } else
+    this.props.openModal(modal);
   }
 
   componentDidMount() {
     this.props.fetchBoards();
+  }
+
+  renderCreateBoard() {
+    if (!this.props.modals || !this.props.modals.includes('CreateBoard'))
+     return null;
+    return (
+      <CreateBoardModal
+      createBoard={this.props.createBoard}
+      toggleModal={this.toggleModal}
+      userId={this.props.match.params.userId} /> 
+    );
   }
 
   renderAllBoards() {
@@ -30,7 +44,7 @@ export default class BoardIndex extends React.Component {
     }
     personalBoards.push(
       <li key={-1} className="board-tile"
-        onClick={this.toggleModal}>
+        onClick={() => this.toggleModal('CreateBoard')}>
           <div className="overlay add-board">
             <span className="add-board-text">Create new board...</span>
           </div>
@@ -41,15 +55,15 @@ export default class BoardIndex extends React.Component {
 
   render() {
     const [starredBoards, personalBoards] = this.renderAllBoards();
-    const createBoard = this.state.modal ? <CreateBoardModal
-      createBoard={this.props.createBoard}
-      modal={this.state.modal}
-      toggleModal={this.toggleModal}
-      userId={this.props.match.params.userId} /> : null;
+    // const createBoard = this.state.modal ? <CreateBoardModal
+    //   createBoard={this.props.createBoard}
+    //   modal={this.state.modal}
+    //   toggleModal={this.toggleModal}
+    //   userId={this.props.match.params.userId} /> : null;
     return(
 
       <div className="all-boards-container">
-        {createBoard}
+        {this.renderCreateBoard()}
         <div className="boards-container">
           <div className="boards-header">
             <img src={window.starGrayIcon} />
