@@ -19,6 +19,7 @@ export default class BoardShow extends React.Component {
   componentDidMount() {
     if (!this.props.board)
       this.props.fetchBoard();
+      this.props.fetchLists();
   }
 
   toggleStar(e) {

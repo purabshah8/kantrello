@@ -90,7 +90,7 @@ export default class ListIndexItem extends React.Component {
               <img src={window.moreIcon}/>
             </div>
           </div>
-          <Droppable droppableId={list.id} type="card">
+          <Droppable droppableId={list.id.toString()} type="card">
             { (provided,snapshot) => (
               <CardIndex 
               provided={provided}

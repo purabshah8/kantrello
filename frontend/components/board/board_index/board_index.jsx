@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import BoardIndexItem from './board_index_item';
 import CreateBoardModal from './create_board_modal';
 
@@ -55,11 +54,6 @@ export default class BoardIndex extends React.Component {
 
   render() {
     const [starredBoards, personalBoards] = this.renderAllBoards();
-    // const createBoard = this.state.modal ? <CreateBoardModal
-    //   createBoard={this.props.createBoard}
-    //   modal={this.state.modal}
-    //   toggleModal={this.toggleModal}
-    //   userId={this.props.match.params.userId} /> : null;
     return(
 
       <div className="all-boards-container">

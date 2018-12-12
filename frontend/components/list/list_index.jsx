@@ -9,10 +9,6 @@ export default class ListIndex extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchLists();
-  }
-
   toggleModal(modal) {
     if (!this.props.modals) return;
     if (this.props.modals.includes(modal)) {

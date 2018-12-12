@@ -53,7 +53,7 @@ export default class CardIndex extends React.Component {
     if (!this.props.cards) return null;
     const cardIndexItems = this.props.cards.map(card => {
       return(
-        <Draggable key={card.id} draggableId={card.id} index={card.position-1}>
+        <Draggable key={card.id} draggableId={card.id.toString()} index={card.position-1}>
           {
             (provided, snapshot) => (
               <CardIndexItem key={card.id}

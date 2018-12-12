@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class UserDropdown extends React.Component {
   constructor(props){
@@ -40,6 +40,7 @@ class UserDropdown extends React.Component {
   handleLogout(id) {
     return (e) => {
       e.preventDefault();
+      this.props.toggleModal('UserDropdown');
       this.props.logout(id);
     };
   }

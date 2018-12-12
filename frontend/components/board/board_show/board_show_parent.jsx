@@ -14,11 +14,13 @@ const BoardShowParent = (props) => {
     // draggableId
     const { source, destination, draggableId, type } = result;
     if (type === "card") {
+      console.log(result);
+      
       if (!destination || 
-        (destination.droppableId === source.droppableId && destination.index === source.index))
+        (parseInt(destination.droppableId) === parseInt(source.droppableId) && destination.index === source.index))
         return;
       const updatedCard = {
-        id: draggableId,
+        id: parseInt(draggableId),
         position: destination.index + 1,
         list_id: destination.droppableId,
       };
