@@ -4,6 +4,7 @@ import merge from 'lodash/merge';
 
 const cardsReducer = (state = {}, action) => {
   let newState;
+  let commentsIdsArray;
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_CARDS:
@@ -20,11 +21,13 @@ const cardsReducer = (state = {}, action) => {
 
     case RECEIVE_COMMENT:
       newState = merge({}, state);
-      newState[action.comment.card_id].commentIds.push(action.comment.id);
+      commentsIdsArray = newState[action.comment.card_id].commentIds;
+      if (!commentsIdsArray.includes(action.comment.id))
+        newState[action.comment.card_id].commentIds.push(action.comment.id);
       return newState;
     case REMOVE_COMMENT:
       newState = merge({}, state);
-      const commentsIdsArray = newState[action.comment.card_id].commentIds;
+      commentsIdsArray = newState[action.comment.card_id].commentIds;
       newState[action.comment.card_id].commentIds.splice(commentsIdsArray.indexOf(action.comment.id), 1);
       return newState;
     default:
