@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import Navbar from '../../navbar/navbar_container';
 import BoardShow from './board_show_container';
 import { updateCard } from '../../../actions/card_actions';
-import { updateList } from '../../../actions/list_actions';
+import { updateList, fetchList } from '../../../actions/list_actions';
 
 const BoardShowParent = (props) => {
   const onDragEnd = result => {
@@ -14,17 +14,18 @@ const BoardShowParent = (props) => {
     // draggableId
     const { source, destination, draggableId, type } = result;
     if (type === "card") {
-      console.log(result);
+      // console.log(result);
       
       if (!destination || 
         (parseInt(destination.droppableId) === parseInt(source.droppableId) && destination.index === source.index))
         return;
+      const listId = parseInt(destination.droppableId);
       const updatedCard = {
         id: parseInt(draggableId),
         position: destination.index + 1,
-        list_id: destination.droppableId,
+        list_id: listId,
       };
-      props.updateCard(updatedCard);
+      props.updateCard(updatedCard).then(() => props.fetchList(listId));
     // } else if (type === "list") {
     //   if (!destination || 
     //     destination.index === source.index)
@@ -52,6 +53,7 @@ const mapDispatchToProps = dispatch => {
   return {
     updateCard: card => dispatch(updateCard(card)),
     updateList: list => dispatch(updateList(list)),
+    fetchList: id => dispatch(fetchList(id)),
   };
 };
 
