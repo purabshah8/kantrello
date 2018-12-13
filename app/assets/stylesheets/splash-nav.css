@@ -1,12 +1,14 @@
 .splash-nav {
   position: fixed;
   height: 80px;
-  background: #0079bf;
+  background: transparent;
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
   width: 100%;
   z-index: 10;
+  opacity: 1;
+  font-family: 'PT Sans';
 }
 
 .home-button {
@@ -42,17 +44,17 @@
   color: white;
   text-decoration: none;
   font-size: 16px;
-  background: rgba(0,0,0,0.15);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  background: none;
+  box-shadow: none;
   border-radius: 5px;
   padding: .7em 1.3em;
-  font-weight: 350;
+  font-weight: 550;
   line-height: 1.1em;
   margin-left:auto;
   margin-right:auto;
 }
 
-.signup-button {
+/* .signup-button {
   color: white;
   text-decoration: none;
   font-size: 16px;
@@ -64,13 +66,34 @@
   line-height: 1.1em;
   margin-left: 15px;
   margin-right: auto;
-}
+} */
 
-.login-button:hover, .signup-button:hover {
-  background: rgba(0,0,0,0.25);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+.signup-button {
+  text-decoration: none;
+  background: #FFFFFF;
+  color: #0079bf;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.05em;
+  padding: .25em 1em .35em;
+  border-radius: 4px;
+  box-shadow: 0 2px #c1c7d0;
+  margin: .25em auto;
+  display: inline-block;
+  line-height: 1.5em;
+  margin-left: 15px;
+  margin-right: auto;
 }
 
 .signup-button:hover {
-  background-image: linear-gradient(rgb(90, 172, 68) 0px, rgb(81, 152, 57) 100%);
+  opacity: 0.95;
 }
+
+/* .login-button:hover{
+  background: rgba(0,0,0,0.25);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+} */
+
+/* .signup-button:hover {
+  background-image: linear-gradient(rgb(90, 172, 68) 0px, rgb(81, 152, 57) 100%);
+} */

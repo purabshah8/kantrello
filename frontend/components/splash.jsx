@@ -32,26 +32,27 @@ class Splash extends React.Component {
         <section className="content">
           <div className="content-top">
             <div className="header-content">
-              <h1>Kantrello allows you to work collaboratively and accomplish more than you thought was possible.</h1>
-              <p className="content-top-text">Use Kantrello's boards to organize your workflow, your personal life, or anything you can think of!</p>
-              <div className="large-button-container">
-                <Link className="signup-button large-button"
-                  to="/signup">
-                  Sign Up - It's Free
-                </Link>
-              </div>
+              <h1>Work smarter and unleash your productivity with Kantrello.</h1>
+              <p className="content-top-text">Use Kantrello to organize your workflow, your personal life, or anything you can think of!</p>
+              <Link className="signup-button large-button"
+                to="/signup">
+                Sign Up - It's Free!
+              </Link>
             </div>
-            <div className="login-link-container">
-              <p className="login-link">
-                Already a user? <Link className="login-link" to="/login">Log In</Link>
-              </p>
+            <div className="splash-pic">
+              <img src={window.splashIcon} alt="splash"/>
             </div>
           </div>
           <div className="content-middle">
-            <div className="header-content">
-            <h1>Be meticulous with Kantrello cards!</h1>
-            <p>You can add detailed info, comments and more on cards.</p>
+            <div className="middle-header-content">
+              <h1>Manage all your projects</h1>
+              <p>Get started using Kantrello's easy to use boards, lists and cards.</p>
+              <Link className="signup-button large-button-2"
+                to="/signup">
+                Start Doing →
+              </Link>
             </div>
+            <img src={window.sampleBoard} alt="board"/>
           </div>
         </section>
         <Footer />

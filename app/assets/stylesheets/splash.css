@@ -1,28 +1,34 @@
 .splash {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  justify-content: flex-start;
+  /* height: 100%; */
 }
 
 
 .content {
-  margin-top: 80px;
-  height: calc(100% - 80px);
+  /* margin-top: 80px; */
+  /* height: calc(100% - 80px); */
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
 }
 
 .content-top {
   background:
-  linear-gradient(
+  linear-gradient(135deg, #0079BF 0, #5067C5 100%);
+  /* linear-gradient(
       rgba(0, 121, 191, 0.8),
       rgba(0, 121, 191, 0.8)
-    ), url('splash.jpg') center left / cover no-repeat;
-  height: 536px;
+    ), url('splash.jpg') center left / cover no-repeat; */
+  font-family: 'PT Sans';
+  /* height: 1440px; */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   padding: 3em 1em;
-  padding-top: 5em;
+  padding-top: 7em;
+  line-height: 3em;
   word-break: break-word;
 }
 
@@ -30,37 +36,68 @@
   color: white;
   /* margin: 0 20%; */
   /* margin-top: 75px; */
-  margin: 0 auto;
-  max-width: 650px;
+  /* margin: 0 auto; */
+  margin-left: 20px;
+  margin-right: 48px;
+  max-width: 550px;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .header-content h1 {
-  text-align: center;
-  font-size: 2.25em;
+  text-align: left;
+  font-size: 2.8125em;
   margin-bottom: 26px;
   color: white;
+}
+
+.splash-pic img {
+  width: 40em;
+  height: 30em;
 }
 
 .content-top-text {
   font-size: 1.5em;
   font-weight: 325;
-  text-align: center;
+  text-align: left;
   margin: 20px 0;
   color: white;
 }
 
 .large-button-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .large-button {
-  padding: .7em 54px;
+  /* padding: .7em 54px;
   text-align: center;
   margin: 15px auto;
-  align-self: flex-end;
+  align-self: flex-start; */
+  background: #36B37E;
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.4em;
+  padding: .5em 1.5em .7em;
+  border-radius: 6px;
+  box-shadow: 0 3px #006644;
+  margin: .25em auto;
+  display: inline-block;
+}
+
+.large-button-2 {
+  background: #EBECF0;
+  color: #172B4D;
+  font-weight: 700;
+  line-height: 1.75em;
+  text-decoration: none;
+  font-size: 1.4em;
+  padding: .5em 1.5em .7em;
+  border-radius: 6px;
+  box-shadow: 0 3px #C1C7D0;
+  margin: .25em auto;
+  display: inline-block;
 }
 
 .login-link-container {
@@ -77,27 +114,50 @@
 }
 
 .content-middle {
-  background: #315989;
-  height: 680px;
+  background: white;
+  font-family: 'PT Sans';
+  padding: 3em 1em;
+  padding-top: 5em;
+  /* height: 1480px; */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.content-middle h1 {
-  color: white;
+.middle-header-content {
+  color: black !important;
+  margin-right: 2.5em;
+  margin-left: 5em;
+  max-width: 550px;
+}
+
+.middle-header-content h1 {
+  font-size: 2.5em;
+  line-height: 1.25em;
+  color: black;
 }
 
 .content-middle p {
-  text-align: center;
-  color: white;
   font-weight: 325;
-  font-size: 1.5vw;
+  padding-top: 3em;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin-bottom: 2em;
+}
+
+.content-middle img {
+  width: 53em;
+  height: 30em;
+  border-radius: 10px;
+  box-shadow: 3px 21px 36px -10px rgba(0,0,0,0.75);
 }
 
 footer {
   display: flex;
   background: white;
   justify-content: center;
+  align-self: flex-end;
+  width: 100%;
   height: 80px;
   flex-direction: column;
   text-align: center;
@@ -117,12 +177,19 @@ footer p {
 }
 
 .footer-links a {
+  text-decoration: none;
   margin: 0 10px;
   height: 100%;
   color: #999;
   height: 100%;
   display: block;
+  font-size: 1.25em;
   line-height: 26px;
+}
+
+#trello-link {
+  text-decoration: underline;
+  font-size: 1em;
 }
 
 .footer-links a:hover {
