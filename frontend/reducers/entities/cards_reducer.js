@@ -1,5 +1,5 @@
 import { RECEIVE_CARDS, RECEIVE_CARD, REMOVE_CARD } from '../../actions/card_actions';
-import { RECEIVE_COMMENT } from '../../actions/comment_actions';
+import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../../actions/comment_actions';
 import merge from 'lodash/merge';
 
 const cardsReducer = (state = {}, action) => {
@@ -15,12 +15,17 @@ const cardsReducer = (state = {}, action) => {
       return merge({}, state, newState);
     case REMOVE_CARD:
       const deletedState = merge({}, state);
-      delete deletedState[action.cardId];
+      delete deletedState[action.id];
       return deletedState;
 
     case RECEIVE_COMMENT:
       newState = merge({}, state);
       newState[action.comment.card_id].commentIds.push(action.comment.id);
+      return newState;
+    case REMOVE_COMMENT:
+      newState = merge({}, state);
+      const commentsIdsArray = newState[action.comment.card_id].commentIds;
+      newState[action.comment.card_id].commentIds.splice(commentsIdsArray.indexOf(action.comment.id), 1);
       return newState;
     default:
       return state;

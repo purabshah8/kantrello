@@ -37,6 +37,7 @@ export default class CardShow extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction);
+    this.props.fetchList(this.props.card.list_id);
   }
 
   escFunction(e) {

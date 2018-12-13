@@ -12,7 +12,7 @@ class Splash extends React.Component {
 
   componentDidMount() {
     document.addEventListener('scroll', () => {
-      const isTop = window.scrollY > 300;
+      const isTop = (window.scrollY > 300);
       if (!isTop) {
         this.setState({ transparentSplashNav: false });
       }
