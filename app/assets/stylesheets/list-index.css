@@ -38,32 +38,6 @@
   background: rgba(255,255,255,.4);
   border-radius: 3px;
 }
-/* .lists::-webkit-scrollbar {
-  top: 20px;
-  height: 12px;
-  width: 12px;
-}
-
-.lists::-webkit-scrollbar-button {
-    display: block;
-    height: 4px;
-    width: 4px;
-}
-
-.lists::-webkit-scollbar-thumb {
-  background: rgba(255, 255, 255, 0.5);
-  border: 4px solid rgba(0, 0, 0, 0);
-}
-
-.lists::-webkit-scrollbar-track {
-  border-radius: 4px;
-}
-
-.lists::-webkit-scrollbar-track-piece {
-    background: rgba(0,0,0,.15);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-} */
-
 
 .list-item-container {
   width: 272px;

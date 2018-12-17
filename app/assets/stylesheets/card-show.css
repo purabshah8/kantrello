@@ -39,13 +39,42 @@
   min-height: 32px;
   display: relative;
 }
+.card-title-div {
+  height: 34px;
+}
 
-.show-card-title > span {
+.card-title-div > span {
   display: block;
+  width: 100%;
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
   margin: 0 0 8px;
+}
+
+.rename-card-form input {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+  border: 1px solid transparent;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  border-radius: 3px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  padding: 4px 7px;
+  margin-top: -5px;
+  margin-left: -8px;
+  color: #17394d;
+  border: 1px solid #5ba4cf;
+  box-shadow: 0 0 0 1px #5ba4cf;
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 85ms;
+  transition-timing-function: ease;
+}
+
+.rename-card-form input:focus {
+  outline: none;
 }
 
 .show-card-title > p {

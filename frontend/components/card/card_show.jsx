@@ -1,5 +1,6 @@
 import React from 'react';
 import showdown from 'showdown';
+import RenameCardForm from './rename_card_form';
 import MoveCardForm from './move_card_form';
 import CopyCardForm from './copy_card_form';
 import EditCardDescriptionForm from './edit_card_description_form';
@@ -72,6 +73,27 @@ export default class CardShow extends React.Component {
 
   deleteComment(commentId) {
     return e => this.props.deleteComment(commentId);
+  }
+
+  renderRenameCardForm() {
+    const { card, modals } = this.props;
+    if (!card) return null;
+    if (!modals || !modals.includes(`RenameCard-${card.id}`)) {
+      return(
+        <div onClick={() => this.toggleModal(`RenameCard-${card.id}`)}
+          className="card-title-div">
+          <span>
+            {card.title}
+          </span>
+        </div>
+      );
+    } else return(
+      <div className="card-title-div">
+        <RenameCardForm
+          toggleModal={this.toggleModal}
+          card={card} />
+      </div>
+    );
   }
 
   renderMoveCardForm() {
@@ -177,7 +199,7 @@ export default class CardShow extends React.Component {
 
   render() {
     const fakeCard = { title: '', description: '' };
-    const { title, description } = this.props.card || fakeCard;
+    const { description } = this.props.card || fakeCard;
     const { card, list } = this.props;
     const listName = list ? list.title : "listName";
     const editDescriptionLink = description ? <u onClick={() => this.toggleModal('EditCardDescription')}>Edit</u> : null;
@@ -197,7 +219,7 @@ export default class CardShow extends React.Component {
           </div>
           <div className="show-card-title">
             <img className="card-icon" src={window.cardIcon}/>
-            <span>{title}</span>
+            {this.renderRenameCardForm()}
             <p>in list <u onClick={() => this.toggleModal(`MoveCard-${card.id}`)}>{listName}</u></p>
           </div>
           <div className="show-card-main">
