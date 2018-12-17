@@ -2,18 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchLists, updateList } from '../../actions/list_actions';
 import { fetchBoards } from '../../actions/board_actions';
-import { fetchCards, updateCard } from '../../actions/card_actions';
+import { fetchCards, createCard } from '../../actions/card_actions';
 import { selectBoards, selectCards } from '../../reducers/selectors';
 import { openModal, closeModal, closeAllModals } from '../../actions/modal_actions';
 
 
-class MoveCardForm extends React.Component {
+class CopyCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       position: this.props.card.position,
       boardId: this.props.card.board_id,
       listId: this.props.card.list_id,
+      title: this.props.card.title,
+      description: this.props.card.description,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
@@ -50,31 +52,31 @@ class MoveCardForm extends React.Component {
 
   handleClickOutside(e) {
     if (this.containerRef && !this.containerRef.contains(e.target)) {
-      this.props.toggleModal(`MoveCard-${this.props.card.id}`);
+      this.props.toggleModal(`CopyCard-${this.props.card.id}`);
     }
   }
 
 
   escFunction(e) {
     if(e.keyCode === 27) {
-      this.props.toggleModal(`MoveCard-${this.props.card.id}`);
+      this.props.toggleModal(`CopyCard-${this.props.card.id}`);
     }
   }
 
   toggleShow() {
-    this.props.toggleMoveCardForm();
+    this.props.toggleCopyCardForm();
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const updatedCard = {
-      id: this.props.card.id,
+    const copiedCard = {
       position: this.state.position,
       list_id: this.state.listId,
+      title: this.state.title,
+      description: this.state.description,
     };
-    this.props.updateCard(updatedCard)
-      .then(() => this.props.fetchCards(this.props.card.list_id));
-    this.props.toggleModal(`MoveCard-${this.props.card.id}`);
+    this.props.createCard(copiedCard).then(() => this.props.fetchCards(this.props.card.list_id));
+    this.props.toggleModal(`CopyCard-${this.props.card.id}`);
   }
 
   update(field) {
@@ -115,7 +117,7 @@ class MoveCardForm extends React.Component {
     return (
       <select value={this.state.boardId}
         onChange={this.update('boardId')}
-        id="select-board-dropdown-card" >
+        id="select-board-dropdown-copy-card" >
         <optgroup label="Board">
           {boardOptions}
         </optgroup>
@@ -140,7 +142,7 @@ class MoveCardForm extends React.Component {
     return (
       <select value={this.state.listId}
         onChange={this.update('listId')}
-        id="select-list-dropdown">
+        id="select-list-dropdown-copy">
         {listOptions}
       </select>
     );
@@ -163,6 +165,12 @@ class MoveCardForm extends React.Component {
             </option>
         );
       });
+      positionOptions.push(
+        <option key={0}
+        value={this.props.list.cardIds.length+1}>
+        {this.props.list.cardIds.length+1}
+        </option>
+        );
     } else {
       const selectedList = this.props.lists.filter(list => list.id == this.state.listId);
       const numCards = selectedList.length > 0 ? selectedList[0].cardIds.length : 0;
@@ -183,19 +191,27 @@ class MoveCardForm extends React.Component {
     const listText = selectedList.length > 0 ? selectedList[0].title : '';
     return(
       <div ref={this.setRef}
-        className="move-card-container">
+        className="copy-card-container">
 
-        <div className="move-card-title">
-          <span>Move Card</span>
-          <img className="close-move-card"
-          onClick={() => this.props.toggleModal(`MoveCard-${this.props.card.id}`)}
+        <div className="copy-card-title">
+          <span>Copy Card</span>
+          <img className="close-copy-card"
+          onClick={() => this.props.toggleModal(`CopyCard-${this.props.card.id}`)}
           src={window.closeIcon} />
         </div>
 
-        <form className="move-card-form" onSubmit={this.handleSubmit}>
+        <form className="copy-card-form" onSubmit={this.handleSubmit}>
+
+          <div className="copy-title">
+            <label htmlFor="new-card-title">Title</label>
+            <textarea 
+              id="new-card-title" 
+              value={this.state.title}
+              onChange={this.update('title')} />
+          </div>
 
           <div className="select-option">
-            <label htmlFor="select-board-dropdown-card">Board</label>
+            <label htmlFor="select-board-dropdown-copy-card">Board</label>
             <span className="select-value">
               {this.props.boards.filter(board => board.id == this.state.boardId)[0].title}
             </span>
@@ -204,7 +220,7 @@ class MoveCardForm extends React.Component {
 
           <div className="select-options-bottom">
             <div className="select-option-list">
-              <label htmlFor="select-list-dropdown">List</label>
+              <label htmlFor="select-list-dropdown-copy">List</label>
               <span className="select-value">
                 {listText}
               </span>
@@ -218,7 +234,7 @@ class MoveCardForm extends React.Component {
             </div>
           </div>
 
-          <button className="green-submit-button">Move</button>
+          <button className="green-submit-button">Create Card</button>
 
         </form>
 
@@ -242,11 +258,11 @@ const mapDispatchToProps = dispatch => {
     fetchBoards: userId => dispatch(fetchBoards(userId)),
     fetchLists: boardId => dispatch(fetchLists(boardId)),
     fetchCards: listId => dispatch(fetchCards(listId)),
-    updateCard: card => dispatch(updateCard(card)),
+    createCard: card => dispatch(createCard(card)),
     openModal: modal => dispatch(openModal(modal)),
     closeModal: modal => dispatch(closeModal(modal)),
     closeAllModals: () => dispatch(closeAllModals()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoveCardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CopyCardForm);

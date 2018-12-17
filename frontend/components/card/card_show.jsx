@@ -1,6 +1,7 @@
 import React from 'react';
 import showdown from 'showdown';
 import MoveCardForm from './move_card_form';
+import CopyCardForm from './copy_card_form';
 import EditCardDescriptionForm from './edit_card_description_form';
 import NewCommentForm from '../comment/new_comment_form';
 import EditCommentForm from '../comment/edit_comment_form';
@@ -80,8 +81,19 @@ export default class CardShow extends React.Component {
     return (
       <MoveCardForm
         toggleModal={this.toggleModal}
-        toggleMoveCardForm={this.toggleMoveCardForm}
         card={card} />
+    );
+  }
+
+  renderCopyCardForm() {
+    const { card, modals, list } = this.props;
+    if (!modals || !card || !modals.includes(`CopyCard-${card.id}`))
+     return null;
+    return (
+      <CopyCardForm
+        toggleModal={this.toggleModal}
+        card={card}
+        list={list} />
     );
   }
 
@@ -163,10 +175,6 @@ export default class CardShow extends React.Component {
     );
   }
 
-  renderEditComments() {
-
-  }
-
   render() {
     const fakeCard = { title: '', description: '' };
     const { title, description } = this.props.card || fakeCard;
@@ -179,6 +187,7 @@ export default class CardShow extends React.Component {
         <div className="card-container"
           onClick={e => e.stopPropagation()}>
           {this.renderMoveCardForm()}
+          {this.renderCopyCardForm()}
           <div onClick={this.closeCardShow}
             onMouseOver={this.changeIcon(window.closeDarkIcon)}
             onMouseOut={this.changeIcon(window.closeIcon)}
@@ -210,7 +219,8 @@ export default class CardShow extends React.Component {
                 <img src={window.arrowIcon} />
                 <span>Move</span>
               </button>
-              <button className="gray-button">
+              <button onClick={() => this.toggleModal(`CopyCard-${card.id}`)}
+              className="gray-button">
                 <img src={window.cardIcon} />
                 <span>Copy</span>
               </button>

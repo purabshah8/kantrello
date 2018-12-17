@@ -6,6 +6,13 @@ class Api::CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
+    if card_params.has_key?(:position)
+      other_cards = cards_with_higher_pos(card_params[:list_id], card_params[:position].to_i-1)
+      other_cards.each do |card|
+        card.position += 1;
+        card.save
+      end
+    end
     if @card.save
       render :show
     else
