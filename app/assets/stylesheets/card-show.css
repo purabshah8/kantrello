@@ -43,6 +43,10 @@
   height: 34px;
 }
 
+.card-title-div:hover {
+  cursor: pointer;
+}
+
 .card-title-div > span {
   display: block;
   width: 100%;

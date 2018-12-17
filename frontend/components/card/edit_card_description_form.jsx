@@ -10,6 +10,7 @@ class EditCardDescriptionForm extends React.Component {
     this.escFunction = this.escFunction.bind(this);
     this.setRef = this.setRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.inputRef = React.createRef();
   }
 
   setRef(node) {
@@ -19,6 +20,7 @@ class EditCardDescriptionForm extends React.Component {
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
     document.addEventListener('mousedown', this.handleClickOutside);
+    this.inputRef.current.focus();
   }
   
   componentWillUnmount() {
@@ -60,7 +62,7 @@ class EditCardDescriptionForm extends React.Component {
       className="edit-description-form-container">
         <form onSubmit={this.handleSubmit}
           className="edit-description-form">
-          <textarea
+          <textarea ref={this.inputRef}
             placeholder="Add a more detailed description..."
             onChange={this.update('description')}
             value={this.state.description} />

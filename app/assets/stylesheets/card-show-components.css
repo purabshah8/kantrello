@@ -22,6 +22,8 @@
 
 .edit-description-form > textarea:focus {
   outline: none;
+  border: 1px solid #5ba4cf;
+  box-shadow: 0 0 0 1px #5ba4cf;
 }
 
 .edit-description-options img {
