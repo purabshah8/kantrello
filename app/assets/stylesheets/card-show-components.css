@@ -1,5 +1,5 @@
 .edit-description-form > textarea {
-  overflow: hidden;
+  overflow: scroll;
   overflow-wrap: break-word;
   resize: none;
   height: 154px;

@@ -31,4 +31,10 @@ class Card < ApplicationRecord
     other_card_positions = self.list.cards.map() {|card| card[:position]}.sort
     self.position ||= other_card_positions.empty? ? 1 : other_card_positions.last + 1
   end
+
+  # def ensure_position
+  #   max = 0
+  #   self.list.cards.each { |card| max = card.position if card.position > max }
+  #   self.position ||= max
+  # end
 end
