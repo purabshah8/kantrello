@@ -6,6 +6,7 @@ import CopyCardForm from './copy_card_form';
 import EditCardDescriptionForm from './edit_card_description_form';
 import NewCommentForm from '../comment/new_comment_form';
 import EditCommentForm from '../comment/edit_comment_form';
+import DateTimePicker from './date_time_picker';
 
 export default class CardShow extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ export default class CardShow extends React.Component {
   }
 
   escFunction(e) {
-    const possibleModals = [`MoveCard-${this.props.card.id}`, 'EditCardDescription'];
+    const possibleModals = [`MoveCard-${this.props.card.id}`, 'EditCardDescription', `CopyCard-${this.props.card.id}`, 'DateTimePicker' ];
     const otherModalsDisplayed = possibleModals.some((modal) => this.props.modals.indexOf(modal) !== -1);
     if(e.keyCode === 27 && !otherModalsDisplayed) {
       this.closeCardShow();
@@ -73,6 +74,17 @@ export default class CardShow extends React.Component {
 
   deleteComment(commentId) {
     return e => this.props.deleteComment(commentId);
+  }
+
+  renderDateTimePicker() {
+    const { card, modals, updateCard } = this.props;
+    if (!modals || !modals.includes("DateTimePicker"))
+      return null;
+    else return (
+      <DateTimePicker card={card}
+        toggleModal={this.toggleModal}
+        updateCard={updateCard} />
+    );
   }
 
   renderRenameCardForm() {
@@ -210,6 +222,7 @@ export default class CardShow extends React.Component {
           onClick={e => e.stopPropagation()}>
           {this.renderMoveCardForm()}
           {this.renderCopyCardForm()}
+          {this.renderDateTimePicker()}
           <div onClick={this.closeCardShow}
             onMouseOver={this.changeIcon(window.closeDarkIcon)}
             onMouseOut={this.changeIcon(window.closeIcon)}
@@ -235,6 +248,12 @@ export default class CardShow extends React.Component {
               {this.renderComments()}
             </div>
             <div className="show-card-sidebar">
+              <h3>Add to Card</h3>
+              <button onClick={() => this.toggleModal("DateTimePicker")}
+                className="gray-button">
+                <img src={window.dueDateIcon} />
+                <span>Due Date</span>
+              </button>
               <h3>Actions</h3>
               <button onClick={() => this.toggleModal(`MoveCard-${card.id}`)}
                 className="gray-button">

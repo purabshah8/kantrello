@@ -43,7 +43,7 @@
   font-size: 12px;
 }
 
-.move-card-container, .copy-card-container {
+.move-card-container, .copy-card-container, .date-time-container {
   position: absolute;
   padding: 12px;
   background: #fff;
@@ -55,7 +55,7 @@
 
 .move-card-container {
   left: 498px;
-  top: 132px;
+  top: 220px;
 }
 
 .move-card-title img, .copy-card-title img {
@@ -125,7 +125,7 @@
 
 .copy-card-container {
   left: 498px;
-  top: 174px;
+  top: 262px;
 }
 
 #new-card-title {
@@ -167,4 +167,10 @@
   top: 204px;
   left: 12px;
   width: 192px;
+}
+
+.date-time-container {
+  position: absolute;
+  left: 498px;
+  top: 132px;
 }

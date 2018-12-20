@@ -182,6 +182,10 @@
   letter-spacing: .04em;
 }
 
+.show-card-sidebar h3:last-of-type {
+  margin-top: 36px;
+}
+
 .gray-button {
   color: #17394d;
   background-color: #dfe3e6;
