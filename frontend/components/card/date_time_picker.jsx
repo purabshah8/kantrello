@@ -6,14 +6,16 @@ export default class DateTimePicker extends React.Component {
   constructor(props) {
     super(props);
     this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const dueDate = this.props.card.due_date;
     const today = new Date();
     let todaysDate = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`;
-    this.state = { dueDate, time: '12:00 PM', date: todaysDate, month: this.months[today.getMonth()], year: today.getFullYear() };
+    this.state = { dueDate, time: '12:00 PM', date: todaysDate, month: today.getMonth(), year: today.getFullYear() };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.setRef = this.setRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleChangeMonth = this.handleChangeMonth.bind(this);
   }
 
   setRef(node) {
@@ -60,8 +62,10 @@ export default class DateTimePicker extends React.Component {
   }
 
   renderMonthPicker() {
+    console.log(this.state.month);
+
     return (
-      <select defaultValue={this.state.month}>
+      <select defaultValue={this.months[this.state.month]}>
         <option value={this.months[0]} >{this.months[0]}</option>
         <option value={this.months[1]} >{this.months[1]}</option>
         <option value={this.months[2]} >{this.months[2]}</option>
@@ -80,6 +84,8 @@ export default class DateTimePicker extends React.Component {
 
   renderYearPicker() {
     const selectedYear = this.state.year;
+    console.log(selectedYear);
+    
     const years = [];
     for (let i = 0; i <= 20; i++) {
       years.push(selectedYear - 10 + i);
@@ -95,18 +101,58 @@ export default class DateTimePicker extends React.Component {
   }
 
   handleChangeMonth(forward) {
-    if (forward) {
-      if (this.state.month === this.months[11]) {
-        this.setState({  });
+    const that = this;
+    return (e) => {
+      e.preventDefault();
+      if (forward) {
+        if (that.state.month === 11) {
+          that.setState({ year: that.state.year+1, month: 0 });
+        } else {
+          that.setState({ month: that.state.month+1});
+        }
       } else {
-        this.setState({ this.state.month})
+        if (that.state.month === 0) {
+          that.setState({year: that.state.year-1, month: 11});
+        } else {
+          that.setState({ month: that.state.month-1});
+        }
       }
-    } else {
+    };
+  }
 
+  renderCalendar() {
+    const date = new Date();
+    date.setFullYear(this.state.year);
+    date.setMonth(this.state.month);
+    date.setDate(1);
+    const firstWeekday = date.getDay();
+    const rows = [];
+    while (date.getMonth() === this.state.month) {
+      const row = [];
+      if (date.getDate() === 1) {
+        for (let i=0; i < firstWeekday; i++) {
+          row.push(<td></td>);
+        }
+      }
+      while (row.length < 7) {
+        if (date.getMonth() !== this.state.month)
+          row.push(<td></td>);
+        else {
+          row.push(<td>{date.getDate()}</td>);
+          date.setDate(date.getDate() + 1);
+        }
+      }
+      rows.push(<tr>{row}</tr>);
     }
+    return (
+      <tbody>
+        {rows}
+      </tbody>
+    );
   }
 
   render() {
+    console.log(this.state);
     return (
       <div ref={this.setRef}
       className="dt-container">
@@ -135,12 +181,12 @@ export default class DateTimePicker extends React.Component {
           </div>
             <div className="dt-calender">
               <div className="dt-calendar-header">
-                <button>Prev</button>
+                <button onClick={this.handleChangeMonth(false)}>Prev</button>
                 <div>
                   {this.renderMonthPicker()}
                   {this.renderYearPicker()}
                 </div>
-                <button>Next</button>
+                <button onClick={this.handleChangeMonth(true)}>Next</button>
               </div>
               <table className="calendar">
                 <thead>
@@ -154,6 +200,7 @@ export default class DateTimePicker extends React.Component {
                     <th>Sa</th>
                   </tr>
                 </thead>
+                {this.renderCalendar()}
               </table>
             </div>
             <div className="dt-buttons">
