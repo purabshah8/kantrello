@@ -174,7 +174,7 @@
   position: absolute;
   left: 498px;
   top: 132px;
-  width: 360px;
+  width: 304px;
 }
 
 .dt-header {
@@ -212,6 +212,12 @@
   padding: 8px 12px;
 }
 
+.dt-input input:hover {
+  background-color: #ebeef0;
+  border: none;
+  box-shadow: inset 0 0 0 2px #dfe3e6
+}
+
 .dt-input input:focus {
   outline: none;
   background: #fff;
@@ -229,6 +235,7 @@
 .dt-calendar-header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .dt-calendar-header button, .dt-calendar-header select {
@@ -261,4 +268,59 @@
 .dt-calendar-header button:hover, .dt-calendar-header select:hover {
   color: #17394d;
   background-color: rgba(9,45,66,.13);
+}
+
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar, .calendar th, .calendar td {
+  border: 1px solid #c2ccd1;
+}
+
+.calendar th {
+  background: #ebeef0;
+  font-weight: 700;
+  padding: 4px;
+}
+
+.calendar td {
+  text-align: center;
+  width: 14.2857%;
+  /* height: 29px; */
+  padding: 0;
+}
+
+.calendar td:hover {
+  background-color: rgba(9,45,66,.13);
+}
+
+
+.calendar td button {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  font-size: 14px;
+  line-height: 29px;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+.calendar-selected {
+  background: #0079bf;
+  color: white;
+}
+
+.calendar-selected:hover {
+  background: #0079bf !important;
+}
+
+.empty-cal {
+  background-color: #f5f6f7; 
+}
+
+.empty-cal:hover {
+  background-color:  #f5f6f7 !important;
 }

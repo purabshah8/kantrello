@@ -10,7 +10,7 @@ export default class DateTimePicker extends React.Component {
     const dueDate = this.props.card.due_date;
     const today = new Date();
     let todaysDate = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`;
-    this.state = { dueDate, time: '12:00 PM', date: todaysDate, month: today.getMonth(), year: today.getFullYear() };
+    this.state = { dueDate, time: '12:00 PM', fullDate: todaysDate, date: today.getDate(), month: today.getMonth(), year: today.getFullYear() };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.setRef = this.setRef.bind(this);
@@ -25,6 +25,13 @@ export default class DateTimePicker extends React.Component {
   componentDidMount() {
     document.addEventListener('keydown', this.escFunction);
     document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentDidUpdate() {
+    const stateDate = `${this.state.month+1}/${this.state.date}/${this.state.year}`;
+    if (this.state.fullDate !== stateDate) {
+      this.setState({ fullDate: stateDate });
+    }
   }
 
   componentWillUnmount() {
@@ -57,12 +64,23 @@ export default class DateTimePicker extends React.Component {
 
   update(field) {
     return e => {
+      e.preventDefault();
       this.setState({[field]: e.target.value});
     };
   }
 
+  handleSelect(e) {
+    e.preventDefault();
+    const prevSelected = document.getElementsByClassName('calendar-selected');
+    if (prevSelected.length > 0) {
+      prevSelected[0].classList.remove('calendar-selected');
+    }
+    
+    e.currentTarget.classList.add('calendar-selected');
+    
+  }
+
   renderMonthPicker() {
-    console.log(this.state.month);
 
     return (
       <select defaultValue={this.months[this.state.month]}>
@@ -84,7 +102,6 @@ export default class DateTimePicker extends React.Component {
 
   renderYearPicker() {
     const selectedYear = this.state.year;
-    console.log(selectedYear);
     
     const years = [];
     for (let i = 0; i <= 20; i++) {
@@ -131,14 +148,20 @@ export default class DateTimePicker extends React.Component {
       const row = [];
       if (date.getDate() === 1) {
         for (let i=0; i < firstWeekday; i++) {
-          row.push(<td></td>);
+          row.push(<td className="empty-cal"></td>);
         }
       }
       while (row.length < 7) {
         if (date.getMonth() !== this.state.month)
-          row.push(<td></td>);
+          row.push(<td className="empty-cal"></td>);
         else {
-          row.push(<td>{date.getDate()}</td>);
+          row.push(
+          <td onClick={this.handleSelect}>
+            <button value={date.getDate()} onClick={this.update('date')}>
+              {date.getDate()}
+            </button>
+          </td>
+          );
           date.setDate(date.getDate() + 1);
         }
       }
@@ -152,7 +175,7 @@ export default class DateTimePicker extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div ref={this.setRef}
       className="dt-container">
@@ -168,8 +191,8 @@ export default class DateTimePicker extends React.Component {
               <label htmlFor="date-input">Date</label>
               <input id="date-input"
                     type="text" 
-                    value={this.state.date} 
-                    onChange={this.update('date')}/>
+                    value={this.state.fullDate} 
+                    onChange={this.update('fullDate')}/>
             </div>
             <div className="dt-input">
               <label htmlFor="time-input">Time</label>
@@ -179,7 +202,7 @@ export default class DateTimePicker extends React.Component {
                     onChange={this.update('time')}/>
             </div>
           </div>
-            <div className="dt-calender">
+            <div className="dt-calendar">
               <div className="dt-calendar-header">
                 <button onClick={this.handleChangeMonth(false)}>Prev</button>
                 <div>
