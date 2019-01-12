@@ -305,11 +305,13 @@
   line-height: 29px;
   border: none;
   background: transparent;
-  color: inherit;
 }
 
 .calendar-selected {
   background: #0079bf;
+}
+
+.calendar-selected button {
   color: white;
 }
 
@@ -323,4 +325,9 @@
 
 .empty-cal:hover {
   background-color:  #f5f6f7 !important;
+}
+
+.is-today {
+  color: #0079bf;
+  font-weight: 700;
 }
