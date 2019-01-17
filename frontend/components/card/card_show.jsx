@@ -15,6 +15,7 @@ export default class CardShow extends React.Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.escFunction = this.escFunction.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.renderDateTimePicker = this.renderDateTimePicker.bind(this);
   }
 
   toggleModal(modal) {
@@ -111,7 +112,7 @@ export default class CardShow extends React.Component {
   renderMoveCardForm() {
     const { card, modals } = this.props;
     if (!modals || !card || !modals.includes(`MoveCard-${card.id}`))
-     return null;
+      return null;
     return (
       <MoveCardForm
         toggleModal={this.toggleModal}
@@ -122,13 +123,60 @@ export default class CardShow extends React.Component {
   renderCopyCardForm() {
     const { card, modals, list } = this.props;
     if (!modals || !card || !modals.includes(`CopyCard-${card.id}`))
-     return null;
+      return null;
     return (
       <CopyCardForm
         toggleModal={this.toggleModal}
         card={card}
         list={list} />
     );
+  }
+
+  renderDueDate() {
+    if (this.props.card && this.props.card.due_date) {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const dueDate = new Date(this.props.card.due_date);
+      const now = new Date();
+      const diff = dueDate - now;
+      let postStr = "";
+      let classNames = "due-date-span ";
+      if (diff < 0 && diff >= -86400000) {
+        classNames += "card-recently-past-due";
+        postStr = "(recently past due)";
+      } else if (diff < -86400000) {
+        classNames += "card-past-due";
+        postStr = "(past due)"
+      } else if (diff >= 0 && diff < 86400000) {
+        classNames += "card-due-soon";
+        postStr = "(due soon)";
+      }
+      return (
+        <div className="card-due-date">
+          <h3>Due Date</h3>
+          <span className={classNames} onClick={this.renderDateTimePicker}>
+            {`${months[dueDate.getMonth()]} ${dueDate.getDate()} at ${this.getTime(this.props.card.due_date)} ${postStr}`}
+          </span>
+        </div>
+      );
+    } else
+      return null;
+  }
+
+  getTime(iso8601Date) {
+    if (!iso8601Date)
+      return '12:00 PM';
+    let date = new Date(iso8601Date);
+    let postfix = 'AM';
+    let hour = date.getHours();
+    if (hour > 12) {
+      hour -= 12;
+      postfix = 'PM';
+    }
+    if (hour === 12)
+      postfix = 'PM';
+    let minutes = date.getMinutes().toString().padStart(2,'0');
+    let time = `${hour}:${minutes} ${postfix}`;
+    return time;
   }
 
   renderEditDescription() {
@@ -234,6 +282,7 @@ export default class CardShow extends React.Component {
             <img className="card-icon" src={window.cardIcon}/>
             {this.renderRenameCardForm()}
             <p>in list <u onClick={() => this.toggleModal(`MoveCard-${card.id}`)}>{listName}</u></p>
+            {this.renderDueDate()}
           </div>
           <div className="show-card-main">
             <div className="show-card-content">
