@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: kantrello_production
-  username: kantrello
-  password: <%= ENV['KANTRELLO_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
