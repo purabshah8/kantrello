@@ -1,9 +1,8 @@
 services:
   - type: web
     name: kantrello
-    env: ruby
+    runtime: ruby
     plan: free
-    runtime: ruby-3.1.6
     buildCommand: |
       bundle install
       npm ci --production=false || npm install
