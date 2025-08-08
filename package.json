@@ -30,14 +30,14 @@
     "test": "test"
   },
   "engines": {
-    "node": "8.9.0",
-    "npm": "6.4.1"
+    "node": "16.x",
+    "npm": "8.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "echo 'Skipping webpack for now'",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch --mode=development",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack"
+    "postinstall": "webpack",
+    "start": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
