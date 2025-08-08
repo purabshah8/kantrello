@@ -1,5 +1,5 @@
 const path = require('path');
-var webpack = require("webpack");
+const webpack = require("webpack");
 
 var plugins = []; // if using any plugins for both dev and production
 var devPlugins = []; // if using any plugins for development
@@ -17,11 +17,13 @@ plugins = plugins.concat(
 );
 
 module.exports = {
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   context: __dirname,
   entry: './frontend/kantrello.jsx',
   output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    clean: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '*']
@@ -34,12 +36,12 @@ module.exports = {
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
-          query: {
-            presets: ['@babel/env', '@babel/react']
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         },
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map'
 };
