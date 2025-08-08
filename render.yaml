@@ -23,6 +23,8 @@ services:
         value: enabled
       - key: RAILS_SERVE_STATIC_FILES
         value: enabled
+      - key: SECRET_KEY_BASE
+        generateValue: true
 
 databases:
   - name: kantrello-db
