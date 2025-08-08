@@ -35,8 +35,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "webpack",
-    "start": "webpack --watch --mode=development"
+    "postinstall": "echo 'Skipping webpack for now'",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch --mode=development",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack"
   },
   "repository": {
     "type": "git",
