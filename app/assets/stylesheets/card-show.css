@@ -98,12 +98,13 @@
 
 .description-icon {
   position: absolute;
-  top: 82px;
+  top: 16px;
   left: 18px;
 }
 
 .show-card-main {
   display: flex;
+  position: relative;
 }
 
 .show-card-content {
@@ -155,15 +156,19 @@
   background-color: rgba(9,45,66,.13);
   color: #092d42;
 }
+
+.show-card-comments {
+  position: relative;
+}
 .comments-icon {
   position: absolute;
-  top: 246px;
+  top: 180px;
   left: 18px;
 }
 
 .activity-icon {
   position: absolute;
-  top: 414px;
+  top: 348px;
   left: 18px;
 }
 
@@ -300,4 +305,64 @@
 .comment-options > u:hover {
   color: #17394d;
   cursor: pointer;
+}
+
+.card-due-date {
+  margin-top: 32px;
+}
+
+.card-due-date h3 {
+  text-transform: uppercase;
+  color: #6b808c;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.due-date-span {
+  display: inline-flex;
+  text-decoration: underline;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 14px;
+  max-width: 256px;
+  background: rgba(9,45,66,.13);
+  color: #6b808c;
+  border-radius: 2px;
+}
+
+.due-date-span:hover {
+  cursor: pointer;
+  color: #17394D;
+}
+
+.card-recently-past-due {
+  background: #cf513d;
+  color: white;
+}
+
+.card-recently-past-due:hover {
+  background: #b04632;
+  color: white;
+}
+
+.card-past-due {
+  background: #ec9488;
+  color: white;
+
+}
+
+.card-past-due:hover {
+  background: #ef7564;
+  color: white;
+}
+
+.card-due-soon {
+  background: #e6c60d;
+  color: white;
+}
+
+.card-due-soon:hover {
+  background: #d9b51c;
+  color: white;
 }

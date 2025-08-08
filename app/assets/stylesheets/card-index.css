@@ -65,7 +65,7 @@
 
 .badge-container {
   margin-right: 4px; 
-  display: flex; 
+  display: flex;
 }
 
 .badge-container img {
@@ -74,8 +74,34 @@
 
 .badge-container span {
   color: #6b808c;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 18px;
+  font-weight: 350;
+}
+
+.due-soon {
+  background: #f2d600;
+  border-radius: 3px;
+  padding: 2px;
+  padding-right: 4px;
+}
+
+.past-due {
+  background: #ec9488;
+  border-radius: 3px;
+  padding: 2px;
+  padding-right: 4px;
+}
+
+.recently-past-due {
+  background: #eb5a46;
+  border-radius: 3px;
+  padding: 2px;
+  padding-right: 4px;
+}
+
+.recently-past-due span, .past-due span, .due-soon span {
+  color: #ffffff !important;
 }
 
 .card-item:hover .edit-icon {

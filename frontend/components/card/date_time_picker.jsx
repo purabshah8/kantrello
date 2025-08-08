@@ -13,21 +13,11 @@ export default class DateTimePicker extends React.Component {
     let selectedDate; 
     if (dueDate) {
       selectedDate = new Date(dueDate);
-      let postfix = 'AM';
-      let hour = selectedDate.getHours();
-      if (hour > 12){
-        hour -= 12;
-        postfix = 'PM';
-      }
-      if (hour === 12)
-        postfix = 'PM';
-      let minutes = selectedDate.getMinutes().toString().padStart(2,'0');
-      time = `${hour}:${minutes} ${postfix}`;
     } else {
       selectedDate = new Date();
       selectedDate.setDate(selectedDate.getDate() + 1);
-      time = '12:00 PM';
     }
+    time = this.getTime(dueDate);
     date = selectedDate.getDate();
     month = selectedDate.getMonth();
     year = selectedDate.getFullYear();
@@ -40,6 +30,7 @@ export default class DateTimePicker extends React.Component {
     this.setRef = this.setRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleChangeMonth = this.handleChangeMonth.bind(this);
+    this.validateTime = this.validateTime.bind(this);
   }
 
   setRef(node) {
@@ -59,7 +50,6 @@ export default class DateTimePicker extends React.Component {
       // debugger;
       prevSelected[0].classList.remove('calendar-selected');
     }
-
   }
 
   componentWillUnmount() {
@@ -98,10 +88,49 @@ export default class DateTimePicker extends React.Component {
       if (isNaN(e.target.value)) {
         val = e.target.value;
       } else {
-        val = parseInt(e.target.value);
+        if (e.target.id === "time-input")
+          val = e.target.value;
+        else 
+          val = parseInt(e.target.value);
       }
       this.setState({[field]: val});
     };
+  }
+
+  getTime(iso8601Date) {
+    if (!iso8601Date)
+      return '12:00 PM';
+    let date = new Date(iso8601Date);
+    let postfix = 'AM';
+    let hour = date.getHours();
+    if (hour > 12) {
+      hour -= 12;
+      postfix = 'PM';
+    }
+    if (hour === 12)
+      postfix = 'PM';
+    let minutes = date.getMinutes().toString().padStart(2,'0');
+    let time = `${hour}:${minutes} ${postfix}`;
+    return time;
+  }
+
+  validateTime(e) {
+    e.preventDefault();
+    const isValid = this.isValidTime(e.target.value);
+    if (!isValid) {
+      let time;
+      if (this.state.dueDate)
+        time = this.getTime(this.state.dueDate);
+      else
+        time = '12:00 PM';
+      this.setState({ time });
+    }
+    console.log(isValid);
+  }
+
+  isValidTime(str) {
+    const timeRegex = /^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/;
+    return str.match(timeRegex);
   }
 
   handleSelect(e) {
@@ -240,7 +269,8 @@ export default class DateTimePicker extends React.Component {
               <label htmlFor="time-input">Time</label>
               <input id="time-input" 
                     type="text"
-                    value={this.state.time} 
+                    value={this.state.time}
+                    onBlur={this.validateTime}
                     onChange={this.update('time')}/>
             </div>
           </div>

@@ -6,6 +6,7 @@ class CardIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.openCardShow = this.openCardShow.bind(this);
+    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   }
 
   openCardShow(e) {
@@ -20,14 +21,39 @@ class CardIndexItem extends React.Component {
         <img src={window.descriptionIcon} />
       </div> : null;
     const commentsIcon = (card.commentIds.length > 0) ?
-    <div className="badge-container">
-      <img src={window.commentsIcon} />
-      <span>{card.commentIds.length}</span>
-     </div> : null;
+      <div className="badge-container">
+        <img src={window.commentsIcon} />
+        <span>{card.commentIds.length}</span>
+      </div> : null;
+    let dueDateIcon;
+    if (card.due_date) {
+      const dueDate = new Date(card.due_date);
+      let classNames = "badge-container";
+      let imgIcon = window.dueDateIcon;
+      const now = new Date();
+      const diff = dueDate - now;
+      if (diff < 0 && diff >= -86400000) {
+        classNames += " recently-past-due";
+        imgIcon = window.dueDateWhiteIcon;
+      }
+      else if (diff < -86400000) {
+        classNames += " past-due";
+        imgIcon = window.dueDateWhiteIcon;
+      } else if (diff >= 0 && diff < 86400000) {
+        classNames += " due-soon";
+        imgIcon = window.dueDateWhiteIcon;
+      }
+      dueDateIcon = <div className={classNames}>
+        <img src={imgIcon} />
+        <span>{`${this.months[dueDate.getMonth()]} ${dueDate.getDate()}`}</span>
+      </div>;
+    }
+    console.log(card.due_date);
     return (
       <>
         {descriptionIcon}
         {commentsIcon}
+        {dueDateIcon}
       </>
     );
   }

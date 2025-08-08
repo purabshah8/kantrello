@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: kantrello
+    env: ruby
+    plan: free
+    runtime: ruby-3.1.6
+    buildCommand: |
+      bundle install
+      npm ci --production=false || npm install
+      NODE_OPTIONS=--openssl-legacy-provider npm run build
+      RAILS_ENV=production bundle exec rake assets:precompile
+      RAILS_ENV=production bundle exec rake db:migrate
+    startCommand: bundle exec puma -C config/puma.rb
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kantrello-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: RACK_ENV
+        value: production
+      - key: RAILS_LOG_TO_STDOUT
+        value: enabled
+      - key: RAILS_SERVE_STATIC_FILES
+        value: enabled
+
+databases:
+  - name: kantrello-db
+    plan: free
+    databaseName: kantrello_production
+    user: kantrello
