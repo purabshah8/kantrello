@@ -30,3 +30,6 @@
 # Ignore bundle files
 bundle.js
 bundle.js.map
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

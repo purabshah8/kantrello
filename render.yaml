@@ -7,9 +7,7 @@ services:
       bundle install
       npm ci --production=false || npm install
       npm run build
-      ls -la app/assets/javascripts/bundle.js
       RAILS_ENV=production bundle exec rake assets:precompile
-      ls -la public/assets/application-*.js
       RAILS_ENV=production bundle exec rake db:migrate
     startCommand: bundle exec puma -C config/puma.rb
     envVars:

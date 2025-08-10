@@ -1,8 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 
-var plugins = []; // if using any plugins for both dev and production
-var devPlugins = []; // if using any plugins for development
+var plugins = [];
+var devPlugins = [];
 
 var prodPlugins = [
   new webpack.DefinePlugin({
@@ -21,7 +21,7 @@ module.exports = {
   context: __dirname,
   entry: "./frontend/kantrello.jsx",
   output: {
-    path: path.resolve(__dirname, "app", "assets", "javascripts"),
+    path: path.resolve(__dirname, "app", "assets", "builds"),
     filename: "bundle.js",
   },
   resolve: {
@@ -42,5 +42,5 @@ module.exports = {
       },
     ],
   },
-  devtool: process.env.NODE_ENV === "production" ? false : "eval-source-map",
+  devtool: process.env.NODE_ENV === "production" ? "source-map" : "eval-source-map",
 };
