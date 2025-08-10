@@ -45,6 +45,7 @@ module.exports = {
   optimization: {
     moduleIds: 'named',
     chunkIds: 'named',
+    minimize: false,
   },
   devtool: process.env.NODE_ENV === "production" ? "source-map" : "eval-source-map",
 };
