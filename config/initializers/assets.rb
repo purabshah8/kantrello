@@ -13,5 +13,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-# Add SVG files and webpack bundle to asset precompilation
-Rails.application.config.assets.precompile += %w( *.svg *.png *.jpg *.jpeg *.gif bundle.js )
+# Add SVG files to asset precompilation
+Rails.application.config.assets.precompile += %w( *.svg *.png *.jpg *.jpeg *.gif )
