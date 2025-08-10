@@ -47,5 +47,5 @@ module.exports = {
     chunkIds: 'named',
     minimize: false,
   },
-  devtool: process.env.NODE_ENV === "production" ? "source-map" : "eval-source-map",
+  devtool: false,
 };
